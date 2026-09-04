@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+*.db
+.env
+api-smoke.db
+.pytest_cache/
+backups/
+frontend/node_modules/
+frontend/.next/
+mobile/.dart_tool/
+mobile/build/
+mobile/android/.gradle/
+mobile/android/key.properties
+mobile/android/app/*.jks
+mobile/android/app/*.keystore

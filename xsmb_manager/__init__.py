@@ -1,0 +1,5 @@
+"""Core package for the XSMB/XSMN manager."""
+
+from .config import APP_VERSION
+
+__all__ = ["APP_VERSION"]

@@ -1,0 +1,10 @@
+{
+  "name": "xsmb-twa-wrapper",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "doctor": "npx @bubblewrap/cli doctor",
+    "build": "npx @bubblewrap/cli build",
+    "install:device": "npx @bubblewrap/cli install"
+  }
+}
