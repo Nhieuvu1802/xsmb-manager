@@ -14,6 +14,16 @@ flutter run --dart-define=API_BASE_URL=https://api.example.com
 
 Với Android Emulator và API chạy trên máy phát triển, dùng `http://10.0.2.2:8000`. Android production phải gọi API qua HTTPS.
 
+Trên điện thoại thật, bấm biểu tượng máy chủ trên thanh tiêu đề rồi nhập URL API. Nếu backend chạy trên máy tính cùng Wi-Fi, dùng IP LAN của máy tính, ví dụ `http://192.168.1.54:8000`; backend phải lắng nghe trên `0.0.0.0` và Windows Firewall phải cho phép cổng 8000. Ứng dụng kiểm tra `/health` trước khi lưu URL.
+
+Trên Windows, từ thư mục gốc dự án có thể khởi động API local và tự tạo `api-mobile.db` từ dữ liệu hiện tại bằng:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/start_mobile_api.ps1
+```
+
+Giữ cửa sổ này mở khi dùng app. Điện thoại và máy tính phải cùng Wi-Fi. URL LAN hiện tại của máy phát triển là `http://192.168.1.54:8000`.
+
 ## Kiểm tra và build
 
 ```bash

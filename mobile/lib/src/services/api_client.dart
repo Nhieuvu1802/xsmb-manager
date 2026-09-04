@@ -22,11 +22,37 @@ class ApiException implements Exception {
 
 class ApiClient {
   ApiClient({String baseUrl = defaultApiBaseUrl, http.Client? client})
-      : baseUrl = baseUrl.replaceAll(RegExp(r'/+$'), ''),
+      : baseUrl = normalizeApiBaseUrl(baseUrl),
         _client = client ?? http.Client();
 
   final String baseUrl;
   final http.Client _client;
+
+  static String normalizeApiBaseUrl(String value) {
+    final normalized = value.trim().replaceAll(RegExp(r'/+$'), '');
+    final uri = Uri.tryParse(normalized);
+    if (uri == null ||
+        !uri.hasAuthority ||
+        uri.host.isEmpty ||
+        (uri.scheme != 'http' && uri.scheme != 'https') ||
+        uri.hasQuery ||
+        uri.hasFragment) {
+      throw const FormatException(
+        'URL API phải bắt đầu bằng http:// hoặc https:// và có tên máy chủ.',
+      );
+    }
+    return normalized;
+  }
+
+  Future<void> checkHealth() async {
+    final response = await _client
+        .get(Uri.parse('$baseUrl/health'))
+        .timeout(const Duration(seconds: 8));
+    final body = _decode(response);
+    if (body is! Map<String, dynamic> || body['status'] != 'ok') {
+      throw const ApiException('Máy chủ không trả về trạng thái sẵn sàng.');
+    }
+  }
 
   Future<List<LotteryResult>> getResults(
     LotteryRegion region, {
@@ -47,6 +73,7 @@ class ApiClient {
   }
 
   Future<String> login(String username, String password) async {
+    _requireProtectedCredentials();
     final response = await _client.post(
       Uri.parse('$baseUrl/api/v1/auth/token'),
       headers: const {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -65,6 +92,7 @@ class ApiClient {
     required DateTime end,
     required String token,
   }) async {
+    _requireProtectedCredentials();
     final response = await _client
         .post(
           Uri.parse('$baseUrl/api/v1/sync/${region.name}'),
@@ -103,6 +131,26 @@ class ApiClient {
 
   String _date(DateTime value) =>
       '${value.year.toString().padLeft(4, '0')}-${value.month.toString().padLeft(2, '0')}-${value.day.toString().padLeft(2, '0')}';
+
+  void _requireProtectedCredentials() {
+    final uri = Uri.parse(baseUrl);
+    if (uri.scheme == 'https' || _isPrivateOrLoopback(uri.host)) return;
+    throw const ApiException(
+      'Đăng nhập và đồng bộ chỉ được phép qua HTTPS hoặc mạng nội bộ.',
+    );
+  }
+
+  bool _isPrivateOrLoopback(String host) {
+    if (host == 'localhost' || host == '::1') return true;
+    final parts = host.split('.').map(int.tryParse).toList();
+    if (parts.length != 4 || parts.any((part) => part == null)) return false;
+    final first = parts[0]!;
+    final second = parts[1]!;
+    return first == 10 ||
+        first == 127 ||
+        (first == 192 && second == 168) ||
+        (first == 172 && second >= 16 && second <= 31);
+  }
 
   void close() => _client.close();
 }

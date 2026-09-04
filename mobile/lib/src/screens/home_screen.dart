@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../models/lottery_result.dart';
 import '../services/api_client.dart';
+import '../services/app_settings.dart';
 import '../services/result_cache.dart';
 import '../widgets/date_filter.dart';
 import '../widgets/result_board.dart';
@@ -17,7 +18,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _api = ApiClient();
+  ApiClient _api = ApiClient();
+  final _settings = AppSettings();
   final _cache = ResultCache();
   final _results = <LotteryRegion, List<LotteryResult>>{
     LotteryRegion.mb: const [],
@@ -29,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
   LotteryRegion _activeRegion = LotteryRegion.mb;
   int _selectedIndex = 0;
   bool _loading = false;
+  String _apiBaseUrl = defaultApiBaseUrl;
   String? _token;
 
   @override
@@ -37,7 +40,14 @@ class _HomeScreenState extends State<HomeScreen> {
     final now = DateTime.now();
     _end = DateTime(now.year, now.month, now.day);
     _start = _end.subtract(const Duration(days: 6));
-    unawaited(_refresh());
+    unawaited(_initialize());
+  }
+
+  Future<void> _initialize() async {
+    final savedUrl = await _settings.loadApiBaseUrl();
+    if (!mounted) return;
+    _replaceApi(savedUrl);
+    await _refresh();
   }
 
   @override
@@ -71,6 +81,82 @@ class _HomeScreenState extends State<HomeScreen> {
     } finally {
       if (mounted) setState(() => _loading = false);
     }
+  }
+
+  Future<void> _configureApi() async {
+    final controller = TextEditingController(text: _apiBaseUrl);
+    final candidate = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Kết nối API'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: controller,
+              keyboardType: TextInputType.url,
+              autocorrect: false,
+              decoration: const InputDecoration(
+                labelText: 'URL FastAPI',
+                hintText: 'https://api.example.com',
+              ),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'Điện thoại thật cùng Wi-Fi có thể dùng IP máy tính, ví dụ '
+              'http://192.168.1.54:8000. Production phải dùng HTTPS.',
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Huỷ'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(context, controller.text),
+            child: const Text('Kiểm tra & lưu'),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (candidate == null) return;
+
+    ApiClient? testClient;
+    try {
+      final normalized = ApiClient.normalizeApiBaseUrl(candidate);
+      testClient = ApiClient(baseUrl: normalized);
+      setState(() => _loading = true);
+      await testClient.checkHealth();
+      await _settings.saveApiBaseUrl(normalized);
+      if (!mounted) return;
+      _replaceApi(normalized);
+      _notice('Kết nối API thành công: $normalized');
+      setState(() => _loading = false);
+      await _refresh();
+    } on FormatException catch (error) {
+      if (mounted) _notice(error.message, error: true);
+    } catch (error) {
+      if (mounted) {
+        _notice(
+          'Không kết nối được ${candidate.trim()}. Kiểm tra backend, Wi-Fi và tường lửa.',
+          error: true,
+        );
+      }
+    } finally {
+      testClient?.close();
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  void _replaceApi(String baseUrl) {
+    final oldClient = _api;
+    _api = ApiClient(baseUrl: baseUrl);
+    _apiBaseUrl = _api.baseUrl;
+    oldClient.close();
+    if (mounted) setState(() {});
   }
 
   Future<void> _synchronize() async {
@@ -192,6 +278,11 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
+          IconButton(
+            tooltip: 'Cấu hình API',
+            onPressed: _loading ? null : _configureApi,
+            icon: const Icon(Icons.dns_outlined),
+          ),
           if (_selectedIndex < 2)
             IconButton(
               tooltip: 'Đồng bộ từ nguồn',
