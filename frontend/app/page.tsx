@@ -19,7 +19,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const [online, setOnline] = useState(true);
+  const [online, setOnline] = useState(() => typeof navigator === "undefined" || navigator.onLine);
   const [token, setToken] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [syncing, setSyncing] = useState(false);
@@ -39,10 +39,13 @@ export default function Dashboard() {
     } finally { setLoading(false); }
   }, [start, end]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    const timer = window.setTimeout(() => void load(), 0);
+    return () => window.clearTimeout(timer);
+  }, [load]);
   useEffect(() => {
     const update = () => setOnline(navigator.onLine);
-    update(); window.addEventListener("online", update); window.addEventListener("offline", update);
+    window.addEventListener("online", update); window.addEventListener("offline", update);
     return () => { window.removeEventListener("online", update); window.removeEventListener("offline", update); };
   }, []);
 
