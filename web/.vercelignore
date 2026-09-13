@@ -1,0 +1,10 @@
+.next/
+node_modules/
+.env*
+!.env.example
+npm-debug.log*
+tests/
+e2e/
+*.test.ts
+playwright.config.ts
+README.md
