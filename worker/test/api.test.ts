@@ -8,7 +8,7 @@
 import { SELF } from "cloudflare:test";
 import { describe, expect, it } from "vitest";
 
-import { MANIFEST, STATUS, allDraws, availableDates } from "../src/dataset";
+import { MANIFEST, STATUS, allDraws, availableDates, historyRange } from "../src/dataset";
 import type { Draw, Prize } from "../src/types";
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -188,6 +188,35 @@ describe("Truy vấn theo ngày và theo khoảng", () => {
     expect(invalid.response.status).toBe(400);
     expect(invalid.body.code).toBe("invalid_query");
   });
+  it("/v1/xsmb/history trả cả cửa sổ 365 ngày thay vì một kỳ", async () => {
+    const range = historyRange("xsmb");
+    const { response, body } = await getJson<DrawListBody>(
+      `/v1/xsmb/history?start=${range.firstDate}&end=${range.latestDate}`,
+    );
+    expect(response.status).toBe(200);
+    expect(range.days).toBe(365);
+    expect(body.count).toBe(allDraws("xsmb").length);
+    expect(body.count).toBeGreaterThan(300);
+    expect(new Set(body.draws.map((draw) => draw.date)).size).toBe(body.count);
+  });
+
+  it("/v1/xsmn/history giữ đài riêng của từng ngày", async () => {
+    const range = historyRange("xsmn");
+    const { body } = await getJson<DrawListBody>(
+      `/v1/xsmn/history?start=${range.firstDate}&end=${range.latestDate}`,
+    );
+    expect(new Set(body.draws.map((draw) => draw.date)).size).toBeGreaterThan(300);
+    const firstDate = body.draws[0]!.date;
+    const sameDay = body.draws.filter((draw) => draw.date === firstDate);
+    expect(new Set(sameDay.map((draw) => draw.station)).size).toBe(sameDay.length);
+  });
+
+  it("/v1/xsmb/latest?days=90 trả đủ 90 ngày gần nhất", async () => {
+    const { body } = await getJson<DrawListBody>("/v1/xsmb/latest?days=90");
+    expect(new Set(body.draws.map((draw) => draw.date)).size).toBe(90);
+    expect(body.date).toBe(availableDates("xsmb")[0]);
+  });
+
 });
 
 

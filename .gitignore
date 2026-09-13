@@ -1,16 +1,54 @@
+# --- Python / backend ---
 .venv/
 __pycache__/
-*.pyc
-*.db
-.env
-api-smoke.db
+*.py[cod]
 .pytest_cache/
-backups/
-frontend/node_modules/
-frontend/.next/
+*.egg-info/
+backend/api-smoke.db
+
+# --- Secrets (không bao giờ commit) ---
+.env
+.env.local
+.env.*.local
+*.jks
+*.keystore
+*.pem
+*.p12
+# Ghi chú tài khoản/credential cá nhân
+vvn.freedev.app.txt
+*credential*
+*secret*.txt
+*password*.txt
+*account*.txt
+
+# --- Dữ liệu runtime: database người dùng, backup, bản phát hành ---
+data/**
+!data/README.md
+
+# --- Web (Next.js PWA) ---
+web/node_modules/
+web/.next/
+web/out/
+web/test-results/
+web/playwright-report/
+web/tsconfig.tsbuildinfo
+
+# --- Flutter (mobile) ---
 mobile/.dart_tool/
 mobile/build/
+mobile/dist/
+mobile/.flutter-plugins
 mobile/android/.gradle/
+mobile/android/local.properties
 mobile/android/key.properties
 mobile/android/app/*.jks
 mobile/android/app/*.keystore
+*.apk
+*.aab
+
+# --- IDE / OS ---
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

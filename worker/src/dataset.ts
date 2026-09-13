@@ -10,21 +10,42 @@
 import configJson from "../../public-data/config.json";
 import manifestJson from "../../public-data/manifest.json";
 import statusJson from "../../public-data/status.json";
+import xsmbHistoryJson from "../../public-data/xsmb/history.json";
 import xsmbLatestJson from "../../public-data/xsmb/latest.json";
+import xsmnHistoryJson from "../../public-data/xsmn/history.json";
 import xsmnLatestJson from "../../public-data/xsmn/latest.json";
 import type {
   DatasetManifest,
   DatasetStatus,
   Draw,
+  HistorySnapshot,
   LatestSnapshot,
   PublicConfig,
   RegionKey,
 } from "./types";
 
 const snapshots: Record<RegionKey, LatestSnapshot> = {
-  xsmb: xsmbLatestJson as LatestSnapshot,
-  xsmn: xsmnLatestJson as LatestSnapshot,
+  xsmb: xsmbLatestJson as unknown as LatestSnapshot,
+  xsmn: xsmnLatestJson as unknown as LatestSnapshot,
 };
+
+const histories: Record<RegionKey, HistorySnapshot> = {
+  xsmb: xsmbHistoryJson as unknown as HistorySnapshot,
+  xsmn: xsmnHistoryJson as unknown as HistorySnapshot,
+};
+
+/**
+ * Tập kỳ quay Worker phục vụ.
+ *
+ * Ưu tiên `public-data/{region}/history.json` (cửa sổ 365 ngày) và chỉ rơi về
+ * `latest.json` khi file lịch sử trống — nhờ vậy `/latest?days=` và
+ * `/history?start=&end=` trả được cả năm dữ liệu thay vì đúng một kỳ.
+ */
+function sourceDraws(region: RegionKey): Draw[] {
+  const draws = histories[region].draws;
+  if (Array.isArray(draws) && draws.length > 0) return draws;
+  return snapshots[region].draws;
+}
 
 export const PUBLIC_CONFIG = configJson as PublicConfig;
 export const MANIFEST = manifestJson as DatasetManifest;
@@ -71,13 +92,13 @@ function compareDraws(a: Draw, b: Draw): number {
 
 /** Toàn bộ kỳ quay của một vùng, mới nhất trước. */
 export function allDraws(region: RegionKey): Draw[] {
-  return [...snapshots[region].draws].sort(compareDraws);
+  return [...sourceDraws(region)].sort(compareDraws);
 }
 
 /** Mọi ngày có dữ liệu của một vùng, mới nhất trước. */
 export function availableDates(region: RegionKey): string[] {
   const dates = new Set<string>();
-  for (const draw of snapshots[region].draws) dates.add(draw.date);
+  for (const draw of sourceDraws(region)) dates.add(draw.date);
   return [...dates].sort((a, b) => (a < b ? 1 : -1));
 }
 
@@ -178,6 +199,26 @@ export function datasetDate(): string | null {
 
 export function datasetVersion(): string {
   return STATUS.datasetVersion || MANIFEST.datasetVersion;
+}
+
+/** Cửa sổ lịch sử Worker đang phục vụ cho một vùng. */
+export interface HistoryRange {
+  /** Số ngày lịch sử của cửa sổ (đọc từ `manifest.history`). */
+  days: number | null;
+  firstDate: string | null;
+  latestDate: string | null;
+  draws: number;
+}
+
+/** Khoảng lịch sử thực tế có trong dataset (không phụ thuộc tham số request). */
+export function historyRange(region: RegionKey): HistoryRange {
+  const dates = availableDates(region);
+  return {
+    days: MANIFEST.history?.[region]?.days ?? histories[region].days ?? null,
+    firstDate: dates.length > 0 ? dates[dates.length - 1]! : null,
+    latestDate: dates.length > 0 ? dates[0]! : null,
+    draws: allDraws(region).length,
+  };
 }
 
 /** Số giải của mỗi kỳ quay (XSMB 27, mỗi đài XSMN 18). */

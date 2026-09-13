@@ -20,6 +20,8 @@ const REQUIRED_FILES = [
   "status.json",
   "xsmb/latest.json",
   "xsmn/latest.json",
+  "xsmb/history.json",
+  "xsmn/history.json",
 ];
 
 const problems = [];
@@ -40,7 +42,7 @@ function readJson(relativePath) {
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
-function checkSnapshot(label, snapshot, expectedPrizes) {
+function checkSnapshot(label, snapshot, expectedPrizes, singleDate = true) {
   if (!snapshot) return null;
   if (!ISO_DATE.test(snapshot.date ?? "")) {
     problems.push(`${label}: date không đúng ISO (nhận "${snapshot.date}")`);
@@ -55,7 +57,7 @@ function checkSnapshot(label, snapshot, expectedPrizes) {
     );
   }
   for (const draw of snapshot.draws) {
-    if (draw.date !== snapshot.date) {
+    if (singleDate && draw.date !== snapshot.date) {
       problems.push(`${label}: kỳ ${draw.draw_code ?? draw.station} lệch ngày snapshot`);
     }
     if (!Array.isArray(draw.results) || draw.results.length !== expectedPrizes) {
@@ -76,6 +78,23 @@ function checkSnapshot(label, snapshot, expectedPrizes) {
       }
     }
   }
+  if (!singleDate) {
+    const dates = snapshot.draws.map((draw) => draw.date).sort();
+    const latest = dates[dates.length - 1];
+    if (snapshot.date !== latest) {
+      problems.push(
+        `${label}: date=${snapshot.date} không phải kỳ mới nhất ${latest}`,
+      );
+    }
+    if (snapshot.firstDate !== dates[0]) {
+      problems.push(
+        `${label}: firstDate=${snapshot.firstDate} không phải kỳ cũ nhất ${dates[0]}`,
+      );
+    }
+    if (!(Number.isInteger(snapshot.days) && snapshot.days >= 1)) {
+      problems.push(`${label}: days=${snapshot.days} không hợp lệ`);
+    }
+  }
   return snapshot;
 }
 
@@ -93,6 +112,18 @@ if (status && manifest && status.datasetVersion !== manifest.datasetVersion) {
 
 const xsmb = checkSnapshot("xsmb/latest.json", readJson("xsmb/latest.json"), 27);
 const xsmn = checkSnapshot("xsmn/latest.json", readJson("xsmn/latest.json"), 18);
+const xsmbHistory = checkSnapshot(
+  "xsmb/history.json",
+  readJson("xsmb/history.json"),
+  27,
+  false,
+);
+const xsmnHistory = checkSnapshot(
+  "xsmn/history.json",
+  readJson("xsmn/history.json"),
+  18,
+  false,
+);
 
 if (problems.length > 0) {
   console.error("❌ Dataset chưa sẵn sàng để deploy:");
@@ -108,4 +139,10 @@ console.log(
   `   xsmn           : ${xsmn.draws.length} đài × 18 giải (${xsmn.date}) - ${xsmn.draws
     .map((draw) => draw.station)
     .join(", ")}`,
+);
+console.log(
+  `   xsmb history   : ${xsmbHistory.draws.length} kỳ × 27 giải trong cửa sổ ${xsmbHistory.days} ngày (${xsmbHistory.firstDate} → ${xsmbHistory.date})`,
+);
+console.log(
+  `   xsmn history   : ${xsmnHistory.draws.length} đài trong cửa sổ ${xsmnHistory.days} ngày (${xsmnHistory.firstDate} → ${xsmnHistory.date})`,
 );

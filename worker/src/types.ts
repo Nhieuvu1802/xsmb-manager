@@ -49,6 +49,19 @@ export interface LatestSnapshot {
   draws: Draw[];
 }
 
+/**
+ * Payload `public-data/{region}/history.json`: cùng cấu trúc với [LatestSnapshot]
+ * nhưng chứa cả cửa sổ lịch sử (mặc định 365 ngày) để app có đủ dữ liệu thống kê
+ * ngay lần cài đầu. Mỗi kỳ giữ `date` + `station` riêng vì miền Nam mỗi ngày quay
+ * một bộ đài khác nhau.
+ */
+export interface HistorySnapshot extends LatestSnapshot {
+  /** Số ngày lịch sử mà cửa sổ bao phủ. */
+  days: number;
+  /** Ngày cũ nhất có dữ liệu trong cửa sổ. */
+  firstDate: string | null;
+}
+
 /** `public-data/status.json` (và `status/health.json`). */
 export interface DatasetStatus {
   status: string;
@@ -56,6 +69,16 @@ export interface DatasetStatus {
   datasetVersion: string;
   apiVersion: string;
   generatedAt: string;
+  /** Số ngày lịch sử đã xuất kèm trong `{region}/history.json`. */
+  historyDays?: number;
+}
+
+/** Một dòng trong `manifest.history[region]`. */
+export interface HistoryManifestEntry {
+  days: number;
+  firstDate: string | null;
+  latestDate: string | null;
+  draws: number;
 }
 
 /** `public-data/manifest.json`. */
@@ -65,6 +88,8 @@ export interface DatasetManifest {
   xsmbLatestDate: string | null;
   xsmnLatestDate: string | null;
   datasetVersion: string;
+  historyDays?: number;
+  history?: Record<RegionKey, HistoryManifestEntry>;
   files: Record<string, { sha256: string; bytes: number }>;
 }
 

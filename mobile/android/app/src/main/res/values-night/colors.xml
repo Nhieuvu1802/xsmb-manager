@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nền splash khi hệ điều hành đang bật chế độ tối: navy-950 `#031027`
+         đúng bằng nền của bảng màu `AppPalette.dark`. -->
+    <color name="tk24_bg">#FF031027</color>
+</resources>

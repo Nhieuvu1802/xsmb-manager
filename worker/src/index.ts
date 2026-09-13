@@ -25,6 +25,7 @@ import {
   datasetVersion,
   drawsForDate,
   drawsInRange,
+  historyRange,
   isRegionKey,
   latestDraws,
   prizeCount,
@@ -140,6 +141,11 @@ function healthHandler(request: Request, env: Env): Response {
       lastDataUpdate: datasetDate(),
       environment: env.ENVIRONMENT ?? "production",
       providers: ["cloudflare-worker", "public-data"],
+      historyDays: MANIFEST.historyDays ?? null,
+      history: {
+        xsmb: historyRange("xsmb"),
+        xsmn: historyRange("xsmn"),
+      },
       regions: {
         xsmb: {
           date: regionDate("xsmb"),
@@ -200,6 +206,7 @@ function indexDocument(request: Request, env: Env): Response {
       service: "xsmb-manager-api",
       datasetDate: datasetDate(),
       datasetVersion: datasetVersion(),
+      historyDays: MANIFEST.historyDays ?? null,
       environment: env.ENVIRONMENT ?? "production",
       endpoints: [
         `${base}/v1/health`,

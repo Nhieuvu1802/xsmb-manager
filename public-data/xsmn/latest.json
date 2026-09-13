@@ -3,7 +3,7 @@
   "source": "vvn-github-backup",
   "region": "xsmn",
   "date": "2026-09-12",
-  "updatedAt": "2026-09-13T02:37:39.787028+00:00",
+  "updatedAt": "2026-09-13T04:30:19.184383+00:00",
   "count": 4,
   "draws": [
     {
@@ -12,7 +12,7 @@
       "station": "Bình Phước",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "collected_at": "2026-09-13T04:30:19.184383+00:00",
       "draw_code": "MN-20260912-Bình Phước",
       "results": [
         {
@@ -113,7 +113,7 @@
       "station": "Hậu Giang",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "collected_at": "2026-09-13T04:30:19.184383+00:00",
       "draw_code": "MN-20260912-Hậu Giang",
       "results": [
         {
@@ -214,7 +214,7 @@
       "station": "Long An",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "collected_at": "2026-09-13T04:30:19.184383+00:00",
       "draw_code": "MN-20260912-Long An",
       "results": [
         {
@@ -315,7 +315,7 @@
       "station": "TPHCM",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "collected_at": "2026-09-13T04:30:19.184383+00:00",
       "draw_code": "MN-20260912-TPHCM",
       "results": [
         {

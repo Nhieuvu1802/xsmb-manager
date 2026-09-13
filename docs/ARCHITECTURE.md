@@ -1,22 +1,54 @@
 # Kiến trúc mục tiêu
 
 ```text
-Flutter Android ───────┐
-Next.js PWA ──────────┼── HTTPS/JSON ── FastAPI ── SQLAlchemy ── PostgreSQL/Supabase
-Streamlit (legacy) ───┘                     │
-                                            └── scraper + logic thống kê dùng chung
+vvn.freedev.app ── Website chính (Cloudflare Pages target)
+api.vvn.freedev.app/v1 ── Cloudflare Worker API ── provider/cache/dataset
+
+Flutter (Android/Web)
+├── 1. VVN API
+├── 2. GitHub public-data JSON (backup chỉ đọc)
+└── 3. SQLite/local storage (offline cache)
+
+GitHub
+├── source code
+├── public configuration
+└── snapshot JSON công khai: latest.json (một ngày) + history.json (cửa sổ 365 ngày)
+```
+
+## Cấu trúc monorepo
+
+```text
+xsmb-manager/
+├── backend/          # Python: Streamlit + FastAPI + logic nghiệp vụ
+├── mobile/           # Flutter: app Android + Web
+├── web/              # Next.js PWA (twa/ là wrapper Bubblewrap)
+├── public-data/      # config + snapshot public dự phòng trên GitHub
+├── data/             # database, backup, bản phát hành (git-ignored)
+├── docs/             # kiến trúc, phát hành, MVP, audit
+└── scripts/          # migrate PostgreSQL, chạy API local
 ```
 
 ## Ranh giới thành phần
 
-- `xsmb_manager/analytics.py`, `services.py`, `scraper.py`, `ports.py`: logic nghiệp vụ không phụ thuộc giao diện.
-- `xsmb_manager/database.py`: SQLite repository cho ứng dụng Streamlit cũ và nhập/sao lưu cục bộ.
-- `xsmb_manager/api/`: FastAPI, JWT, SQLAlchemy models và PostgreSQL repository.
+- `backend/xsmb_manager/analytics.py`, `services.py`, `scraper.py`, `ports.py`: logic nghiệp vụ không phụ thuộc giao diện.
+- `backend/xsmb_manager/config.py`: đường dẫn dữ liệu tập trung — `data/xsmb.db`, `data/backups/*`.
+- `backend/xsmb_manager/database.py`: SQLite repository cho ứng dụng Streamlit và nhập/sao lưu cục bộ.
+- `backend/xsmb_manager/api/`: FastAPI, JWT, SQLAlchemy models và repository PostgreSQL/SQLite.
 - `scripts/migrate_sqlite_to_postgres.py`: chuyển dữ liệu lịch sử SQLite sang PostgreSQL theo cơ chế upsert.
-- `frontend/`: web/PWA, là client API chứ không truy cập database trực tiếp.
-- `mobile/`: Flutter Android, là client API và chỉ cache dữ liệu đọc gần nhất trên thiết bị.
+- `web/`: web/PWA, là client API chứ không truy cập database trực tiếp.
+- `mobile/`: Flutter Android/Web; nguồn theo thứ tự VVN API → GitHub JSON → SQLite.
+- `public-data/`: bản sao public, không phải database chính và không nhận thao tác ghi từ app. Snapshot gồm `latest.json` (một ngày, tải nhanh) và `history.json` (**365 ngày**; mỗi kỳ giữ `date` + `station` riêng vì miền Nam/Trung mỗi ngày quay một bộ đài khác nhau). Sinh lại bằng `scripts/collector/export_public_data.py`; thêm ngày cũ vào database bằng `scripts/collector/backfill_history.py`.
 
-Database và JWT secret chỉ tồn tại ở backend. Frontend/Flutter không chứa database password, service-role key hoặc admin password. Mọi tác vụ ghi/đồng bộ phải qua endpoint có JWT quản trị.
+## Ràng buộc hosting hiện tại
+
+InfinityFree free hosting chỉ là legacy website; FastAPI được giữ cho xử lý local.
+Production API chuyển sang Worker tại `api.vvn.freedev.app/v1`. DNS hiện chưa có
+record cho hostname này và `vvn.freedev.app` không được delegate thành zone riêng,
+vì vậy giai đoạn đầu cần endpoint `workers.dev` cho tới khi chủ zone `freedev.app`
+cấp DNS/delegation phù hợp.
+
+Database và JWT secret chỉ tồn tại ở backend. Web/Flutter không chứa database password, service-role key hoặc admin password. Mọi tác vụ ghi/đồng bộ phải qua endpoint có JWT quản trị.
+
 
 ## PostgreSQL hoặc Supabase
 

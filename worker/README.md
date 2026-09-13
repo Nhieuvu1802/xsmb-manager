@@ -10,6 +10,14 @@ một định dạng dữ liệu duy nhất.
 - Dữ liệu mới = collector cập nhật `public-data/` → push lên GitHub → Cloudflare
   Git deployment tự build lại.
 
+Cập nhật dữ liệu (chi tiết ở `scripts/collector/README.md`):
+
+```powershell
+.venv\Scripts\python.exe scripts\collector\update_lottery.py --mirror-database data\api-mobile.db
+.venv\Scripts\python.exe scripts\collector\backfill_history.py --region all --days 365 --mirror-database data\api-mobile.db
+.venv\Scripts\python.exe scripts\collector\export_public_data.py
+```
+
 ## Endpoint
 
 | Endpoint | Mô tả |
@@ -19,13 +27,14 @@ một định dạng dữ liệu duy nhất.
 | `GET /v1/xsmn/latest?days=7&province=Long%20An` | Các kỳ XSMN, 18 giải/đài |
 | `GET /v1/xsmb/{YYYY-MM-DD}` | Đúng một ngày (404 JSON nếu chưa có) |
 | `GET /v1/xsmn/{YYYY-MM-DD}` | Đúng một ngày của một đài |
-| `GET /v1/xsmb/history?start=&end=` | Lọc theo khoảng ngày |
-| `GET /v1/xsmn/history?start=&end=` | Lọc theo khoảng ngày |
+| `GET /v1/xsmb/history?start=&end=` | Lọc theo khoảng ngày (tối đa cả cửa sổ 365 ngày) |
+| `GET /v1/xsmn/history?start=&end=` | Lọc theo khoảng ngày (tối đa cả cửa sổ 365 ngày) |
 | `GET /v1/config`, `GET /v1/manifest` | Metadata công khai |
 | `GET /` | Danh sách endpoint + phiên bản dataset |
 
 Quy ước: mọi phản hồi là JSON (kể cả lỗi), có CORS, `ETag`/`304` và
-`Cache-Control` phù hợp. `days` nhận 1–90 (mặc định 7). Lỗi trả
+`Cache-Control` phù hợp. Riêng `/latest`, `days` nhận 1–90 (mặc định 7);
+`/history` dùng `start`/`end` nên lấy được cả cửa sổ có trong dataset. Lỗi trả
 `{ status: "error", code, message, detail }`.
 
 Ví dụ:
@@ -77,12 +86,15 @@ công khai (`API_VERSION`, `ALLOWED_ORIGINS`, `ENVIRONMENT`). Muốn siết CORS
 đổi `ALLOWED_ORIGINS` thành danh sách origin, ví dụ
 `https://vvn.freedev.app,https://xsmb-manager.pages.dev`.
 
-## Giới hạn hiện tại
+## Độ sâu dữ liệu
 
-- Snapshot chỉ chứa **kỳ mới nhất** của mỗi miền, nên `/latest` và `/history`
-  chỉ trả được ngày có trong `public-data/`. Muốn nhiều ngày hơn thì mở rộng
-  `build_latest_payload` trong `backend/xsmb_manager/public_export.py` (ví dụ
-  `--days 30`) rồi chạy lại `scripts/collector/export_public_data.py`.
+- Worker bundle `public-data/{xsmb,xsmn}/latest.json` (một ngày) và
+  `history.json` — **cửa sổ 365 ngày** (`historyDays` trong `manifest.json`).
+  Nhờ vậy `/history?start=&end=` trả được cả năm kỳ thay vì đúng một ngày.
+- Cửa sổ có thể ít hơn 365 ngày khi nguồn thiếu ngày: XSMB hiện có 361 kỳ/365 ngày
+  (thiếu 2026-02-16…19, nghỉ Tết), XSMN đủ 365 ngày với nhiều đài mỗi ngày.
+- Đổi độ sâu: `scripts/collector/export_public_data.py --days 180`. Muốn thêm ngày
+  cũ vào database thì chạy `scripts/collector/backfill_history.py` trước khi export.
 - Miền Trung chưa có dữ liệu (giống backend FastAPI).
 - Các endpoint cần database ghi (`/auth/token`, `/draws/*`, `/sync/*`) vẫn phải
   dùng backend FastAPI, không thuộc Worker này.

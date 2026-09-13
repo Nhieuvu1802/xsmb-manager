@@ -17,6 +17,7 @@ import {
   datasetDate,
   datasetHealthy,
   datasetVersion,
+  historyRange,
   latestDraws,
   normalizeText,
   prizeCount,
@@ -72,4 +73,35 @@ describe("Dataset snapshot", () => {
     expect(normalizeText("Bình Phước")).toBe("binh phuoc");
     expect(normalizeText("Hội đồng XSKT miền Bắc")).toBe("hoi dong xskt mien bac");
   });
+  it("phục vụ cửa sổ lịch sử 365 ngày cho cả hai miền", () => {
+    expect(MANIFEST.historyDays).toBe(365);
+    for (const region of ["xsmb", "xsmn"] as const) {
+      const range = historyRange(region);
+      const dates = availableDates(region);
+      expect(range.days).toBe(365);
+      expect(range.latestDate).toBe(dates[0]);
+      expect(range.firstDate).toBe(dates[dates.length - 1]);
+      expect(range.draws).toBe(allDraws(region).length);
+      // Cửa sổ một năm chỉ thiếu vài ngày nghỉ Tết là cùng.
+      expect(dates.length).toBeGreaterThanOrEqual(350);
+      expect(dates.length).toBeLessThanOrEqual(366);
+    }
+    // XSMB một kỳ mỗi ngày; XSMN nhiều đài mỗi ngày.
+    expect(allDraws("xsmb").length).toBe(availableDates("xsmb").length);
+    expect(allDraws("xsmn").length).toBeGreaterThan(availableDates("xsmn").length);
+  });
+
+  it("kỳ quay mới nhất trước và mỗi ngày XSMN không trùng đài", () => {
+    const draws = allDraws("xsmn");
+    for (let index = 1; index < draws.length; index += 1) {
+      expect(draws[index - 1]!.date >= draws[index]!.date).toBe(true);
+    }
+    const latest = availableDates("xsmn")[0]!;
+    const stations = draws
+      .filter((draw) => draw.date === latest)
+      .map((draw) => draw.station);
+    expect(stations.length).toBeGreaterThan(0);
+    expect(new Set(stations).size).toBe(stations.length);
+  });
+
 });

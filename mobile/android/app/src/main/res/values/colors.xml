@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nền cửa sổ Android trước khi Flutter vẽ frame đầu tiên.
+         Giao diện mặc định là bản sáng (nền `slate-50` như trang tham chiếu),
+         nên nền splash cũng theo tông sáng; chế độ tối hệ thống lấy giá trị
+         trong `values-night/colors.xml`. -->
+    <color name="tk24_bg">#FFF8FAFC</color>
+</resources>

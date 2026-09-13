@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LotteryType {
+  TRADITIONAL
+  COMBINATION
+}
+
+enum Region {
+  NORTH
+  CENTRAL
+  SOUTH
+}
+
+enum VerificationStatus {
+  SAMPLE
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+model LotteryDraw {
+  id           String             @id @default(uuid()) @db.Uuid
+  drawCode     String             @unique @map("draw_code")
+  lotteryType  LotteryType        @map("lottery_type")
+  region       Region
+  station      String
+  drawnAt      DateTime           @map("drawn_at") @db.Timestamptz(3)
+  sourceUrl    String             @map("source_url")
+  collectedAt  DateTime           @map("collected_at") @db.Timestamptz(3)
+  verification VerificationStatus @default(PENDING)
+  createdAt    DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  results      PrizeResult[]
+
+  @@index([region, drawnAt(sort: Desc)])
+  @@map("lottery_draws")
+}
+
+model PrizeResult {
+  id        String      @id @default(uuid()) @db.Uuid
+  drawId    String      @map("draw_id") @db.Uuid
+  prize     String
+  position  Int
+  value     String
+  lastTwo   String      @map("last_two") @db.VarChar(2)
+  draw      LotteryDraw @relation(fields: [drawId], references: [id], onDelete: Cascade)
+
+  @@unique([drawId, prize, position])
+  @@index([lastTwo])
+  @@map("prize_results")
+}
+
+model DataImport {
+  id            String   @id @default(uuid()) @db.Uuid
+  source        String
+  importedAt    DateTime @default(now()) @map("imported_at") @db.Timestamptz(3)
+  acceptedRows  Int      @default(0) @map("accepted_rows")
+  duplicateRows Int      @default(0) @map("duplicate_rows")
+  rejectedRows  Int      @default(0) @map("rejected_rows")
+  report        Json
+
+  @@map("data_imports")
+}

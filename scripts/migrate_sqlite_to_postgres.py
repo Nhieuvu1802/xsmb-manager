@@ -5,8 +5,8 @@ import sqlite3
 import sys
 from pathlib import Path
 
-# Make direct execution from the project root resolve the local package.
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Make direct execution from the repository root resolve the backend package.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 
 from xsmb_manager.api.database import PostgresLotteryRepository, SessionLocal, create_schema
 
@@ -48,7 +48,7 @@ def migrate(source_path: Path) -> tuple[int, int]:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("source", type=Path, nargs="?", default=Path("xsmb.db"))
+    parser.add_argument("source", type=Path, nargs="?", default=Path("data/xsmb.db"))
     args = parser.parse_args()
     mb, mn = migrate(args.source)
     print(f"Migrated {mb} XSMB draws and {mn} XSMN province draws")

@@ -4,12 +4,17 @@ param(
 )
 
 $projectRoot = Split-Path -Parent $PSScriptRoot
+$backendDir = Join-Path $projectRoot "backend"
+$dataDir = Join-Path $projectRoot "data"
 $python = Join-Path $projectRoot ".venv\Scripts\python.exe"
-$sourceDatabase = Join-Path $projectRoot "xsmb.db"
-$apiDatabase = Join-Path $projectRoot "api-mobile.db"
+$sourceDatabase = Join-Path $dataDir "xsmb.db"
+$apiDatabase = Join-Path $dataDir "api-mobile.db"
 
 if (-not (Test-Path -LiteralPath $python -PathType Leaf)) {
     throw "Python environment not found at $python"
+}
+if (-not (Test-Path -LiteralPath $dataDir -PathType Container)) {
+    New-Item -ItemType Directory -Force -Path $dataDir | Out-Null
 }
 
 $databaseUrlPath = [IO.Path]::GetFullPath($apiDatabase).Replace("\", "/")
@@ -31,6 +36,6 @@ if (-not (Test-Path -LiteralPath $apiDatabase -PathType Leaf)) {
     }
 }
 
-Write-Host "Mobile API: http://localhost:$Port"
-Write-Host "Phone on the same Wi-Fi: use http://<PC-LAN-IP>:$Port"
-& $python -m uvicorn xsmb_manager.api.main:app --app-dir $projectRoot --host $HostAddress --port $Port
+Write-Host "Mobile API: http://localhost:$Port/api/v1"
+Write-Host "Phone on the same Wi-Fi: use http://<PC-LAN-IP>:$Port/api/v1"
+& $python -m uvicorn xsmb_manager.api.main:app --app-dir $backendDir --host $HostAddress --port $Port
