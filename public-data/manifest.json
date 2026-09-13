@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-13T02:37:39.787028+00:00",
+  "xsmbLatestDate": "2026-09-12",
+  "xsmnLatestDate": "2026-09-12",
+  "datasetVersion": "c38bd612c87c942d",
+  "files": {
+    "config.json": {
+      "sha256": "5b9bf7fec7740c25798b4c2138184c3795d34e23b7531cf86852237df6ad838d",
+      "bytes": 264
+    },
+    "xsmb/latest.json": {
+      "sha256": "9a25c2aaa4751714d1ae5755cca9b841983f3a92da174ff3249fcedada1a671c",
+      "bytes": 3333
+    },
+    "xsmn/latest.json": {
+      "sha256": "00ae86530249d5447c5411bb19d4358e3199f66db1a8b0025bcd062e2abafe68",
+      "bytes": 8979
+    }
+  }
+}

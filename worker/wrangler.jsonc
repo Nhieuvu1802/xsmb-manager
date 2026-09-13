@@ -1,0 +1,27 @@
+{
+  // Cloudflare Worker API v1 cho xsmb-manager.
+  //
+  // Không có secret nào ở đây: Worker chỉ đọc snapshot JSON công khai đã bundle
+  // sẵn (public-data/) nên không cần binding, KV, D1 hay credential nào khác.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "xsmb-manager-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "workers_dev": true,
+  "preview_urls": true,
+  "upload_source_maps": true,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  // Biến công khai (không phải bí mật). Muốn siết CORS thì đổi ALLOWED_ORIGINS
+  // thành danh sách origin, ví dụ: "https://xsmb-manager.pages.dev,https://vvn.freedev.app".
+  "vars": {
+    "API_VERSION": "v1",
+    "ALLOWED_ORIGINS": "*",
+    "ENVIRONMENT": "production"
+  }
+  // Custom domain api.vvn.freedev.app: thêm thủ công ở dashboard
+  // (Worker → Settings → Domains & Routes) sau khi deploy lần đầu thành công,
+  // để việc deploy từ Git không phụ thuộc vào zone đã tồn tại hay chưa.
+}

@@ -1,0 +1,414 @@
+{
+  "success": true,
+  "source": "vvn-github-backup",
+  "region": "xsmn",
+  "date": "2026-09-12",
+  "updatedAt": "2026-09-13T02:37:39.787028+00:00",
+  "count": 4,
+  "draws": [
+    {
+      "region": "mn",
+      "date": "2026-09-12",
+      "station": "Bình Phước",
+      "source": "vvn-database",
+      "verification": "VERIFIED",
+      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "draw_code": "MN-20260912-Bình Phước",
+      "results": [
+        {
+          "prize": "Giải ba",
+          "position": 1,
+          "value": "78635"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 2,
+          "value": "59028"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 1,
+          "value": "378"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 1,
+          "value": "77749"
+        },
+        {
+          "prize": "Giải nhất",
+          "position": 1,
+          "value": "94263"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 1,
+          "value": "7901"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 1,
+          "value": "4637"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 2,
+          "value": "5974"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 3,
+          "value": "7072"
+        },
+        {
+          "prize": "Giải tám",
+          "position": 1,
+          "value": "17"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 1,
+          "value": "51399"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 2,
+          "value": "54433"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 3,
+          "value": "78400"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 4,
+          "value": "02724"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 5,
+          "value": "58164"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 6,
+          "value": "68756"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 7,
+          "value": "01140"
+        },
+        {
+          "prize": "Đặc biệt",
+          "position": 1,
+          "value": "871126"
+        }
+      ]
+    },
+    {
+      "region": "mn",
+      "date": "2026-09-12",
+      "station": "Hậu Giang",
+      "source": "vvn-database",
+      "verification": "VERIFIED",
+      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "draw_code": "MN-20260912-Hậu Giang",
+      "results": [
+        {
+          "prize": "Giải ba",
+          "position": 1,
+          "value": "98644"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 2,
+          "value": "05441"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 1,
+          "value": "208"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 1,
+          "value": "96901"
+        },
+        {
+          "prize": "Giải nhất",
+          "position": 1,
+          "value": "35210"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 1,
+          "value": "5200"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 1,
+          "value": "8816"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 2,
+          "value": "8912"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 3,
+          "value": "7590"
+        },
+        {
+          "prize": "Giải tám",
+          "position": 1,
+          "value": "42"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 1,
+          "value": "32294"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 2,
+          "value": "87255"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 3,
+          "value": "41313"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 4,
+          "value": "25193"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 5,
+          "value": "09579"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 6,
+          "value": "44819"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 7,
+          "value": "86336"
+        },
+        {
+          "prize": "Đặc biệt",
+          "position": 1,
+          "value": "447951"
+        }
+      ]
+    },
+    {
+      "region": "mn",
+      "date": "2026-09-12",
+      "station": "Long An",
+      "source": "vvn-database",
+      "verification": "VERIFIED",
+      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "draw_code": "MN-20260912-Long An",
+      "results": [
+        {
+          "prize": "Giải ba",
+          "position": 1,
+          "value": "12160"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 2,
+          "value": "28151"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 1,
+          "value": "464"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 1,
+          "value": "80295"
+        },
+        {
+          "prize": "Giải nhất",
+          "position": 1,
+          "value": "86640"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 1,
+          "value": "5461"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 1,
+          "value": "0811"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 2,
+          "value": "9151"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 3,
+          "value": "2765"
+        },
+        {
+          "prize": "Giải tám",
+          "position": 1,
+          "value": "14"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 1,
+          "value": "36913"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 2,
+          "value": "08800"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 3,
+          "value": "43356"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 4,
+          "value": "33646"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 5,
+          "value": "95188"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 6,
+          "value": "89870"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 7,
+          "value": "01626"
+        },
+        {
+          "prize": "Đặc biệt",
+          "position": 1,
+          "value": "155337"
+        }
+      ]
+    },
+    {
+      "region": "mn",
+      "date": "2026-09-12",
+      "station": "TPHCM",
+      "source": "vvn-database",
+      "verification": "VERIFIED",
+      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "draw_code": "MN-20260912-TPHCM",
+      "results": [
+        {
+          "prize": "Giải ba",
+          "position": 1,
+          "value": "95790"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 2,
+          "value": "38976"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 1,
+          "value": "722"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 1,
+          "value": "50557"
+        },
+        {
+          "prize": "Giải nhất",
+          "position": 1,
+          "value": "79995"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 1,
+          "value": "9425"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 1,
+          "value": "6584"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 2,
+          "value": "3651"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 3,
+          "value": "1496"
+        },
+        {
+          "prize": "Giải tám",
+          "position": 1,
+          "value": "17"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 1,
+          "value": "63432"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 2,
+          "value": "32190"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 3,
+          "value": "91686"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 4,
+          "value": "75436"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 5,
+          "value": "59386"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 6,
+          "value": "89236"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 7,
+          "value": "73393"
+        },
+        {
+          "prize": "Đặc biệt",
+          "position": 1,
+          "value": "269569"
+        }
+      ]
+    }
+  ]
+}

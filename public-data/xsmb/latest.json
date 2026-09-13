@@ -1,0 +1,156 @@
+{
+  "success": true,
+  "source": "vvn-github-backup",
+  "region": "xsmb",
+  "date": "2026-09-12",
+  "updatedAt": "2026-09-13T02:37:39.787028+00:00",
+  "count": 1,
+  "draws": [
+    {
+      "region": "mb",
+      "date": "2026-09-12",
+      "station": "Hội đồng XSKT miền Bắc",
+      "source": "vvn-database",
+      "verification": "VERIFIED",
+      "collected_at": "2026-09-13T02:37:39.787028+00:00",
+      "draw_code": "MB-20260912",
+      "results": [
+        {
+          "prize": "Giải ba",
+          "position": 1,
+          "value": "15181"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 2,
+          "value": "68352"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 3,
+          "value": "76599"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 4,
+          "value": "77021"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 5,
+          "value": "54082"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 6,
+          "value": "85899"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 1,
+          "value": "01"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 2,
+          "value": "39"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 3,
+          "value": "43"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 4,
+          "value": "23"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 1,
+          "value": "62249"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 2,
+          "value": "19402"
+        },
+        {
+          "prize": "Giải nhất",
+          "position": 1,
+          "value": "93635"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 1,
+          "value": "2462"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 2,
+          "value": "9390"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 3,
+          "value": "4742"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 4,
+          "value": "1298"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 5,
+          "value": "8565"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 6,
+          "value": "6114"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 1,
+          "value": "119"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 2,
+          "value": "998"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 3,
+          "value": "793"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 1,
+          "value": "5804"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 2,
+          "value": "9984"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 3,
+          "value": "3399"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 4,
+          "value": "1827"
+        },
+        {
+          "prize": "Đặc biệt",
+          "position": 1,
+          "value": "58851"
+        }
+      ]
+    }
+  ]
+}

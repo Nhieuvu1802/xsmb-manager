@@ -1,0 +1,8 @@
+{
+  "apiBaseUrl": "https://api.vvn.freedev.app/v1",
+  "apiVersion": "v1",
+  "fallbackDataUrl": "https://raw.githubusercontent.com/Nhieuvu1802/xsmb-manager/main/public-data",
+  "maintenance": false,
+  "minimumAppVersion": "2.0.0",
+  "githubFallbackEnabled": true
+}
