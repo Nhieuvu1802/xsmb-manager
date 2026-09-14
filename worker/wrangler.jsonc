@@ -35,16 +35,13 @@
     ]
   },
   // R2 binding: bucket xsmb-data lưu master dataset.
-  // KHÔNG bật R2 trong Cloudflare Dashboard.
-  // Tạm thời comment để deploy Worker trước.
-  // Sau khi enable R2 → uncomment block này → wrangler deploy lại.
-  //
-  // "r2_buckets": [
-  //   {
-  //     "binding": "LOTTERY_DATA",
-  //     "bucket_name": "xsmb-data"
-  //   }
-  // ],
+  // Enable R2 trong Cloudflare Dashboard → R2 → Enable trước khi deploy.
+  "r2_buckets": [
+    {
+      "binding": "LOTTERY_DATA",
+      "bucket_name": "xsmb-data"
+    }
+  ],
   // Custom domain api.vvn.freedev.app: thêm thủ công ở dashboard
   // (Worker → Settings → Domains & Routes) sau khi deploy lần đầu thành công,
   // để việc deploy từ Git không phụ thuộc vào zone đã tồn tại hay chưa.
