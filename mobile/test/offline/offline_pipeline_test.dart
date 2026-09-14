@@ -1,4 +1,4 @@
-/// Kiểm thử luồng ngoại tuyến đầu–cuối (STEP 9–13).
+﻿/// Kiểm thử luồng ngoại tuyến đầu–cuối (STEP 9–13).
 ///
 /// Bộ test này dùng **fixture thật chụp từ Worker production** đi qua đúng các
 /// lớp của app (MockClient → JsonHttpClient → LotteryApiClient → chuỗi provider
@@ -31,8 +31,8 @@ import '../support/fixtures.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  /// 2026-09-12 12:00 giờ Việt Nam — trùng ngày kỳ mới nhất của fixture.
-  final clock = DateTime.utc(2026, 9, 12, 5);
+  /// 2026-09-13 12:00 giờ Việt Nam — trùng ngày kỳ mới nhất của fixture.
+  final clock = DateTime.utc(2026, 9, 13, 5);
   const baseUrl = 'https://xsmb-api.nhieuvu1802.workers.dev/v1';
   const host = 'xsmb-api.nhieuvu1802.workers.dev';
 
@@ -96,21 +96,21 @@ void main() {
       final report = await repository.sync(region: Region.mienBac);
 
       expect(report.status, SyncOutcome.success);
-      expect(report.inserted, 1);
-      expect(await store.latestDrawDate(Region.mienBac), '2026-09-12');
+      expect(report.inserted, 7);
+      expect(await store.latestDrawDate(Region.mienBac), '2026-09-13');
 
       // Cache trống → tải trọn cửa sổ bootstrap 365 ngày (≥ 1 năm kỳ).
       final call = historyCall(requested);
-      expect(call.queryParameters['start'], '2025-09-13');
-      expect(call.queryParameters['end'], '2026-09-12');
+      expect(call.queryParameters['start'], '2025-09-14');
+      expect(call.queryParameters['end'], '2026-09-13');
 
       final meta = await store.datasetMeta(Region.mienBac);
       expect(meta, isNotNull);
       expect(meta!.source, DataSourceKind.cloudflare);
-      expect(meta.datasetVersion, 'c38bd612c87c942d');
-      expect(meta.datasetDate, '2026-09-12');
+      expect(meta.datasetVersion, '1c88f61aba6c40a9');
+      expect(meta.datasetDate, '2026-09-13');
       expect(meta.apiHost, host);
-      expect(meta.recordCount, 1);
+      expect(meta.recordCount, 7);
       expect(meta.fetchedAt, report.finishedAt);
     });
 
@@ -131,7 +131,7 @@ void main() {
         '2026-09-10',
         reason: 'chỉ tải từ ngày kế tiếp kỳ cuối trong cache',
       );
-      expect(await store.countDraws(Region.mienBac), 3);
+      expect(await store.countDraws(Region.mienBac), 6);
     });
   });
 
@@ -214,8 +214,8 @@ void main() {
 
       expect(status.apiOnline, isTrue);
       expect(status.source, DataSourceKind.cloudflare);
-      expect(status.datasetDateLabel, '2026-09-12');
-      expect(status.datasetVersionLabel, 'c38bd612…942d');
+      expect(status.datasetDateLabel, '2026-09-13');
+      expect(status.datasetVersionLabel, '1c88f61a…40a9');
       expect(status.appVersion, isNotEmpty);
     });
 
@@ -243,7 +243,7 @@ void main() {
       );
 
       expect(status.cacheDate, '2026-09-10');
-      expect(status.datasetDate, '2026-09-12');
+      expect(status.datasetDate, '2026-09-13');
       expect(status.cacheBehindApi, isTrue);
       expect(status.summary, contains('mới hơn cache'));
     });
@@ -253,16 +253,16 @@ void main() {
     test('kỳ quay của Worker giữ nguyên hình dạng khi vào cache', () async {
       final api = mockApi();
       final fetched = await api.latest(region: Region.mienBac, days: 1);
-      final LotteryResult record = fetched.value.single;
+      final LotteryResult record = fetched.value.first;
 
-      expect(record.date, '2026-09-12');
+      expect(record.date, '2026-09-13');
       expect(record.station, 'Hội đồng XSKT miền Bắc');
       expect(record.results.length, 27);
-      expect(record.resolvedDrawCode, 'MB-20260912');
+      expect(record.resolvedDrawCode, 'MB-20260913');
 
       await store.upsertDraws(<DrawRecord>[record]);
       final cached = await store.loadDraws(region: Region.mienBac);
-      final restored = cached.single;
+      final restored = cached.first;
 
       expect(restored.key, record.key);
       expect(restored.date, record.date);
@@ -277,7 +277,7 @@ void main() {
         source: DataSourceKind.github,
         fetchedAt: '2026-09-12T19:05:00+07:00',
         datasetVersion: 'abc123',
-        datasetDate: '2026-09-12',
+        datasetDate: '2026-09-13',
         apiHost: 'xsmb-api.nhieuvu1802.workers.dev',
         recordCount: 4,
       );
@@ -288,12 +288,12 @@ void main() {
       expect(fromRow.source, DataSourceKind.github);
       expect(fromRow.region, Region.mienNam);
       expect(fromRow.recordCount, 4);
-      expect(fromRow.datasetDate, '2026-09-12');
+      expect(fromRow.datasetDate, '2026-09-13');
       expect(fromJson.datasetVersion, 'abc123');
       expect(fromJson.fetchedAt, meta.fetchedAt);
       expect(DatasetMeta.empty(Region.mienBac).isEmpty, isTrue);
       expect(meta.copyWith(recordCount: 9).recordCount, 9);
-      expect(meta.copyWith().datasetDate, '2026-09-12');
+      expect(meta.copyWith().datasetDate, '2026-09-13');
     });
 
     test('LotteryStation suy ra mã đài và trạm mặc định', () {
@@ -337,7 +337,7 @@ void main() {
           source: DataSourceKind.cloudflare,
           fetchedAt: '2026-09-12T19:00:00+07:00',
           datasetVersion: 'v1',
-          datasetDate: '2026-09-12',
+          datasetDate: '2026-09-13',
           recordCount: 1,
         ),
       );
@@ -352,7 +352,7 @@ void main() {
         ),
       );
 
-      expect((await store.datasetMeta(Region.mienBac))?.datasetDate, '2026-09-12');
+      expect((await store.datasetMeta(Region.mienBac))?.datasetDate, '2026-09-13');
       expect((await store.datasetMeta(Region.mienNam))?.recordCount, 4);
       expect(
         (await store.datasetMeta(Region.mienNam))?.source,

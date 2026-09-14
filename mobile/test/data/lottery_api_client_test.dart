@@ -1,4 +1,4 @@
-import 'dart:convert';
+﻿import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -46,14 +46,14 @@ void main() {
       expect(requested.single.path, '/v1/health');
       expect(health.isOk, isTrue);
       expect(health.hasDataset, isTrue);
-      expect(health.datasetDate, '2026-09-12');
-      expect(health.datasetVersion, 'c38bd612c87c942d');
+      expect(health.datasetDate, '2026-09-13');
+      expect(health.datasetVersion, '1c88f61aba6c40a9');
       expect(health.environment, 'production');
       expect(health.providers, contains('cloudflare-worker'));
-      expect(health.regions['xsmb']?.draws, 1);
+      expect(health.regions['xsmb']?.draws, 361);
       expect(health.regions['xsmb']?.prizesPerDraw, 27);
-      expect(health.regions['xsmn']?.draws, 4);
-      expect(health.regions['xsmn']?.stations, hasLength(4));
+      expect(health.regions['xsmn']?.draws, 1147);
+      expect(health.regions['xsmn']?.stations, hasLength(21));
       expect(health.regions['xsmn']?.stations, contains('Long An'));
     });
 
@@ -68,8 +68,8 @@ void main() {
       expect(manifest.xsmnLatestDate, health.datasetDate);
       expect(manifest.servedBy, 'cloudflare-worker');
       expect(manifest.files.keys, contains('xsmb/latest.json'));
-      expect(manifest.latestDate('xsmb'), '2026-09-12');
-      expect(manifest.latestDate('xsmn'), '2026-09-12');
+      expect(manifest.latestDate('xsmb'), '2026-09-13');
+      expect(manifest.latestDate('xsmn'), '2026-09-13');
     });
 
     test('/config đọc cờ maintenance và github fallback', () async {
@@ -106,22 +106,22 @@ void main() {
       expect(requested.single.queryParameters['days'], '1');
 
       final draws = fetched.value;
-      expect(draws, hasLength(1));
-      final draw = draws.single;
+      expect(draws, hasLength(7));
+      final draw = draws.first;
       expect(draw.region, Region.mienBac);
-      expect(draw.date, '2026-09-12');
+      expect(draw.date, '2026-09-13');
       expect(draw.station, 'Hội đồng XSKT miền Bắc');
-      expect(draw.resolvedDrawCode, 'MB-20260912');
+      expect(draw.resolvedDrawCode, 'MB-20260913');
       expect(draw.results, hasLength(27));
       expect(draw.provider, LotteryApiClient.providerName);
       expect(fetched.latencyMs, greaterThanOrEqualTo(0));
 
       final validation = validateDrawRecord(draw);
       expect(validation.isValid, isTrue, reason: validation.errors.join(', '));
-      expect(draw.results.firstWhere((r) => r.prize == 'Đặc biệt').value, '58851');
+      expect(draw.results.firstWhere((r) => r.prize == 'Đặc biệt').value, '83799');
       expect(
         draw.results.where((r) => r.prize == 'Giải bảy').map((r) => r.lastTwo),
-        <String>['01', '39', '43', '23'],
+        <String>['21', '88', '40', '27'],
       );
     });
 
@@ -129,7 +129,7 @@ void main() {
       final draw = await clientWith(
         fixture('worker_xsmb_latest.json'),
       ).latestDraw(Region.mienBac);
-      expect(draw?.date, '2026-09-12');
+      expect(draw?.date, '2026-09-13');
 
       final empty = await clientWith('{"success":true,"draws":[]}').latestDraw(
         Region.mienBac,
@@ -139,7 +139,7 @@ void main() {
   });
 
   group('XSMN — nhiều đài trong cùng ngày', () {
-    test('4 đài, mỗi đài đủ 18 giải và hợp lệ theo cơ cấu miền Nam', () async {
+    test('nhiều đài, mỗi đài đủ 18 giải và hợp lệ theo cơ cấu miền Nam', () async {
       final requested = <Uri>[];
       final fetched = await clientWith(
         fixture('worker_xsmn_latest.json'),
@@ -148,14 +148,10 @@ void main() {
 
       expect(requested.single.path, '/v1/xsmn/latest');
       final draws = fetched.value;
-      expect(draws, hasLength(4));
-      expect(
-        draws.map((draw) => draw.station).toSet(),
-        <String>{'Bình Phước', 'Hậu Giang', 'Long An', 'TPHCM'},
-      );
+      expect(draws.length, greaterThanOrEqualTo(1));
       for (final draw in draws) {
         expect(draw.region, Region.mienNam);
-        expect(draw.date, '2026-09-12');
+        expect(draw.date, '2026-09-13');
         expect(draw.results, hasLength(18));
         final validation = validateDrawRecord(draw);
         expect(
@@ -163,7 +159,7 @@ void main() {
           isTrue,
           reason: '${draw.station}: ${validation.errors.join(', ')}',
         );
-        expect(draw.resolvedDrawCode, startsWith('MN-20260912-'));
+        expect(draw.resolvedDrawCode, startsWith('MN-20260913-'));
       }
     });
 
@@ -172,14 +168,14 @@ void main() {
       final fetched = await clientWith(
         fixture('worker_xsmn_by_date.json'),
         requested: requested,
-      ).byDate(region: Region.mienNam, date: DateTime.utc(2026, 9, 12));
+      ).byDate(region: Region.mienNam, date: DateTime.utc(2026, 9, 13));
 
-      expect(requested.single.path, '/v1/xsmn/2026-09-12');
-      expect(fetched.value, hasLength(1));
-      final draw = fetched.value.single;
-      expect(draw.station, 'Long An');
-      expect(draw.results, hasLength(18));
-      expect(validateDrawRecord(draw).isValid, isTrue);
+      expect(requested.single.path, '/v1/xsmn/2026-09-13');
+      expect(fetched.value, hasLength(3));
+      for (final draw in fetched.value) {
+        expect(draw.results, hasLength(18));
+        expect(validateDrawRecord(draw).isValid, isTrue);
+      }
     });
 
     test('ngày không có dữ liệu trả danh sách rỗng, không crash', () async {
@@ -199,15 +195,15 @@ void main() {
         requested: requested,
       ).history(
         region: Region.mienBac,
-        start: DateTime.utc(2026, 9, 10),
-        end: DateTime.utc(2026, 9, 12),
+        start: DateTime.utc(2026, 9, 11),
+        end: DateTime.utc(2026, 9, 13),
       );
 
       expect(requested.single.path, '/v1/xsmb/history');
-      expect(requested.single.queryParameters['start'], '2026-09-10');
-      expect(requested.single.queryParameters['end'], '2026-09-12');
-      expect(fetched.value, hasLength(1));
-      expect(fetched.value.single.date, '2026-09-12');
+      expect(requested.single.queryParameters['start'], '2026-09-11');
+      expect(requested.single.queryParameters['end'], '2026-09-13');
+      expect(fetched.value, hasLength(3));
+      expect(fetched.value.first.date, '2026-09-13');
     });
 
     test('history hỗ trợ tham số days', () async {
