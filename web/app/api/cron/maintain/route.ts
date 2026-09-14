@@ -1,0 +1,83 @@
+import { NextResponse } from "next/server";
+import { createSampleDraws } from "@/lib/sample-data";
+import {
+  databaseStatus,
+  insertMissingDraws,
+  logDataImport,
+  pruneOldDraws,
+  upsertDraws,
+} from "@/lib/server/draw-repository";
+import { refreshNumberTrends } from "@/lib/server/trend-repository";
+import { fetchLegalProvider, providerRecordsToDraws } from "@/lib/server/provider";
+import { fetchWorkerHistory } from "@/lib/worker-api-client";
+import type { Region } from "@/lib/lottery-domain";
+
+export const maxDuration = 300;
+
+function dateOnly(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
+export async function GET(request: Request) {
+  const secret = process.env.CRON_SECRET;
+  if (!secret || request.headers.get("authorization") !== `Bearer ${secret}`) {
+    return NextResponse.json({ error: "Cron không hợp lệ." }, { status: 401 });
+  }
+
+  const retentionDays = Math.min(Math.max(Number(process.env.DATA_RETENTION_DAYS) || 370, 365), 400);
+
+  try {
+    const before = await databaseStatus();
+    const today = new Date();
+    const requestedFullSync = new URL(request.url).searchParams.get("full") === "true";
+    const fullSync = requestedFullSync || !before?.drawCount || today.getUTCDay() === 0;
+    const from = new Date(today);
+    from.setUTCDate(from.getUTCDate() - (fullSync ? 365 : 7));
+    const payload = await fetchLegalProvider(dateOnly(from), dateOnly(today));
+
+    let imported = 0;
+    let source = "rolling-sample";
+    if (payload) {
+      imported = await upsertDraws(providerRecordsToDraws(payload.records));
+      source = "legal-provider";
+    } else {
+      const regions: Region[] = ["Miền Bắc", "Miền Trung", "Miền Nam"];
+      const workerDraws = (await Promise.all(
+        regions.map((region) => fetchWorkerHistory(region, dateOnly(from), dateOnly(today))),
+      )).flat();
+      if (workerDraws.length) {
+        imported = before?.drawCount ? await upsertDraws(workerDraws) : await insertMissingDraws(workerDraws);
+        source = "cloudflare-worker-api";
+      } else {
+        imported = await insertMissingDraws(createSampleDraws(before?.drawCount ? 3 : 365));
+      }
+    }
+
+    const removed = await pruneOldDraws(retentionDays);
+
+    // Refresh NumberTrend pre-aggregated table for fast trend queries
+    let trendRows = 0;
+    try {
+      trendRows = await refreshNumberTrends(dateOnly(from), dateOnly(today));
+    } catch (trendError) {
+      console.error("Refresh NumberTrends thất bại.", trendError);
+    }
+
+    const after = await databaseStatus();
+    await logDataImport({
+      source,
+      acceptedRows: imported,
+      duplicateRows: 0,
+      rejectedRows: 0,
+      report: { from: dateOnly(from), to: dateOnly(today), fullSync, removed: removed.count, retentionDays, trendRows },
+    });
+
+    return NextResponse.json({ status: "MAINTAINED", source, fullSync, imported, removed: removed.count, trendRows, database: after });
+  } catch (error) {
+    console.error("Cron duy trì dữ liệu thất bại.", error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Không thể duy trì dữ liệu." },
+      { status: 500 },
+    );
+  }
+}

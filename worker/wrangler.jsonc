@@ -1,8 +1,9 @@
 {
   // Cloudflare Worker API v1 cho xsmb-manager.
   //
-  // Không có secret nào ở đây: Worker chỉ đọc snapshot JSON công khai đã bundle
-  // sẵn (public-data/) nên không cần binding, KV, D1 hay credential nào khác.
+  // Worker đọc snapshot JSON đã bundle (public-data/) làm fallback.
+  // Khi R2 được cấu hình, Worker ưu tiên đọc từ R2 làm primary storage.
+  // Cron scheduled handler tự động collect dữ liệu mới.
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "xsmb-manager-api",
   "main": "src/index.ts",
@@ -15,12 +16,35 @@
     "head_sampling_rate": 1
   },
   // Biến công khai (không phải bí mật). Muốn siết CORS thì đổi ALLOWED_ORIGINS
-  // thành danh sách origin, ví dụ: "https://xsmb-manager.pages.dev,https://vvn.freedev.app".
+  // thành danh sách origin, ví dụ: "https://laptopvvn.vercel.app".
   "vars": {
     "API_VERSION": "v1",
     "ALLOWED_ORIGINS": "*",
     "ENVIRONMENT": "production"
-  }
+  },
+  // Cloudflare Cron: chạy 3 lần quanh giờ quay XSMB (18:15 ICT = 11:15 UTC).
+  // 11:15, 11:30, 12:00 UTC — chống upstream delay.
+  // XSMN (16:15 ICT = 09:15 UTC): 09:15, 09:30, 10:00 UTC.
+  // Tách scheduledXSMB/scheduledXSMN để logic riêng.
+  "triggers": {
+    "crons": [
+      "15,30 9 * * *",
+      "0 10 * * *",
+      "15,30 11 * * *",
+      "0 12 * * *"
+    ]
+  },
+  // R2 binding: bucket xsmb-data lưu master dataset.
+  // KHÔNG bật R2 trong Cloudflare Dashboard.
+  // Tạm thời comment để deploy Worker trước.
+  // Sau khi enable R2 → uncomment block này → wrangler deploy lại.
+  //
+  // "r2_buckets": [
+  //   {
+  //     "binding": "LOTTERY_DATA",
+  //     "bucket_name": "xsmb-data"
+  //   }
+  // ],
   // Custom domain api.vvn.freedev.app: thêm thủ công ở dashboard
   // (Worker → Settings → Domains & Routes) sau khi deploy lần đầu thành công,
   // để việc deploy từ Git không phụ thuộc vào zone đã tồn tại hay chưa.

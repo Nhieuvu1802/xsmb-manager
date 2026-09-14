@@ -33,6 +33,7 @@ import {
   type DrawSelection,
 } from "./dataset";
 import { CACHE, errorResponse, jsonResponse, preflight } from "./response";
+import { calculateStatistics, generateTop4 } from "./statistics";
 import type { Env, RegionKey } from "./types";
 
 const API_VERSION = "v1";
@@ -136,10 +137,12 @@ function healthHandler(request: Request, env: Env): Response {
       datasetDate: datasetDate(),
       datasetVersion: datasetVersion(),
       generatedAt: MANIFEST.generatedAt,
-      database: "snapshot",
+      database: env.LOTTERY_DATA ? "r2+snapshot" : "snapshot",
       time: new Date().toISOString(),
       lastDataUpdate: datasetDate(),
       environment: env.ENVIRONMENT ?? "production",
+      r2: { available: !!env.LOTTERY_DATA },
+      cron: { enabled: true },
       providers: ["cloudflare-worker", "public-data"],
       historyDays: MANIFEST.historyDays ?? null,
       history: {
@@ -216,6 +219,10 @@ function indexDocument(request: Request, env: Env): Response {
         `${base}/v1/xsmn/{YYYY-MM-DD}`,
         `${base}/v1/xsmb/history?start=&end=`,
         `${base}/v1/xsmn/history?start=&end=`,
+        `${base}/v1/statistics/00-99`,
+        `${base}/v1/xsmb/statistics`,
+        `${base}/v1/xsmn/statistics`,
+        `${base}/v1/predictions/top4`,
         `${base}/v1/config`,
         `${base}/v1/manifest`,
       ],
@@ -296,6 +303,43 @@ function dateHandler(
 }
 
 /* -------------------------------------------------------------------------- */
+/* Statistics & Predictions handlers                                           */
+/* -------------------------------------------------------------------------- */
+
+function statisticsHandler(request: Request, env: Env, region: string): Response {
+  const regionKey = region === "xsmb" ? "xsmb" : "xsmn";
+  const draws = allDraws(regionKey);
+  const stats = calculateStatistics(draws, regionKey);
+  stats.datasetVersion = datasetVersion();
+  return jsonResponse(
+    stats,
+    request,
+    env,
+    200,
+    { cacheControl: CACHE.meta, etag: etag(env, `${regionKey}-statistics`) },
+  );
+}
+
+function predictionsHandler(request: Request, env: Env): Response {
+  // Compute stats for xsmb (most data, 27 results per draw)
+  const draws = allDraws("xsmb");
+  const stats = calculateStatistics(draws, "xsmb");
+  const top4 = generateTop4(
+    stats.numbers,
+    regionDate("xsmb") ?? new Date().toISOString().slice(0, 10),
+    datasetVersion(),
+    "top4-v1",
+  );
+  return jsonResponse(
+    top4,
+    request,
+    env,
+    200,
+    { cacheControl: CACHE.health, etag: etag(env, "predictions-top4") },
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 /* Router                                                                      */
 /* -------------------------------------------------------------------------- */
 
@@ -346,6 +390,10 @@ const worker = {
             return configHandler(request, env);
           case "manifest":
             return manifestHandler(request, env);
+          case "statistics":
+            return statisticsHandler(request, env, "xsmb");
+          case "predictions":
+            return predictionsHandler(request, env);
           case "xsmb":
           case "xsmn":
             return errorResponse(
@@ -366,6 +414,14 @@ const worker = {
         }
       }
 
+      // ── Tham số室.pathname routes (trước region check) ──
+      if (first === "predictions" && second === "top4") {
+        return predictionsHandler(request, env);
+      }
+      if (first === "statistics" && second === "00-99") {
+        return statisticsHandler(request, env, "00-99");
+      }
+
       if (!isRegionKey(first)) {
         return errorResponse(
           request,
@@ -378,6 +434,7 @@ const worker = {
 
       if (second === "latest") return latestHandler(request, env, url, first);
       if (second === "history") return historyHandler(request, env, url, first);
+      if (second === "statistics") return statisticsHandler(request, env, first);
       if (ISO_DATE.test(second)) {
         return dateHandler(request, env, url, first, second);
       }
@@ -415,3 +472,42 @@ const worker = {
 };
 
 export default worker;
+
+/* -------------------------------------------------------------------------- */
+/* Scheduled handler (Cloudflare Cron)                                         */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Cloudflare Cron gọi scheduled() theo crons đã cấu hình trong wrangler.jsonc.
+ * Hiện tại Worker chỉ đọc snapshot tĩnh — scheduled() log thông tin dataset
+ * để khi collector được thêm vào, handler này đã sẵn sàng gọi collector.
+ *
+ * Cron schedule (UTC):
+ *   - 15,30 9 * * *  → XSMN collection window (09:15, 09:30)
+ *   - 0 10 * * *     → XSMN final check (10:00)
+ *   - 15,30 11 * * * → XSMB collection window (11:15, 11:30)
+ *   - 0 12 * * *     → XSMB final check (12:00)
+ */
+export async function scheduled(
+  _event: ScheduledEvent,
+  env: Env,
+  _ctx: ExecutionContext,
+): Promise<void> {
+  const now = new Date().toISOString();
+  console.log(JSON.stringify({
+    event: "cron_tick",
+    timestamp: now,
+    datasetVersion: datasetVersion(),
+    datasetDate: datasetDate(),
+    environment: env.ENVIRONMENT ?? "production",
+  }));
+
+  // When R2 is available, this is where collector logic runs:
+  // 1. Determine which region to collect based on current time
+  // 2. Fetch from providers (primary → secondary → fallback)
+  // 3. Validate and normalize
+  // 4. Store to R2
+  // 5. Update manifest
+  // 6. Generate updated statistics
+  // For now, the bundled snapshot is the source of truth.
+}

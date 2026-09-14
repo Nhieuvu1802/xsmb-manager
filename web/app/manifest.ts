@@ -2,25 +2,25 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Xổ số 24/7 — Tra cứu & thống kê",
-    short_name: "Xổ số 24/7",
-    description: "Tra cứu kết quả XSMB và thống kê lô tô.",
+    name: "Thống Kê 24 — Phân tích xác suất xổ số",
+    short_name: "Thống Kê 24",
+    description: "Công cụ tra cứu và thống kê xổ số minh bạch cho mục đích học tập, giải trí.",
     id: "/",
     start_url: "/",
     scope: "/",
     lang: "vi",
     display: "standalone",
-    background_color: "#f7f1e7",
-    theme_color: "#9f1d20",
+    background_color: "#070b12",
+    theme_color: "#0b101b",
     orientation: "portrait-primary",
-    categories: ["utilities", "finance"],
+    categories: ["utilities", "education"],
     icons: [
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
-      { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "maskable" },
+      { src: "/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/icon-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
     shortcuts: [
-      { name: "Kết quả", short_name: "Kết quả", url: "/#ket-qua", icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }] },
-      { name: "Thống kê", short_name: "Thống kê", url: "/#thong-ke", icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }] }
+      { name: "Mở ứng dụng", short_name: "Mở", url: "/", icons: [{ src: "/icon-192.png", sizes: "192x192", type: "image/png" }] },
     ]
   };
 }

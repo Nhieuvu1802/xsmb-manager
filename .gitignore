@@ -46,9 +46,16 @@ mobile/android/app/*.keystore
 *.apk
 *.aab
 
+# --- Cloudflare Worker ---
+worker/dist/
+worker/.wrangler/
+
 # --- IDE / OS ---
 .idea/
 .vscode/
 *.iml
 .DS_Store
 Thumbs.db
+
+.vercel
+.env*

@@ -304,6 +304,64 @@ export function secureRandomNumbers(amount: number) {
     .map((value) => value.toString().padStart(2, "0"));
 }
 
+export type HistoricalCandidate = {
+  number: string;
+  score: number;
+  overallHits: number;
+  recentHits: number;
+  weekdayHits: number;
+  sampleDraws: number;
+};
+
+export function rankHistoricalCandidates(draws: LotteryDraw[], targetDate: string, limit = 12): HistoricalCandidate[] {
+  const target = new Date(`${targetDate}T12:00:00Z`);
+  if (Number.isNaN(target.getTime())) return [];
+
+  // Strictly earlier dates prevent a historical back-test from seeing the target day's outcome.
+  const historical = draws.filter((draw) => draw.date < targetDate);
+  if (!historical.length) return [];
+
+  const recentThreshold = new Date(target);
+  recentThreshold.setUTCDate(recentThreshold.getUTCDate() - 30);
+  const recentThresholdDate = recentThreshold.toISOString().slice(0, 10);
+  const weekday = target.getUTCDay();
+  const weekdayDraws = historical.filter((draw) => new Date(`${draw.date}T12:00:00Z`).getUTCDay() === weekday);
+  const recentDraws = historical.filter((draw) => draw.date >= recentThresholdDate);
+
+  function countNumbers(source: LotteryDraw[]) {
+    const counts = Array.from({ length: 100 }, () => 0);
+    source.forEach((draw) => draw.results.forEach((result) => {
+      counts[Number(lastTwoDigits(result.value))] += 1;
+    }));
+    return counts;
+  }
+
+  const overallCounts = countNumbers(historical);
+  const weekdayCounts = countNumbers(weekdayDraws);
+  const recentCounts = countNumbers(recentDraws);
+  const overallMax = Math.max(...overallCounts, 1);
+  const weekdayMax = Math.max(...weekdayCounts, 1);
+  const recentMax = Math.max(...recentCounts, 1);
+
+  return Array.from({ length: 100 }, (_, value) => {
+    const score = (
+      (overallCounts[value] / overallMax) * 0.45
+      + (weekdayCounts[value] / weekdayMax) * 0.35
+      + (recentCounts[value] / recentMax) * 0.2
+    ) * 100;
+    return {
+      number: value.toString().padStart(2, "0"),
+      score: Math.round(score * 10) / 10,
+      overallHits: overallCounts[value],
+      recentHits: recentCounts[value],
+      weekdayHits: weekdayCounts[value],
+      sampleDraws: historical.length,
+    };
+  })
+    .sort((left, right) => right.score - left.score || right.overallHits - left.overallHits || left.number.localeCompare(right.number))
+    .slice(0, Math.min(Math.max(limit, 1), 100));
+}
+
 export function validateCsv(text: string): CsvValidation {
   const lines = text.replace(/^\uFEFF/, "").split(/\r?\n/).filter((line) => line.trim());
   if (!lines.length) {
@@ -312,7 +370,9 @@ export function validateCsv(text: string): CsvValidation {
 
   const headers = lines[0].split(",").map((value) => value.trim().toLowerCase());
   const dateIndex = headers.findIndex((value) => ["date", "ngay", "ngày", "draw_date"].includes(value));
+  const stationIndex = headers.findIndex((value) => ["station", "dai", "đài"].includes(value));
   const issues: CsvValidation["issues"] = [];
+  const drawKeys = new Set<string>();
   const dates = new Set<string>();
   let validRows = 0;
   let duplicateRows = 0;
@@ -333,16 +393,19 @@ export function validateCsv(text: string): CsvValidation {
       issues.push({ row, level: "error", message: "Ngày không đúng định dạng YYYY-MM-DD." });
       return;
     }
-    if (dates.has(date)) {
+    const station = stationIndex >= 0 ? cells[stationIndex]?.trim().toLowerCase() : "";
+    const drawKey = `${date}|${station}`;
+    if (drawKeys.has(drawKey)) {
       duplicateRows += 1;
-      issues.push({ row, level: "warning", message: `Kỳ quay ${date} bị trùng.` });
+      issues.push({ row, level: "warning", message: `Kỳ quay ${date}${station ? ` · ${station}` : ""} bị trùng.` });
       return;
     }
-    const hasNumber = cells.some((cell, index) => index !== dateIndex && /\d{2,}/.test(cell));
+    const hasNumber = cells.some((cell, index) => index !== dateIndex && index !== stationIndex && /\d{2,}/.test(cell));
     if (!hasNumber) {
       issues.push({ row, level: "error", message: "Không tìm thấy kết quả số." });
       return;
     }
+    drawKeys.add(drawKey);
     dates.add(date);
     validRows += 1;
   });
@@ -371,16 +434,19 @@ export function parseCsvDraws(text: string, region: Region = "Miền Bắc"): Lo
   const dateIndex = headers.findIndex((value) =>
     ["date", "ngay", "ngày", "draw_date"].includes(value.toLowerCase()),
   );
+  const stationIndex = headers.findIndex((value) => ["station", "dai", "đài"].includes(value.toLowerCase()));
   if (dateIndex < 0) return [];
 
   const seen = new Set<string>();
   return lines.slice(1).flatMap((line) => {
     const cells = line.split(",").map((value) => value.trim().replace(/^"|"$/g, ""));
     const date = cells[dateIndex];
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date ?? "") || seen.has(date)) return [];
+    const station = stationIndex >= 0 && cells[stationIndex] ? cells[stationIndex] : region;
+    const drawKey = `${date}|${station}`;
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date ?? "") || seen.has(drawKey)) return [];
     const results: PrizeResult[] = [];
     cells.forEach((cell, columnIndex) => {
-      if (columnIndex === dateIndex) return;
+      if (columnIndex === dateIndex || columnIndex === stationIndex) return;
       const numbers = cell.match(/\d+/g) ?? [];
       numbers.forEach((value, position) => {
         results.push({
@@ -391,15 +457,17 @@ export function parseCsvDraws(text: string, region: Region = "Miền Bắc"): Lo
       });
     });
     if (!results.length) return [];
-    seen.add(date);
+    seen.add(drawKey);
+    const stationSlug = station.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "");
+    const drawTime = region === "Miền Bắc" ? "18:15" : region === "Miền Trung" ? "17:15" : "16:15";
     return [{
-      id: `csv-${region}-${date}`,
-      drawCode: `CSV-${region}-${date}`,
+      id: `csv-${region}-${stationSlug}-${date}`,
+      drawCode: `CSV-${region}-${stationSlug}-${date}`,
       lotteryType: "TRADITIONAL" as const,
       date,
-      drawnAt: `${date}T18:00:00+07:00`,
+      drawnAt: `${date}T${drawTime}:00+07:00`,
       region,
-      station: region,
+      station,
       source: "CSV do người dùng nhập",
       collectedAt: new Date().toISOString(),
       verification: "PENDING" as const,

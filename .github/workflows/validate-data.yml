@@ -1,0 +1,61 @@
+name: Validate Data
+
+on:
+  push:
+    paths:
+      - "public-data/**"
+  pull_request:
+    paths:
+      - "public-data/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify public-data integrity
+        run: node worker/scripts/verify-public-data.mjs
+      - name: Validate dataset schema
+        run: |
+          echo "Validating public-data schema..."
+          node -e "
+          const fs = require('fs');
+          const files = [
+            'public-data/manifest.json',
+            'public-data/status.json',
+            'public-data/config.json',
+            'public-data/xsmb/latest.json',
+            'public-data/xsmn/latest.json',
+          ];
+          let errors = 0;
+          for (const file of files) {
+            try {
+              const data = JSON.parse(fs.readFileSync(file, 'utf8'));
+              console.log('OK:', file);
+              if (file.includes('manifest')) {
+                if (!data.schemaVersion || !data.datasetVersion || !data.generatedAt) {
+                  console.error('FAIL:', file, '- missing required fields');
+                  errors++;
+                }
+              }
+              if (file.includes('status')) {
+                if (!data.datasetVersion || !data.generatedAt) {
+                  console.error('FAIL:', file, '- missing required fields');
+                  errors++;
+                }
+              }
+            } catch (e) {
+              console.error('FAIL:', file, e.message);
+              errors++;
+            }
+          }
+          if (errors > 0) { process.exit(1); }
+          console.log('All validations passed.');
+          "

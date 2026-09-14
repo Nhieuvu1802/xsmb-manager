@@ -1,0 +1,95 @@
+name: Deploy Worker
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - "public-data/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  WORKING_DIR: worker
+
+jobs:
+  # ── Quality gate: chạy trước khi deploy ──
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: worker/package-lock.json
+
+      - name: Install dependencies
+        working-directory: worker
+        run: npm ci
+
+      - name: Typecheck
+        working-directory: worker
+        run: npm run typecheck
+
+      - name: Run tests
+        working-directory: worker
+        run: npm test
+
+      - name: Validate public-data snapshot
+        working-directory: worker
+        run: npm run build
+
+  # ── Deploy lên Cloudflare ──
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    # Chỉ deploy khi push to main, KHÔNG deploy khi PR
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: worker/package-lock.json
+
+      - name: Install dependencies
+        working-directory: worker
+        run: npm ci
+
+      - name: Validate public-data
+        working-directory: worker
+        run: npm run build
+
+      # ── Deploy Worker (bao gồm Cron triggers từ wrangler.jsonc) ──
+      - name: Deploy to Cloudflare
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
+          command: deploy
+
+      # ── Tạo R2 bucket nếu chưa có (one-time, idempotent) ──
+      - name: Create R2 bucket (if not exists)
+        uses: cloudflare/wrangler-action@v4
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
+          command: r2 bucket create xsmb-data
+
+      # ── Print deployment URL ──
+      - name: Print deployment info
+        run: |
+          echo "=== Deployment Complete ==="
+          echo "Worker: ${{ steps.deploy.outputs.deployment-url }}"
+          echo "Worker name: xsmb-manager-api"
+          echo "Dashboard: https://dash.cloudflare.com"

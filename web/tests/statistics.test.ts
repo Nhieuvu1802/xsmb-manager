@@ -9,6 +9,7 @@ import {
   expectedValue,
   monteCarloAtLeastOne,
   parseCsvDraws,
+  rankHistoricalCandidates,
   validateCsv,
   wilsonInterval,
 } from "../lib/statistics";
@@ -62,6 +63,24 @@ describe("dữ liệu và thống kê", () => {
     expect(draws[0].results).toHaveLength(2);
     expect(draws[0].verification).toBe("PENDING");
   });
+
+  it("xếp hạng lịch sử không nhìn thấy kết quả của ngày mục tiêu", () => {
+    const draws = SAMPLE_DRAWS.filter((draw) => draw.region === "Miền Bắc");
+    const targetDate = draws[10].date;
+    const candidates = rankHistoricalCandidates(draws, targetDate);
+    expect(candidates).toHaveLength(12);
+    expect(candidates[0].score).toBeGreaterThanOrEqual(candidates[1].score);
+    expect(candidates.every((candidate) => candidate.sampleDraws === draws.filter((draw) => draw.date < targetDate).length)).toBe(true);
+  });
+
+  it("cho phép nhiều đài trong cùng một ngày", () => {
+    const csv = "date,station,dac_biet\n2026-09-12,Đà Nẵng,123456\n2026-09-12,Quảng Ngãi,654321";
+    const validation = validateCsv(csv);
+    const draws = parseCsvDraws(csv, "Miền Trung");
+    expect(validation.validRows).toBe(2);
+    expect(validation.duplicateRows).toBe(0);
+    expect(draws.map((draw) => draw.station)).toEqual(["Đà Nẵng", "Quảng Ngãi"]);
+  });
 });
 
 describe("cặp số và phân bố ngày", () => {
@@ -90,4 +109,3 @@ describe("cặp số và phân bố ngày", () => {
     expect(days.every((d) => d.count === 0 && d.drawHits === 0)).toBe(true);
   });
 });
-

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useMemo, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   Activity,
   AlertCircle,
@@ -49,11 +49,14 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { SAMPLE_DRAWS } from "@/lib/sample-data";
+import { CLIENT_SAMPLE_DRAWS } from "@/lib/sample-data";
 import type { LotteryDraw, NumberStat, Region } from "@/lib/lottery-domain";
+import { stationMatches, stationsForRegion } from "@/lib/stations";
 import { HistoryView } from "@/components/history-view";
 import { StatsView } from "@/components/stats-view";
 import { CompareView } from "@/components/compare-view";
+import { SimulatorView } from "@/components/simulator-view";
+import { SouthernDualView } from "@/components/southern-dual-view";
 import {
   buildTrend,
   calculateStructure,
@@ -75,13 +78,14 @@ import {
   monteCarloAtLeastOne,
 } from "@/lib/statistics";
 
-type View = "overview" | "analyzer" | "history" | "stats" | "compare" | "data" | "method";
+type View = "overview" | "analyzer" | "simulator" | "history" | "stats" | "compare" | "data" | "method";
 type CompareSet = { id: number; label: string; numbers: string[] };
 type Period = 7 | 30 | 90 | 180 | 365;
 
 const NAV_ITEMS: Array<{ id: View; label: string; description: string; icon: typeof LayoutDashboard }> = [
   { id: "overview", label: "Tổng quan", description: "Nhịp dữ liệu", icon: LayoutDashboard },
   { id: "analyzer", label: "Phân tích", description: "Kiểm tra bộ số", icon: CircleGauge },
+  { id: "simulator", label: "Quay thử", description: "Mô phỏng minh bạch", icon: Dices },
   { id: "history", label: "Lịch sử", description: "Kỳ quay gần nhất", icon: History },
   { id: "stats", label: "Thống kê", description: "Phân tích chi tiết", icon: BarChart3 },
   { id: "compare", label: "So sánh", description: "7–365 kỳ", icon: Activity },
@@ -90,6 +94,7 @@ const NAV_ITEMS: Array<{ id: View; label: string; description: string; icon: typ
 ];
 
 const PERIOD_OPTIONS: Period[] = [7, 30, 90, 180, 365];
+const MOBILE_NAV: View[] = ["overview", "analyzer", "simulator", "history"];
 
 function formatDate(date: string, long = false) {
   return new Intl.DateTimeFormat("vi-VN", {
@@ -136,18 +141,54 @@ export function LotteryApp() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [period, setPeriod] = useState<Period>(90);
   const [region, setRegion] = useState<Region>("Miền Bắc");
+  const [station, setStation] = useState("");
   const [lotteryType, setLotteryType] = useState("Lô tô 2 số");
-  const [draws, setDraws] = useState<LotteryDraw[]>(SAMPLE_DRAWS);
+  const [draws, setDraws] = useState<LotteryDraw[]>(CLIENT_SAMPLE_DRAWS);
+  const [dataSource, setDataSource] = useState<"worker" | "postgres" | "sample">("sample");
   const [toast, setToast] = useState("");
   const [theme, setTheme] = useState<"dark" | "light">(() =>
     typeof window !== "undefined" && localStorage.getItem("tk24:theme") === "light" ? "light" : "dark",
   );
 
-  const filteredDraws = useMemo(
-    () => draws.filter((draw) => draw.region === region).slice(0, period),
-    [draws, period, region],
+  const availableStations = useMemo(() => stationsForRegion(region), [region]);
+  const allRegionalDraws = useMemo(() => draws.filter((draw) => draw.region === region), [draws, region]);
+  const regionalDraws = useMemo(
+    () => allRegionalDraws.filter((draw) => !station || stationMatches(draw.station, station)),
+    [allRegionalDraws, station],
   );
+  const filteredDraws = useMemo(() => {
+    const selectedDates = new Set<string>();
+    for (const draw of regionalDraws) {
+      if (selectedDates.size >= period && !selectedDates.has(draw.date)) break;
+      selectedDates.add(draw.date);
+    }
+    return regionalDraws.filter((draw) => selectedDates.has(draw.date));
+  }, [period, regionalDraws]);
   const stats = useMemo(() => calculateNumberStats(filteredDraws), [filteredDraws]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const params = new URLSearchParams({ region, limit: "5000", includeResults: "true" });
+    fetch(`/api/draws?${params}`, { signal: controller.signal })
+      .then((response) => response.ok ? response.json() : Promise.reject(new Error("Không tải được dữ liệu.")))
+      .then((payload: { draws?: LotteryDraw[]; storage?: "worker" | "postgres" | "sample" }) => {
+        if (!payload.draws?.length) return;
+        setDraws((current) => [
+          ...payload.draws!,
+          ...current.filter((draw) => draw.region !== region),
+        ].sort((left, right) => right.date.localeCompare(left.date) || left.station.localeCompare(right.station)));
+        setDataSource(payload.storage ?? "sample");
+      })
+      .catch((error: unknown) => {
+        if (!(error instanceof DOMException && error.name === "AbortError")) console.error(error);
+      });
+    return () => controller.abort();
+  }, [region]);
+
+  function changeRegion(nextRegion: Region) {
+    setRegion(nextRegion);
+    setStation("");
+  }
 
   function navigate(next: View) {
     setView(next);
@@ -156,12 +197,12 @@ export function LotteryApp() {
   }
 
   function importDraws(nextDraws: LotteryDraw[]) {
-    const importedIds = new Set(nextDraws.map((draw) => `${draw.region}-${draw.date}`));
+    const importedIds = new Set(nextDraws.map((draw) => `${draw.region}-${draw.station}-${draw.date}`));
     setDraws((current) => [
       ...nextDraws,
-      ...current.filter((draw) => !importedIds.has(`${draw.region}-${draw.date}`)),
+      ...current.filter((draw) => !importedIds.has(`${draw.region}-${draw.station}-${draw.date}`)),
     ].sort((a, b) => b.date.localeCompare(a.date)));
-    setRegion(nextDraws[0]?.region ?? region);
+    changeRegion(nextDraws[0]?.region ?? region);
     setToast(`Đã nhập ${nextDraws.length} kỳ hợp lệ vào phiên làm việc.`);
     window.setTimeout(() => setToast(""), 4200);
   }
@@ -169,7 +210,7 @@ export function LotteryApp() {
   const pageTitle = NAV_ITEMS.find((item) => item.id === view)?.label ?? "Tổng quan";
 
   return (
-    <div className="app-shell" data-theme={theme}>
+    <div className="app-shell" data-theme={theme} data-region={region}>
       <aside className={`sidebar ${mobileMenu ? "open" : ""}`}>
         <div className="brand-block">
           <div className="brand-symbol" aria-hidden="true"><span>24</span></div>
@@ -195,7 +236,7 @@ export function LotteryApp() {
           <ShieldCheck size={21} />
           <div><strong>18+ · Có trách nhiệm</strong><p>Thống kê để tham khảo, không phải cam kết trúng thưởng.</p></div>
         </div>
-        <div className="sidebar-meta"><span><span className="status-dot" />Dữ liệu mẫu</span><small>v3.0.0</small></div>
+        <div className="sidebar-meta"><span><span className="status-dot" />{dataSource === "postgres" ? "PostgreSQL trực tuyến" : dataSource === "worker" ? "Cloudflare Worker API" : "Dữ liệu mẫu"}</span><small>v3.3.0</small></div>
       </aside>
 
       {mobileMenu && <button className="sidebar-scrim" onClick={() => setMobileMenu(false)} aria-label="Đóng menu" />}
@@ -205,9 +246,10 @@ export function LotteryApp() {
           <button className="icon-button menu-button" onClick={() => setMobileMenu(true)} aria-label="Mở menu"><Menu /></button>
           <div className="mobile-title"><small>Thống Kê 24</small><strong>{pageTitle}</strong></div>
           <div className="desktop-filters">
-            <label><span>Khu vực</span><select value={region} onChange={(event) => setRegion(event.target.value as Region)}><option>Miền Bắc</option><option>Miền Trung</option><option>Miền Nam</option></select><ChevronDown size={14} /></label>
+            <label><span>Khu vực</span><select value={region} onChange={(event) => changeRegion(event.target.value as Region)}><option>Miền Bắc</option><option>Miền Trung</option><option>Miền Nam</option></select><ChevronDown size={14} /></label>
+            <label><span>Đài quay</span><select value={station} onChange={(event) => setStation(event.target.value)}><option value="">Tất cả đài</option>{availableStations.map((item) => <option value={item.name} key={item.code}>{item.name}</option>)}</select><ChevronDown size={14} /></label>
             <label><span>Loại phân tích</span><select value={lotteryType} onChange={(event) => setLotteryType(event.target.value)}><option>Lô tô 2 số</option><option>Giải đặc biệt</option><option>Vé 6/45</option></select><ChevronDown size={14} /></label>
-            <label><span>Khoảng dữ liệu</span><select value={period} onChange={(event) => setPeriod(Number(event.target.value) as Period)}>{PERIOD_OPTIONS.map((value) => <option value={value} key={value}>{value} kỳ gần nhất</option>)}</select><ChevronDown size={14} /></label>
+            <label><span>Khoảng dữ liệu</span><select value={period} onChange={(event) => setPeriod(Number(event.target.value) as Period)}>{PERIOD_OPTIONS.map((value) => <option value={value} key={value}>{value} ngày gần nhất</option>)}</select><ChevronDown size={14} /></label>
           </div>
           <button className="icon-button theme-button" onClick={() => setTheme((current) => {
             const next = current === "dark" ? "light" : "dark";
@@ -218,18 +260,20 @@ export function LotteryApp() {
         </header>
 
         <div className="mobile-filters">
-          <label><select value={region} onChange={(event) => setRegion(event.target.value as Region)}><option>Miền Bắc</option><option>Miền Trung</option><option>Miền Nam</option></select><ChevronDown /></label>
-          <label><select value={period} onChange={(event) => setPeriod(Number(event.target.value) as Period)}>{PERIOD_OPTIONS.map((value) => <option value={value} key={value}>{value} kỳ</option>)}</select><ChevronDown /></label>
+          <label><select value={region} onChange={(event) => changeRegion(event.target.value as Region)}><option>Miền Bắc</option><option>Miền Trung</option><option>Miền Nam</option></select><ChevronDown /></label>
+          <label><select value={station} onChange={(event) => setStation(event.target.value)}><option value="">Tất cả đài</option>{availableStations.map((item) => <option value={item.name} key={item.code}>{item.name}</option>)}</select><ChevronDown /></label>
+          <label><select value={period} onChange={(event) => setPeriod(Number(event.target.value) as Period)}>{PERIOD_OPTIONS.map((value) => <option value={value} key={value}>{value} ngày</option>)}</select><ChevronDown /></label>
           <label><select value={lotteryType} onChange={(event) => setLotteryType(event.target.value)}><option>Lô tô 2 số</option><option>Giải đặc biệt</option><option>Vé 6/45</option></select><ChevronDown /></label>
         </div>
 
         <div className="page-content">
-          {view === "overview" && <Overview draws={filteredDraws} stats={stats} period={period} onNavigate={navigate} />}
+          {view === "overview" && <Overview draws={filteredDraws} allRegionalDraws={allRegionalDraws} stats={stats} period={period} region={region} onNavigate={navigate} />}
           {view === "analyzer" && <Analyzer draws={filteredDraws} stats={stats} />}
-          {view === "history" && <HistoryView draws={draws} />}
+          {view === "simulator" && <SimulatorView draws={regionalDraws} region={region} station={station} />}
+          {view === "history" && <HistoryView draws={regionalDraws} />}
           {view === "stats" && <StatsView draws={filteredDraws} stats={stats} />}
           {view === "compare" && <CompareView draws={filteredDraws} />}
-          {view === "data" && <DataCenter draws={draws} onImport={importDraws} />}
+          {view === "data" && <DataCenter draws={draws} dataSource={dataSource} onImport={importDraws} />}
           {view === "method" && <Methodology draws={filteredDraws} stats={stats} />}
         </div>
 
@@ -240,7 +284,7 @@ export function LotteryApp() {
       </main>
 
       <nav className="bottom-nav" aria-label="Điều hướng di động">
-        {NAV_ITEMS.slice(0, 4).map((item) => {
+        {MOBILE_NAV.map((viewId) => NAV_ITEMS.find((item) => item.id === viewId)!).map((item) => {
           const Icon = item.icon;
           return <button key={item.id} className={view === item.id ? "active" : ""} onClick={() => navigate(item.id)}><Icon /><span>{item.label}</span></button>;
         })}
@@ -251,7 +295,7 @@ export function LotteryApp() {
   );
 }
 
-function Overview({ draws, stats, period, onNavigate }: { draws: LotteryDraw[]; stats: NumberStat[]; period: Period; onNavigate: (view: View) => void }) {
+function Overview({ draws, allRegionalDraws, stats, period, region, onNavigate }: { draws: LotteryDraw[]; allRegionalDraws: LotteryDraw[]; stats: NumberStat[]; period: Period; region: Region; onNavigate: (view: View) => void }) {
   const [trendMode, setTrendMode] = useState<"Ngày" | "Tuần" | "Tháng">("Ngày");
   const latest = draws[0];
   const sortedHot = [...stats].sort((a, b) => b.count - a.count || a.number.localeCompare(b.number));
@@ -278,7 +322,7 @@ function Overview({ draws, stats, period, onNavigate }: { draws: LotteryDraw[]; 
     return (
       <>
         <PageHeading eyebrow="TRUNG TÂM DỮ LIỆU" title="Tổng quan xác suất" description="Không có dữ liệu mẫu cho khu vực đã chọn." />
-        <section className="panel"><EmptyState>Hãy chọn Miền Bắc hoặc nhập CSV cho khu vực này trong Kho dữ liệu.</EmptyState></section>
+        <section className="panel"><EmptyState>Chưa có kỳ quay phù hợp. Hãy đổi đài, khoảng ngày hoặc nhập dữ liệu trong Kho dữ liệu.</EmptyState></section>
       </>
     );
   }
@@ -288,9 +332,11 @@ function Overview({ draws, stats, period, onNavigate }: { draws: LotteryDraw[]; 
       <PageHeading
         eyebrow="TRUNG TÂM DỮ LIỆU"
         title="Tổng quan xác suất"
-        description={`Góc nhìn thống kê trên ${period} kỳ gần nhất — dữ liệu mô phỏng, không phải dự đoán.`}
-        action={<button className="primary-button" onClick={() => onNavigate("analyzer")}><Sparkles size={17} />Phân tích bộ số</button>}
+        description={`Góc nhìn thống kê trong ${period} ngày gần nhất — dữ liệu chỉ mô tả lịch sử, không phải dự đoán.`}
+        action={<div className="page-actions"><button className="secondary-button" onClick={() => onNavigate("simulator")}><Dices size={17} />Quay thử</button><button className="primary-button" onClick={() => onNavigate("analyzer")}><Sparkles size={17} />Phân tích bộ số</button></div>}
       />
+
+      {region === "Miền Nam" && <SouthernDualView draws={allRegionalDraws} />}
 
       <section className="metric-grid">
         <article className="metric-card featured">
@@ -314,7 +360,7 @@ function Overview({ draws, stats, period, onNavigate }: { draws: LotteryDraw[]; 
 
       <section className="overview-grid top-row">
         <article className="panel draw-panel">
-          <PanelHeader icon={<History />} eyebrow="KỲ QUAY MỚI NHẤT" title={formatDate(latest.date, true)} meta={<span className="source-chip"><span />Mẫu · seed cố định</span>} />
+          <PanelHeader icon={<History />} eyebrow="KỲ QUAY MỚI NHẤT" title={latest.station} meta={<span className="source-chip"><CalendarDays size={13} />{formatDate(latest.date, true)}</span>} />
           <PrizeBoard draw={latest} />
           <div className="draw-footer"><span><Cloud size={15} />Nguồn: {latest.source}</span><span>Cập nhật: 20:10 · {formatDate(latest.date)}</span></div>
         </article>
@@ -458,7 +504,7 @@ function PrizeBoard({ draw }: { draw: LotteryDraw }) {
     (accumulator[result.prize] ??= []).push(result.value);
     return accumulator;
   }, {});
-  const preferredOrder = ["Đặc biệt", "Giải nhất", "Giải nhì", "Giải ba", "Giải tư", "Giải năm", "Giải sáu", "Giải bảy"];
+  const preferredOrder = ["Đặc biệt", "Giải nhất", "Giải nhì", "Giải ba", "Giải tư", "Giải năm", "Giải sáu", "Giải bảy", "Giải tám"];
   const entries = Object.entries(groups).sort(([a], [b]) => {
     const ai = preferredOrder.indexOf(a);
     const bi = preferredOrder.indexOf(b);
@@ -607,7 +653,7 @@ function Analyzer({ draws, stats }: { draws: LotteryDraw[]; stats: NumberStat[] 
   );
 }
 
-function DataCenter({ draws, onImport }: { draws: LotteryDraw[]; onImport: (draws: LotteryDraw[]) => void }) {
+function DataCenter({ draws, dataSource, onImport }: { draws: LotteryDraw[]; dataSource: "worker" | "postgres" | "sample"; onImport: (draws: LotteryDraw[]) => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState("");
   const [csvText, setCsvText] = useState("");
@@ -642,8 +688,8 @@ function DataCenter({ draws, onImport }: { draws: LotteryDraw[]; onImport: (draw
       <PageHeading eyebrow="QUẢN TRỊ DỮ LIỆU" title="Kho dữ liệu" description="Biết dữ liệu đến từ đâu, được kiểm tra thế nào và cập nhật khi nào." action={<button className="primary-button" onClick={() => inputRef.current?.click()}><FileUp size={17} />Chọn CSV / JSON</button>} />
 
       <section className="source-grid">
-        <article className="panel source-card active-source"><div className="source-logo"><Database /></div><div><span>ĐANG SỬ DỤNG</span><h3>Dữ liệu mẫu cục bộ</h3><p>{draws.length} kỳ · sinh bằng seed cố định để chạy thử an toàn.</p></div><span className="verified"><Check />Sẵn sàng</span></article>
-        <article className="panel source-card"><div className="source-logo api"><Cloud /></div><div><span>TÙY CHỌN</span><h3>API hợp pháp</h3><p>Ánh xạ endpoint của đơn vị được cấp quyền trong lớp dữ liệu.</p></div><button className="secondary-button" disabled>Kết nối sau</button></article>
+        <article className="panel source-card active-source"><div className="source-logo"><Database /></div><div><span>ĐANG SỬ DỤNG</span><h3>{dataSource === "postgres" ? "PostgreSQL trên Vercel" : dataSource === "worker" ? "Cloudflare Worker API (dữ liệu thật)" : "Dữ liệu mẫu cục bộ"}</h3><p>{draws.length} kỳ · {dataSource === "postgres" ? "đọc từ kho dữ liệu trực tuyến." : dataSource === "worker" ? "dữ liệu xổ số thật từ xsmb-api.nhieuvu1802.workers.dev." : "sinh bằng seed theo ngày và đài để chạy thử an toàn."}</p></div><span className="verified"><Check />Sẵn sàng</span></article>
+        <article className="panel source-card"><div className="source-logo api"><Cloud /></div><div><span>TÙY CHỌN</span><h3>API dữ liệu hợp pháp</h3><p>Khai báo URL và token riêng trên Vercel; khóa truy cập không gửi xuống trình duyệt.</p></div><span className="verified"><ShieldCheck />Phía máy chủ</span></article>
       </section>
 
       <section className="data-layout">
@@ -653,7 +699,7 @@ function DataCenter({ draws, onImport }: { draws: LotteryDraw[]; onImport: (draw
           <button className="drop-zone" onClick={() => inputRef.current?.click()}>
             <span><FileUp /></span><strong>{fileName || "Chọn tệp CSV hoặc JSON"}</strong><small>{fileName ? "Chọn tệp khác" : "Bấm để chọn · tối đa 10 MB"}</small>
           </button>
-          <div className="csv-format"><strong>Định dạng tối thiểu</strong><code>date,dac_biet,giai_nhat,giai_nhi<br />2026-09-12,12345,54321,&quot;11111 22222&quot;</code></div>
+          <div className="csv-format"><strong>Định dạng tối thiểu · thêm station khi một ngày có nhiều đài</strong><code>date,station,dac_biet,giai_nhat<br />2026-09-12,Đà Nẵng,123456,54321</code></div>
           <label className="field-label">Khu vực dữ liệu<select value={region} onChange={(event) => setRegion(event.target.value as Region)}><option>Miền Bắc</option><option>Miền Trung</option><option>Miền Nam</option></select></label>
         </article>
 
@@ -671,7 +717,7 @@ function DataCenter({ draws, onImport }: { draws: LotteryDraw[]; onImport: (draw
 
       <section className="panel provenance-panel">
         <PanelHeader icon={<History />} eyebrow="DẤU VẾT DỮ LIỆU" title="Nguồn và lần cập nhật" />
-        <div className="provenance-table"><div className="provenance-head"><span>Nguồn</span><span>Phạm vi</span><span>Cập nhật gần nhất</span><span>Trạng thái</span></div><div><span><Database />Mẫu cục bộ</span><span>Miền Bắc · {draws.length} kỳ</span><span>{latestDate ? `20:10 · ${formatDate(latestDate)}` : "—"}</span><span className="good-status"><Check />Đã kiểm tra</span></div></div>
+        <div className="provenance-table"><div className="provenance-head"><span>Nguồn</span><span>Phạm vi</span><span>Cập nhật gần nhất</span><span>Trạng thái</span></div><div><span><Database />{dataSource === "postgres" ? "PostgreSQL" : dataSource === "worker" ? "Cloudflare Worker API" : "Mẫu cục bộ"}</span><span>3 miền · {draws.length} kỳ · khoảng 1 năm</span><span>{latestDate ? `20:10 · ${formatDate(latestDate)}` : "—"}</span><span className="good-status"><Check />Đã kiểm tra</span></div></div>
       </section>
     </>
   );
