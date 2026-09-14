@@ -9,7 +9,7 @@
 /** Vùng dữ liệu có snapshot tĩnh (miền Trung chưa có dữ liệu). */
 export type RegionKey = "xsmb" | "xsmn";
 
-/** Biến môi trường công khai trong wrangler.jsonc (không chứa bí mật). */
+/** Biến môi trường trong wrangler.jsonc + secrets. */
 export interface Env {
   /** Phiên bản API công bố trong mọi response, mặc định `v1`. */
   API_VERSION: string;
@@ -17,6 +17,15 @@ export interface Env {
   ALLOWED_ORIGINS: string;
   /** Nhãn môi trường để đưa vào /v1/health. */
   ENVIRONMENT?: string;
+
+  /** R2 bucket binding — có thể undefined khi chưa cấu hình. */
+  LOTTERY_DATA?: R2Bucket;
+
+  /** Cloudflare Cron secret (nếu dùng webhook validation). */
+  CRON_SECRET?: string;
+
+  /** Admin secret để gọi manual sync endpoint. */
+  ADMIN_SECRET?: string;
 }
 
 /** Một giải trong kỳ quay (`PrizeRead`). */
@@ -101,4 +110,61 @@ export interface PublicConfig {
   maintenance: boolean;
   minimumAppVersion: string;
   githubFallbackEnabled: boolean;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Statistics & Predictions                                                   */
+/* -------------------------------------------------------------------------- */
+
+/** Thống kê cho một số từ 00-99. */
+export interface NumberStatistics {
+  number: string;
+  appearanceCount: number;
+  drawOccurrenceRate: number;
+  frequency5: number;
+  frequency10: number;
+  frequency20: number;
+  frequency30: number;
+  frequency60: number;
+  frequency90: number;
+  gapCurrent: number | null;
+  gapAverage: number | null;
+  gapMedian: number | null;
+  gapStdDev: number | null;
+  gapMax: number | null;
+  recency: number;
+  statisticalScore: number;
+  shortTrend: number;
+  mediumTrend: number;
+  longTrend: number;
+}
+
+/** Snapshot thống kê cho toàn bộ 100 số. */
+export interface StatisticsSnapshot {
+  datasetVersion: string;
+  statisticsVersion: string;
+  generatedAt: string;
+  region: string;
+  totalDraws: number;
+  numbers: NumberStatistics[];
+}
+
+/** Một dự đoán Top4. */
+export interface Top4Prediction {
+  number: string;
+  statisticalScore: number;
+  features: {
+    frequency90: number;
+    gapCurrent: number | null;
+    shortTrend: number;
+  };
+}
+
+/** Snapshot Top4. */
+export interface Top4Snapshot {
+  drawDate: string;
+  modelVersion: string;
+  datasetVersion: string;
+  generatedAt: string;
+  numbers: Top4Prediction[];
 }

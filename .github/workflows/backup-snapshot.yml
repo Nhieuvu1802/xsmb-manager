@@ -1,0 +1,38 @@
+name: Backup Snapshot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public-data/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify public-data before snapshot
+        run: node worker/scripts/verify-public-data.mjs
+      - name: Report snapshot status
+        run: |
+          echo "=== Snapshot Status ==="
+          node -e "
+          const fs = require('fs');
+          const m = JSON.parse(fs.readFileSync('public-data/manifest.json', 'utf8'));
+          console.log('datasetVersion:', m.datasetVersion);
+          console.log('generatedAt:', m.generatedAt);
+          console.log('xsmbLatestDate:', m.xsmbLatestDate);
+          console.log('xsmnLatestDate:', m.xsmnLatestDate);
+          console.log('historyDays:', m.historyDays);
+          console.log('files:');
+          for (const [name, info] of Object.entries(m.files)) {
+            console.log('  ', name, '-', info.bytes, 'bytes');
+          }
+          "

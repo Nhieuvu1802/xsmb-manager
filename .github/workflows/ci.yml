@@ -25,6 +25,28 @@ jobs:
         env:
           NEXT_PUBLIC_API_URL: http://localhost:8000/api/v1
 
+  worker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: worker/package-lock.json
+      - name: Install dependencies
+        working-directory: worker
+        run: npm ci
+      - name: Typecheck
+        working-directory: worker
+        run: npm run typecheck
+      - name: Test
+        working-directory: worker
+        run: npm test
+      - name: Validate public-data
+        working-directory: worker
+        run: npm run build
+
   test:
     runs-on: ubuntu-latest
     strategy:
@@ -46,7 +68,7 @@ jobs:
       - run: python -m pytest -q
 
   container:
-    needs: [test, web]
+    needs: [test, web, worker]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

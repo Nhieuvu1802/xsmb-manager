@@ -1,6 +1,5 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -38,8 +37,11 @@ model LotteryDraw {
   verification VerificationStatus @default(PENDING)
   createdAt    DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
   results      PrizeResult[]
+  trends       NumberTrend[]
 
   @@index([region, drawnAt(sort: Desc)])
+  @@index([station, drawnAt(sort: Desc)])
+  @@index([drawnAt(sort: Desc)])
   @@map("lottery_draws")
 }
 
@@ -54,7 +56,31 @@ model PrizeResult {
 
   @@unique([drawId, prize, position])
   @@index([lastTwo])
+  @@index([lastTwo, drawId])
   @@map("prize_results")
+}
+
+/**
+ * Pre-aggregated number trend data.
+ * One row per number that appears in a draw — stores hit count and draw metadata.
+ * Populated by cron /api/cron/maintain and queried by stats APIs.
+ * Enables O(1) lookups for "number X appeared in draw Y" and
+ * fast GROUP BY for frequency/gap/streak analytics.
+ */
+model NumberTrend {
+  id        String      @id @default(uuid()) @db.Uuid
+  drawId    String      @map("draw_id") @db.Uuid
+  drawDate  DateTime    @map("draw_date") @db.Date
+  region    Region
+  number    String      @db.VarChar(2)
+  hitCount  Int         @default(0) @map("hit_count")
+  draw      LotteryDraw @relation(fields: [drawId], references: [id], onDelete: Cascade)
+
+  @@unique([drawId, number])
+  @@index([number, region, drawDate(sort: Desc)])
+  @@index([region, drawDate(sort: Desc)])
+  @@index([number, drawDate(sort: Desc)])
+  @@map("number_trends")
 }
 
 model DataImport {

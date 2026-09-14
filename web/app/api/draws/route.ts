@@ -1,57 +1,92 @@
 import { NextResponse } from "next/server";
 import { SAMPLE_DRAWS } from "@/lib/sample-data";
-import type { Region } from "@/lib/lottery-domain";
+import type { LotteryDraw, Region } from "@/lib/lottery-domain";
+import { listStoredDraws } from "@/lib/server/draw-repository";
+import { fetchWorkerHistory } from "@/lib/worker-api-client";
+import { stationMatches } from "@/lib/stations";
 
 const VALID_REGIONS: Region[] = ["Miền Bắc", "Miền Trung", "Miền Nam"];
+const VALID_TYPES: LotteryDraw["lotteryType"][] = ["TRADITIONAL", "COMBINATION"];
 
 export async function GET(request: Request) {
   const params = Object.fromEntries(new URL(request.url).searchParams);
-  const region = params.region as Region | undefined;
-  const type = params.type;
-  const station = params.station;
+  const region = VALID_REGIONS.includes(params.region as Region) ? (params.region as Region) : undefined;
+  const lotteryType = VALID_TYPES.includes(params.type as LotteryDraw["lotteryType"])
+    ? (params.type as LotteryDraw["lotteryType"])
+    : undefined;
+  const station = params.station?.trim() || undefined;
   const from = params.from;
   const to = params.to;
-  const limit = Math.min(Math.max(Number(params.limit) || 50, 1), 100);
+  const includeResults = params.includeResults === "true";
+  const limit = Math.min(Math.max(Number(params.limit) || 50, 1), 5000);
   const offset = Math.max(Number(params.offset) || 0, 0);
 
-  let draws = [...SAMPLE_DRAWS];
+  let storage: "postgres" | "worker" | "sample" = "sample";
+  let total = 0;
+  let draws: LotteryDraw[] = [];
 
-  if (region && VALID_REGIONS.includes(region)) {
-    draws = draws.filter((d) => d.region === region);
-  }
-  if (type) {
-    draws = draws.filter((d) => d.lotteryType === type);
-  }
-  if (station) {
-    draws = draws.filter((d) => d.station.toLowerCase().includes(station.toLowerCase()));
-  }
-  if (from) {
-    draws = draws.filter((d) => d.date >= from);
-  }
-  if (to) {
-    draws = draws.filter((d) => d.date <= to);
+  // Priority 1: PostgreSQL (if configured)
+  try {
+    const stored = await listStoredDraws({ region, lotteryType, station, from, to, limit, offset });
+    if (stored?.total) {
+      storage = "postgres";
+      total = stored.total;
+      draws = stored.draws;
+    }
+  } catch (error) {
+    console.error("Không đọc được PostgreSQL.", error);
   }
 
-  const total = draws.length;
-  const paged = draws.slice(offset, offset + limit);
+  // Priority 2: Cloudflare Worker API (always available, real data)
+  if (storage === "sample" && region) {
+    try {
+      const workerDraws = await fetchWorkerHistory(region, from, to);
+      if (workerDraws.length > 0) {
+        storage = "worker";
+        let filtered = [...workerDraws];
+        if (station) filtered = filtered.filter((draw) => stationMatches(draw.station, station));
+        if (lotteryType) filtered = filtered.filter((d) => d.lotteryType === lotteryType);
+        total = filtered.length;
+        draws = filtered.slice(offset, offset + limit);
+      }
+    } catch (error) {
+      console.error("Worker API không khả dụng.", error);
+    }
+  }
+
+  // Priority 3: Sample data fallback
+  if (storage === "sample") {
+    let sample = [...SAMPLE_DRAWS];
+    if (region) sample = sample.filter((draw) => draw.region === region);
+    if (lotteryType) sample = sample.filter((draw) => draw.lotteryType === lotteryType);
+    if (station) sample = sample.filter((draw) => stationMatches(draw.station, station));
+    if (from) sample = sample.filter((draw) => draw.date >= from);
+    if (to) sample = sample.filter((draw) => draw.date <= to);
+    total = sample.length;
+    draws = sample.slice(offset, offset + limit);
+  }
 
   return NextResponse.json(
     {
-      draws: paged.map((d) => ({
-        id: d.id,
-        drawCode: d.drawCode,
-        lotteryType: d.lotteryType,
-        date: d.date,
-        drawnAt: d.drawnAt,
-        region: d.region,
-        station: d.station,
-        source: d.source,
-        verification: d.verification,
-        resultCount: d.results.length,
+      draws: draws.map((draw) => ({
+        id: draw.id,
+        drawCode: draw.drawCode,
+        lotteryType: draw.lotteryType,
+        date: draw.date,
+        drawnAt: draw.drawnAt,
+        region: draw.region,
+        station: draw.station,
+        source: draw.source,
+        collectedAt: draw.collectedAt,
+        verification: draw.verification,
+        resultCount: draw.results.length,
+        ...(includeResults ? { results: draw.results } : {}),
       })),
       total,
       hasMore: offset + limit < total,
+      storage,
+      updatedAt: draws[0]?.collectedAt ?? null,
     },
-    { headers: { "Cache-Control": "public, max-age=300" } }
+    { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=900" } },
   );
 }
