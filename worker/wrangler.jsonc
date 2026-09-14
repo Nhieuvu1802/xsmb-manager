@@ -1,51 +1,54 @@
 {
-  // Cloudflare Worker API v1 cho xsmb-manager.
-  //
-  // Worker đọc snapshot JSON đã bundle (public-data/) làm fallback.
-  // Khi R2 được cấu hình, Worker ưu tiên đọc từ R2 làm primary storage.
-  // Cron scheduled handler tự động collect dữ liệu mới.
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "xsmb-manager-api",
-  "main": "src/index.ts",
-  "compatibility_date": "2026-08-01",
-  "workers_dev": true,
-  "preview_urls": true,
-  "upload_source_maps": true,
-  "observability": {
-    "enabled": true,
-    "head_sampling_rate": 1
-  },
-  // Biến công khai (không phải bí mật). Muốn siết CORS thì đổi ALLOWED_ORIGINS
-  // thành danh sách origin, ví dụ: "https://laptopvvn.vercel.app".
-  "vars": {
-    "API_VERSION": "v1",
-    "ALLOWED_ORIGINS": "*",
-    "ENVIRONMENT": "production"
-  },
-  // Cloudflare Cron: chạy 3 lần quanh giờ quay XSMB (18:15 ICT = 11:15 UTC).
-  // 11:15, 11:30, 12:00 UTC — chống upstream delay.
-  // XSMN (16:15 ICT = 09:15 UTC): 09:15, 09:30, 10:00 UTC.
-  // Tách scheduledXSMB/scheduledXSMN để logic riêng.
-  "triggers": {
-    "crons": [
-      "15,30 9 * * *",
-      "0 10 * * *",
-      "15,30 11 * * *",
-      "0 12 * * *"
-    ]
-  },
-  // R2 binding: bucket xsmb-data lưu master dataset.
-  // R2 binding: bucket xsmb-data lưu master dataset.
-  // Step 1: Enable R2 trong Cloudflare Dashboard → R2 → Enable
-  // Step 2: Uncomment block này → push to main → auto-deploy
-  //
-  // "r2_buckets": [
-  //   {
-  //     "binding": "LOTTERY_DATA",
-  //     "bucket_name": "xsmb-data"
-  //   }
-  // ],
-  // Custom domain api.vvn.freedev.app: thêm thủ công ở dashboard
-  // (Worker → Settings → Domains & Routes) sau khi deploy lần đầu thành công,
-  // để việc deploy từ Git không phụ thuộc vào zone đã tồn tại hay chưa.
+	// Cloudflare Worker API v1 cho xsmb-manager.
+	//
+	// Worker đọc snapshot JSON đã bundle (public-data/) làm fallback.
+	// Khi R2 được cấu hình, Worker ưu tiên đọc từ R2 làm primary storage.
+	// Cron scheduled handler tự động collect dữ liệu mới.
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "xsmb-manager-api",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-08-01",
+	"workers_dev": true,
+	"preview_urls": true,
+	"upload_source_maps": true,
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
+	// Biến công khai (không phải bí mật). Muốn siết CORS thì đổi ALLOWED_ORIGINS
+	// thành danh sách origin, ví dụ: "https://laptopvvn.vercel.app".
+	"vars": {
+		"API_VERSION": "v1",
+		"ALLOWED_ORIGINS": "*",
+		"ENVIRONMENT": "production",
+		// R2 Budget Guard limits — defaults are safe (90% of free tier)
+		"R2_MAX_STORAGE_BYTES": "9663676416",
+		"R2_MAX_WRITES_MONTH": "9000000",
+		"R2_MAX_READS_MONTH": "10000000",
+		"R2_SOFT_LIMIT_PERCENT": "80",
+		"R2_HARD_LIMIT_PERCENT": "95"
+	},
+	// Cloudflare Cron: chạy 3 lần quanh giờ quay XSMB (18:15 ICT = 11:15 UTC).
+	// 11:15, 11:30, 12:00 UTC — chống upstream delay.
+	// XSMN (16:15 ICT = 09:15 UTC): 09:15, 09:30, 10:00 UTC.
+	// Tách scheduledXSMB/scheduledXSMN để logic riêng.
+	"triggers": {
+		"crons": [
+			"15,30 9 * * *",
+			"0 10 * * *",
+			"15,30 11 * * *",
+			"0 12 * * *"
+		]
+	},
+	// R2 binding: bucket xsmb-data lưu master dataset.
+	// Deploy workflow tự tạo bucket nếu chưa có (idempotent).
+	"r2_buckets": [
+		{
+			"binding": "LOTTERY_DATA",
+			"bucket_name": "xsmb-data"
+		}
+	],
+	// Custom domain api.vvn.freedev.app: thêm thủ công ở dashboard
+	// (Worker → Settings → Domains & Routes) sau khi deploy lần đầu thành công,
+	// để việc deploy từ Git không phụ thuộc vào zone đã tồn tại hay chưa.
 }

@@ -34,6 +34,10 @@ import {
 } from "./dataset";
 import { CACHE, errorResponse, jsonResponse, preflight } from "./response";
 import { calculateStatistics, generateTop4 } from "./statistics";
+import {
+  checkBudget, parseLimits, activateCircuitBreaker, deactivateCircuitBreaker,
+  DEFAULT_LIMITS,
+} from "./r2-budget";
 import type { Env, RegionKey } from "./types";
 
 const API_VERSION = "v1";
@@ -340,15 +344,92 @@ function predictionsHandler(request: Request, env: Env): Response {
 }
 
 /* -------------------------------------------------------------------------- */
+/* R2 Budget handlers                                                          */
+/* -------------------------------------------------------------------------- */
+
+function r2BudgetHandler(request: Request, env: Env): Response | Promise<Response> {
+  if (!env.LOTTERY_DATA) {
+    return jsonResponse(
+      { r2: false, message: "R2 not configured" },
+      request, env, 200, { cacheControl: CACHE.health },
+    );
+  }
+  const limits = parseLimits(env as unknown as Record<string, string | undefined>);
+  return checkBudget(env.LOTTERY_DATA, "read", 0, limits).then((result) =>
+    jsonResponse({
+      r2: true,
+      circuitBreaker: result.meta.circuitBreaker,
+      blockedReason: result.meta.blockedReason ?? null,
+      status: result.severity,
+      message: result.message,
+      limits: {
+        maxStorageGB: round4(limits.maxStorageBytes / 1024 ** 3),
+        maxWritesPerMonth: limits.maxWritesPerMonth,
+        softLimitPercent: limits.softLimitPercent,
+        hardLimitPercent: limits.hardLimitPercent,
+      },
+      usage: result.usage,
+      lastUpdated: result.meta.lastUpdated,
+    }, request, env, 200, { cacheControl: "private, max-age=0" }),
+  );
+}
+
+async function r2BudgetSubHandler(
+  request: Request, env: Env, sub: string | undefined,
+): Promise<Response> {
+  if (!sub) {
+    return r2BudgetHandler(request, env) as Promise<Response>;
+  }
+  if (sub === "budget") return r2BudgetHandler(request, env) as Promise<Response>;
+
+  if (sub === "circuit-breaker") {
+    if (!env.LOTTERY_DATA) {
+      return errorResponse(request, env, 503, "r2_not_configured", "R2 not configured.");
+    }
+    if (request.method === "POST") {
+      // Check admin secret
+      const authHeader = request.headers.get("Authorization");
+      const token = authHeader?.replace("Bearer ", "") ?? "";
+      if (!env.ADMIN_SECRET || token !== env.ADMIN_SECRET) {
+        return errorResponse(request, env, 401, "unauthorized", "Admin secret required.");
+      }
+      const body = await request.json<{ action: "on" | "off"; reason?: string }>();
+      if (body.action === "on") {
+        await activateCircuitBreaker(env.LOTTERY_DATA, body.reason ?? "manual activation");
+        return jsonResponse({ circuitBreaker: true, message: "Circuit breaker activated" },
+          request, env, 200);
+      }
+      if (body.action === "off") {
+        await deactivateCircuitBreaker(env.LOTTERY_DATA);
+        return jsonResponse({ circuitBreaker: false, message: "Circuit breaker deactivated" },
+          request, env, 200);
+      }
+      return errorResponse(request, env, 400, "invalid_action", "Action must be 'on' or 'off'.");
+    }
+    return errorResponse(request, env, 405, "method_not_allowed", "Use POST with {action, reason}.");
+  }
+
+  return errorResponse(request, env, 404, "not_found", `/v1/r2/${sub} không tồn tại.`);
+}
+
+function round4(n: number): number {
+  return Math.round(n * 10000) / 10000;
+}
+
+/* -------------------------------------------------------------------------- */
 /* Router                                                                      */
 /* -------------------------------------------------------------------------- */
 
 const worker = {
-  fetch(request: Request, env: Env): Response {
+  async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     try {
       if (request.method === "OPTIONS") return preflight(request, env);
-      if (request.method !== "GET" && request.method !== "HEAD") {
+      // Allow POST only for R2 circuit-breaker admin endpoint
+      const isCircuitBreakerPost =
+        request.method === "POST" &&
+        url.pathname === `/${API_VERSION}/r2/circuit-breaker`;
+      if (request.method !== "GET" && request.method !== "HEAD" && !isCircuitBreakerPost) {
         return errorResponse(
           request,
           env,
@@ -394,6 +475,8 @@ const worker = {
             return statisticsHandler(request, env, "xsmb");
           case "predictions":
             return predictionsHandler(request, env);
+          case "r2":
+            return r2BudgetHandler(request, env);
           case "xsmb":
           case "xsmn":
             return errorResponse(
@@ -420,6 +503,11 @@ const worker = {
       }
       if (first === "statistics" && second === "00-99") {
         return statisticsHandler(request, env, "00-99");
+      }
+
+      // R2 admin routes: /v1/r2/budget, /v1/r2/circuit-breaker
+      if (first === "r2") {
+        return r2BudgetSubHandler(request, env, second);
       }
 
       if (!isRegionKey(first)) {
@@ -502,11 +590,44 @@ export async function scheduled(
     environment: env.ENVIRONMENT ?? "production",
   }));
 
+  // ── R2 Budget Guard: kiểm tra trước khi collector ghi dữ liệu ──
+  if (env.LOTTERY_DATA) {
+    const limits = parseLimits(env as unknown as Record<string, string | undefined>);
+    const budget = await checkBudget(env.LOTTERY_DATA, "write", 0, limits);
+    console.log(JSON.stringify({
+      event: "cron_r2_budget_check",
+      severity: budget.severity,
+      message: budget.message,
+      usage: budget.usage,
+    }));
+
+    if (!budget.allowed) {
+      console.error(JSON.stringify({
+        event: "cron_r2_budget_blocked",
+        message: budget.message,
+        usage: budget.usage,
+        action: "skipping_collection",
+      }));
+      // KHÔNG collect — tránh chi phí ngoài dự kiến.
+      // Budget meta đã được ghi trong checkBudget.
+      return;
+    }
+
+    if (budget.severity === "soft") {
+      console.warn(JSON.stringify({
+        event: "cron_r2_budget_warning",
+        message: budget.message,
+        usage: budget.usage,
+        action: "proceeding_with_collection",
+      }));
+    }
+  }
+
   // When R2 is available, this is where collector logic runs:
   // 1. Determine which region to collect based on current time
   // 2. Fetch from providers (primary → secondary → fallback)
   // 3. Validate and normalize
-  // 4. Store to R2
+  // 4. Store to R2 (using guardedPut for budget tracking)
   // 5. Update manifest
   // 6. Generate updated statistics
   // For now, the bundled snapshot is the source of truth.

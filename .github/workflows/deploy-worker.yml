@@ -43,7 +43,7 @@ jobs:
         working-directory: worker
         run: npm run build
 
-  # ── Deploy lên Cloudflare ──
+  # ── Deploy lên Cloudflare (bao gồm R2 + Secrets + Cron) ──
   deploy:
     needs: validate
     runs-on: ubuntu-latest
@@ -66,17 +66,7 @@ jobs:
         working-directory: worker
         run: npm run build
 
-      # ── Deploy Worker (bao gồm Cron triggers từ wrangler.jsonc) ──
-      - name: Deploy to Cloudflare
-        id: deploy
-        uses: cloudflare/wrangler-action@v4
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: worker
-          command: deploy
-
-      # ── Tạo R2 bucket nếu chưa có (one-time, idempotent) ──
+      # ── Step 1: Tạo R2 bucket TRƯỚC deploy (tránh wrangler fail) ──
       - name: Create R2 bucket (if not exists)
         uses: cloudflare/wrangler-action@v4
         continue-on-error: true
@@ -86,10 +76,58 @@ jobs:
           workingDirectory: worker
           command: r2 bucket create xsmb-data
 
-      # ── Print deployment URL ──
+      # ── Step 2: Set Worker secrets (ADMIN_SECRET, CRON_SECRET) ──
+      # Secrets must be set in GitHub → Settings → Secrets → Actions
+      # If not set, this step is skipped (no error).
+      - name: Set Worker secrets
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ADMIN_SECRET: ${{ secrets.ADMIN_SECRET }}
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          echo "Setting Worker secrets (skip if not configured)..."
+          if [ -n "$ADMIN_SECRET" ]; then
+            echo "$ADMIN_SECRET" | npx wrangler secret put ADMIN_SECRET --name xsmb-manager-api
+            echo "  ✅ ADMIN_SECRET set"
+          else
+            echo "  ⏭️  ADMIN_SECRET not configured — skipping"
+          fi
+          if [ -n "$CRON_SECRET" ]; then
+            echo "$CRON_SECRET" | npx wrangler secret put CRON_SECRET --name xsmb-manager-api
+            echo "  ✅ CRON_SECRET set"
+          else
+            echo "  ⏭️  CRON_SECRET not configured — skipping"
+          fi
+
+      # ── Step 3: Deploy Worker (bao gồm R2 binding + Cron triggers) ──
+      - name: Deploy to Cloudflare
+        id: deploy
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: worker
+          command: deploy
+
+      # ── Step 4: Verify R2 binding hoạt động ──
+      - name: Verify R2 binding
+        if: always()
+        run: |
+          WORKER_URL="${{ steps.deploy.outputs.deployment-url }}"
+          if [ -n "$WORKER_URL" ]; then
+            echo "Checking R2 budget endpoint..."
+            curl -sf "$WORKER_URL/v1/r2/budget" | head -c 500 || echo "⚠️  R2 budget check failed (bucket may not exist yet)"
+          fi
+
+      # ── Print deployment info ──
       - name: Print deployment info
         run: |
           echo "=== Deployment Complete ==="
           echo "Worker: ${{ steps.deploy.outputs.deployment-url }}"
           echo "Worker name: xsmb-manager-api"
           echo "Dashboard: https://dash.cloudflare.com"
+          echo ""
+          echo "R2 Budget endpoint: ${{ steps.deploy.outputs.deployment-url }}/v1/r2/budget"
+          echo "Circuit breaker: POST ${{ steps.deploy.outputs.deployment-url }}/v1/r2/circuit-breaker"
