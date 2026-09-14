@@ -2,19 +2,165 @@
   "success": true,
   "source": "vvn-github-backup",
   "region": "xsmb",
-  "date": "2026-09-12",
-  "firstDate": "2025-09-13",
-  "updatedAt": "2026-09-13T04:30:19.184383+00:00",
+  "date": "2026-09-13",
+  "firstDate": "2025-09-14",
+  "updatedAt": "2026-09-14T04:15:50.634459+00:00",
   "days": 365,
   "count": 361,
   "draws": [
+    {
+      "region": "mb",
+      "date": "2026-09-13",
+      "station": "Hội đồng XSKT miền Bắc",
+      "source": "vvn-database",
+      "verification": "VERIFIED",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
+      "draw_code": "MB-20260913",
+      "results": [
+        {
+          "prize": "Giải ba",
+          "position": 1,
+          "value": "28530"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 2,
+          "value": "12732"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 3,
+          "value": "41085"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 4,
+          "value": "43205"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 5,
+          "value": "58675"
+        },
+        {
+          "prize": "Giải ba",
+          "position": 6,
+          "value": "62527"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 1,
+          "value": "21"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 2,
+          "value": "88"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 3,
+          "value": "40"
+        },
+        {
+          "prize": "Giải bảy",
+          "position": 4,
+          "value": "27"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 1,
+          "value": "21509"
+        },
+        {
+          "prize": "Giải nhì",
+          "position": 2,
+          "value": "71228"
+        },
+        {
+          "prize": "Giải nhất",
+          "position": 1,
+          "value": "63029"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 1,
+          "value": "5439"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 2,
+          "value": "8360"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 3,
+          "value": "4126"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 4,
+          "value": "2579"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 5,
+          "value": "5130"
+        },
+        {
+          "prize": "Giải năm",
+          "position": 6,
+          "value": "5884"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 1,
+          "value": "988"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 2,
+          "value": "648"
+        },
+        {
+          "prize": "Giải sáu",
+          "position": 3,
+          "value": "462"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 1,
+          "value": "2812"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 2,
+          "value": "7409"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 3,
+          "value": "9962"
+        },
+        {
+          "prize": "Giải tư",
+          "position": 4,
+          "value": "7240"
+        },
+        {
+          "prize": "Đặc biệt",
+          "position": 1,
+          "value": "83799"
+        }
+      ]
+    },
     {
       "region": "mb",
       "date": "2026-09-12",
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260912",
       "results": [
         {
@@ -160,7 +306,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260911",
       "results": [
         {
@@ -306,7 +452,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260910",
       "results": [
         {
@@ -452,7 +598,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260909",
       "results": [
         {
@@ -598,7 +744,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260908",
       "results": [
         {
@@ -744,7 +890,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260907",
       "results": [
         {
@@ -890,7 +1036,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260906",
       "results": [
         {
@@ -1036,7 +1182,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260905",
       "results": [
         {
@@ -1182,7 +1328,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260904",
       "results": [
         {
@@ -1328,7 +1474,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260903",
       "results": [
         {
@@ -1474,7 +1620,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260902",
       "results": [
         {
@@ -1620,7 +1766,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260901",
       "results": [
         {
@@ -1766,7 +1912,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260831",
       "results": [
         {
@@ -1912,7 +2058,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260830",
       "results": [
         {
@@ -2058,7 +2204,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260829",
       "results": [
         {
@@ -2204,7 +2350,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260828",
       "results": [
         {
@@ -2350,7 +2496,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260827",
       "results": [
         {
@@ -2496,7 +2642,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260826",
       "results": [
         {
@@ -2642,7 +2788,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260825",
       "results": [
         {
@@ -2788,7 +2934,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260824",
       "results": [
         {
@@ -2934,7 +3080,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260823",
       "results": [
         {
@@ -3080,7 +3226,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260822",
       "results": [
         {
@@ -3226,7 +3372,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260821",
       "results": [
         {
@@ -3372,7 +3518,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260820",
       "results": [
         {
@@ -3518,7 +3664,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260819",
       "results": [
         {
@@ -3664,7 +3810,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260818",
       "results": [
         {
@@ -3810,7 +3956,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260817",
       "results": [
         {
@@ -3956,7 +4102,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260816",
       "results": [
         {
@@ -4102,7 +4248,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260815",
       "results": [
         {
@@ -4248,7 +4394,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260814",
       "results": [
         {
@@ -4394,7 +4540,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260813",
       "results": [
         {
@@ -4540,7 +4686,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260812",
       "results": [
         {
@@ -4686,7 +4832,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260811",
       "results": [
         {
@@ -4832,7 +4978,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260810",
       "results": [
         {
@@ -4978,7 +5124,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260809",
       "results": [
         {
@@ -5124,7 +5270,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260808",
       "results": [
         {
@@ -5270,7 +5416,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260807",
       "results": [
         {
@@ -5416,7 +5562,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260806",
       "results": [
         {
@@ -5562,7 +5708,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260805",
       "results": [
         {
@@ -5708,7 +5854,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260804",
       "results": [
         {
@@ -5854,7 +6000,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260803",
       "results": [
         {
@@ -6000,7 +6146,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260802",
       "results": [
         {
@@ -6146,7 +6292,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260801",
       "results": [
         {
@@ -6292,7 +6438,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260731",
       "results": [
         {
@@ -6438,7 +6584,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260730",
       "results": [
         {
@@ -6584,7 +6730,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260729",
       "results": [
         {
@@ -6730,7 +6876,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260728",
       "results": [
         {
@@ -6876,7 +7022,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260727",
       "results": [
         {
@@ -7022,7 +7168,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260726",
       "results": [
         {
@@ -7168,7 +7314,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260725",
       "results": [
         {
@@ -7314,7 +7460,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260724",
       "results": [
         {
@@ -7460,7 +7606,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260723",
       "results": [
         {
@@ -7606,7 +7752,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260722",
       "results": [
         {
@@ -7752,7 +7898,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260721",
       "results": [
         {
@@ -7898,7 +8044,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260720",
       "results": [
         {
@@ -8044,7 +8190,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260719",
       "results": [
         {
@@ -8190,7 +8336,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260718",
       "results": [
         {
@@ -8336,7 +8482,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260717",
       "results": [
         {
@@ -8482,7 +8628,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260716",
       "results": [
         {
@@ -8628,7 +8774,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260715",
       "results": [
         {
@@ -8774,7 +8920,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260714",
       "results": [
         {
@@ -8920,7 +9066,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260713",
       "results": [
         {
@@ -9066,7 +9212,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260712",
       "results": [
         {
@@ -9212,7 +9358,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260711",
       "results": [
         {
@@ -9358,7 +9504,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260710",
       "results": [
         {
@@ -9504,7 +9650,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260709",
       "results": [
         {
@@ -9650,7 +9796,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260708",
       "results": [
         {
@@ -9796,7 +9942,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260707",
       "results": [
         {
@@ -9942,7 +10088,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260706",
       "results": [
         {
@@ -10088,7 +10234,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260705",
       "results": [
         {
@@ -10234,7 +10380,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260704",
       "results": [
         {
@@ -10380,7 +10526,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260703",
       "results": [
         {
@@ -10526,7 +10672,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260702",
       "results": [
         {
@@ -10672,7 +10818,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260701",
       "results": [
         {
@@ -10818,7 +10964,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260630",
       "results": [
         {
@@ -10964,7 +11110,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260629",
       "results": [
         {
@@ -11110,7 +11256,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260628",
       "results": [
         {
@@ -11256,7 +11402,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260627",
       "results": [
         {
@@ -11402,7 +11548,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260626",
       "results": [
         {
@@ -11548,7 +11694,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260625",
       "results": [
         {
@@ -11694,7 +11840,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260624",
       "results": [
         {
@@ -11840,7 +11986,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260623",
       "results": [
         {
@@ -11986,7 +12132,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260622",
       "results": [
         {
@@ -12132,7 +12278,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260621",
       "results": [
         {
@@ -12278,7 +12424,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260620",
       "results": [
         {
@@ -12424,7 +12570,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260619",
       "results": [
         {
@@ -12570,7 +12716,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260618",
       "results": [
         {
@@ -12716,7 +12862,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260617",
       "results": [
         {
@@ -12862,7 +13008,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260616",
       "results": [
         {
@@ -13008,7 +13154,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260615",
       "results": [
         {
@@ -13154,7 +13300,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260614",
       "results": [
         {
@@ -13300,7 +13446,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260613",
       "results": [
         {
@@ -13446,7 +13592,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260612",
       "results": [
         {
@@ -13592,7 +13738,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260611",
       "results": [
         {
@@ -13738,7 +13884,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260610",
       "results": [
         {
@@ -13884,7 +14030,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260609",
       "results": [
         {
@@ -14030,7 +14176,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260608",
       "results": [
         {
@@ -14176,7 +14322,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260607",
       "results": [
         {
@@ -14322,7 +14468,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260606",
       "results": [
         {
@@ -14468,7 +14614,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260605",
       "results": [
         {
@@ -14614,7 +14760,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260604",
       "results": [
         {
@@ -14760,7 +14906,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260603",
       "results": [
         {
@@ -14906,7 +15052,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260602",
       "results": [
         {
@@ -15052,7 +15198,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260601",
       "results": [
         {
@@ -15198,7 +15344,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260531",
       "results": [
         {
@@ -15344,7 +15490,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260530",
       "results": [
         {
@@ -15490,7 +15636,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260529",
       "results": [
         {
@@ -15636,7 +15782,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260528",
       "results": [
         {
@@ -15782,7 +15928,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260527",
       "results": [
         {
@@ -15928,7 +16074,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260526",
       "results": [
         {
@@ -16074,7 +16220,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260525",
       "results": [
         {
@@ -16220,7 +16366,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260524",
       "results": [
         {
@@ -16366,7 +16512,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260523",
       "results": [
         {
@@ -16512,7 +16658,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260522",
       "results": [
         {
@@ -16658,7 +16804,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260521",
       "results": [
         {
@@ -16804,7 +16950,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260520",
       "results": [
         {
@@ -16950,7 +17096,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260519",
       "results": [
         {
@@ -17096,7 +17242,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260518",
       "results": [
         {
@@ -17242,7 +17388,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260517",
       "results": [
         {
@@ -17388,7 +17534,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260516",
       "results": [
         {
@@ -17534,7 +17680,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260515",
       "results": [
         {
@@ -17680,7 +17826,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260514",
       "results": [
         {
@@ -17826,7 +17972,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260513",
       "results": [
         {
@@ -17972,7 +18118,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260512",
       "results": [
         {
@@ -18118,7 +18264,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260511",
       "results": [
         {
@@ -18264,7 +18410,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260510",
       "results": [
         {
@@ -18410,7 +18556,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260509",
       "results": [
         {
@@ -18556,7 +18702,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260508",
       "results": [
         {
@@ -18702,7 +18848,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260507",
       "results": [
         {
@@ -18848,7 +18994,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260506",
       "results": [
         {
@@ -18994,7 +19140,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260505",
       "results": [
         {
@@ -19140,7 +19286,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260504",
       "results": [
         {
@@ -19286,7 +19432,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260503",
       "results": [
         {
@@ -19432,7 +19578,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260502",
       "results": [
         {
@@ -19578,7 +19724,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260501",
       "results": [
         {
@@ -19724,7 +19870,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260430",
       "results": [
         {
@@ -19870,7 +20016,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260429",
       "results": [
         {
@@ -20016,7 +20162,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260428",
       "results": [
         {
@@ -20162,7 +20308,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260427",
       "results": [
         {
@@ -20308,7 +20454,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260426",
       "results": [
         {
@@ -20454,7 +20600,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260425",
       "results": [
         {
@@ -20600,7 +20746,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260424",
       "results": [
         {
@@ -20746,7 +20892,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260423",
       "results": [
         {
@@ -20892,7 +21038,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260422",
       "results": [
         {
@@ -21038,7 +21184,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260421",
       "results": [
         {
@@ -21184,7 +21330,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260420",
       "results": [
         {
@@ -21330,7 +21476,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260419",
       "results": [
         {
@@ -21476,7 +21622,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260418",
       "results": [
         {
@@ -21622,7 +21768,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260417",
       "results": [
         {
@@ -21768,7 +21914,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260416",
       "results": [
         {
@@ -21914,7 +22060,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260415",
       "results": [
         {
@@ -22060,7 +22206,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260414",
       "results": [
         {
@@ -22206,7 +22352,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260413",
       "results": [
         {
@@ -22352,7 +22498,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260412",
       "results": [
         {
@@ -22498,7 +22644,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260411",
       "results": [
         {
@@ -22644,7 +22790,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260410",
       "results": [
         {
@@ -22790,7 +22936,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260409",
       "results": [
         {
@@ -22936,7 +23082,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260408",
       "results": [
         {
@@ -23082,7 +23228,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260407",
       "results": [
         {
@@ -23228,7 +23374,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260406",
       "results": [
         {
@@ -23374,7 +23520,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260405",
       "results": [
         {
@@ -23520,7 +23666,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260404",
       "results": [
         {
@@ -23666,7 +23812,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260403",
       "results": [
         {
@@ -23812,7 +23958,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260402",
       "results": [
         {
@@ -23958,7 +24104,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260401",
       "results": [
         {
@@ -24104,7 +24250,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260331",
       "results": [
         {
@@ -24250,7 +24396,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260330",
       "results": [
         {
@@ -24396,7 +24542,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260329",
       "results": [
         {
@@ -24542,7 +24688,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260328",
       "results": [
         {
@@ -24688,7 +24834,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260327",
       "results": [
         {
@@ -24834,7 +24980,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260326",
       "results": [
         {
@@ -24980,7 +25126,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260325",
       "results": [
         {
@@ -25126,7 +25272,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260324",
       "results": [
         {
@@ -25272,7 +25418,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260323",
       "results": [
         {
@@ -25418,7 +25564,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260322",
       "results": [
         {
@@ -25564,7 +25710,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260321",
       "results": [
         {
@@ -25710,7 +25856,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260320",
       "results": [
         {
@@ -25856,7 +26002,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260319",
       "results": [
         {
@@ -26002,7 +26148,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260318",
       "results": [
         {
@@ -26148,7 +26294,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260317",
       "results": [
         {
@@ -26294,7 +26440,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260316",
       "results": [
         {
@@ -26440,7 +26586,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260315",
       "results": [
         {
@@ -26586,7 +26732,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260314",
       "results": [
         {
@@ -26732,7 +26878,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260313",
       "results": [
         {
@@ -26878,7 +27024,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260312",
       "results": [
         {
@@ -27024,7 +27170,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260311",
       "results": [
         {
@@ -27170,7 +27316,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260310",
       "results": [
         {
@@ -27316,7 +27462,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260309",
       "results": [
         {
@@ -27462,7 +27608,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260308",
       "results": [
         {
@@ -27608,7 +27754,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260307",
       "results": [
         {
@@ -27754,7 +27900,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260306",
       "results": [
         {
@@ -27900,7 +28046,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260305",
       "results": [
         {
@@ -28046,7 +28192,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260304",
       "results": [
         {
@@ -28192,7 +28338,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260303",
       "results": [
         {
@@ -28338,7 +28484,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260302",
       "results": [
         {
@@ -28484,7 +28630,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260301",
       "results": [
         {
@@ -28630,7 +28776,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260228",
       "results": [
         {
@@ -28776,7 +28922,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260227",
       "results": [
         {
@@ -28922,7 +29068,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260226",
       "results": [
         {
@@ -29068,7 +29214,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260225",
       "results": [
         {
@@ -29214,7 +29360,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260224",
       "results": [
         {
@@ -29360,7 +29506,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260223",
       "results": [
         {
@@ -29506,7 +29652,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260222",
       "results": [
         {
@@ -29652,7 +29798,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260221",
       "results": [
         {
@@ -29798,7 +29944,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260220",
       "results": [
         {
@@ -29944,7 +30090,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260215",
       "results": [
         {
@@ -30090,7 +30236,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260214",
       "results": [
         {
@@ -30236,7 +30382,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260213",
       "results": [
         {
@@ -30382,7 +30528,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260212",
       "results": [
         {
@@ -30528,7 +30674,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260211",
       "results": [
         {
@@ -30674,7 +30820,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260210",
       "results": [
         {
@@ -30820,7 +30966,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260209",
       "results": [
         {
@@ -30966,7 +31112,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260208",
       "results": [
         {
@@ -31112,7 +31258,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260207",
       "results": [
         {
@@ -31258,7 +31404,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260206",
       "results": [
         {
@@ -31404,7 +31550,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260205",
       "results": [
         {
@@ -31550,7 +31696,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260204",
       "results": [
         {
@@ -31696,7 +31842,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260203",
       "results": [
         {
@@ -31842,7 +31988,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260202",
       "results": [
         {
@@ -31988,7 +32134,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260201",
       "results": [
         {
@@ -32134,7 +32280,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260131",
       "results": [
         {
@@ -32280,7 +32426,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260130",
       "results": [
         {
@@ -32426,7 +32572,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260129",
       "results": [
         {
@@ -32572,7 +32718,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260128",
       "results": [
         {
@@ -32718,7 +32864,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260127",
       "results": [
         {
@@ -32864,7 +33010,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260126",
       "results": [
         {
@@ -33010,7 +33156,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260125",
       "results": [
         {
@@ -33156,7 +33302,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260124",
       "results": [
         {
@@ -33302,7 +33448,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260123",
       "results": [
         {
@@ -33448,7 +33594,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260122",
       "results": [
         {
@@ -33594,7 +33740,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260121",
       "results": [
         {
@@ -33740,7 +33886,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260120",
       "results": [
         {
@@ -33886,7 +34032,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260119",
       "results": [
         {
@@ -34032,7 +34178,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260118",
       "results": [
         {
@@ -34178,7 +34324,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260117",
       "results": [
         {
@@ -34324,7 +34470,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260116",
       "results": [
         {
@@ -34470,7 +34616,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260115",
       "results": [
         {
@@ -34616,7 +34762,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260114",
       "results": [
         {
@@ -34762,7 +34908,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260113",
       "results": [
         {
@@ -34908,7 +35054,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260112",
       "results": [
         {
@@ -35054,7 +35200,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260111",
       "results": [
         {
@@ -35200,7 +35346,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260110",
       "results": [
         {
@@ -35346,7 +35492,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260109",
       "results": [
         {
@@ -35492,7 +35638,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260108",
       "results": [
         {
@@ -35638,7 +35784,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260107",
       "results": [
         {
@@ -35784,7 +35930,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260106",
       "results": [
         {
@@ -35930,7 +36076,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260105",
       "results": [
         {
@@ -36076,7 +36222,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260104",
       "results": [
         {
@@ -36222,7 +36368,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260103",
       "results": [
         {
@@ -36368,7 +36514,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260102",
       "results": [
         {
@@ -36514,7 +36660,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20260101",
       "results": [
         {
@@ -36660,7 +36806,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251231",
       "results": [
         {
@@ -36806,7 +36952,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251230",
       "results": [
         {
@@ -36952,7 +37098,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251229",
       "results": [
         {
@@ -37098,7 +37244,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251228",
       "results": [
         {
@@ -37244,7 +37390,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251227",
       "results": [
         {
@@ -37390,7 +37536,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251226",
       "results": [
         {
@@ -37536,7 +37682,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251225",
       "results": [
         {
@@ -37682,7 +37828,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251224",
       "results": [
         {
@@ -37828,7 +37974,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251223",
       "results": [
         {
@@ -37974,7 +38120,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251222",
       "results": [
         {
@@ -38120,7 +38266,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251221",
       "results": [
         {
@@ -38266,7 +38412,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251220",
       "results": [
         {
@@ -38412,7 +38558,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251219",
       "results": [
         {
@@ -38558,7 +38704,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251218",
       "results": [
         {
@@ -38704,7 +38850,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251217",
       "results": [
         {
@@ -38850,7 +38996,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251216",
       "results": [
         {
@@ -38996,7 +39142,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251215",
       "results": [
         {
@@ -39142,7 +39288,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251214",
       "results": [
         {
@@ -39288,7 +39434,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251213",
       "results": [
         {
@@ -39434,7 +39580,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251212",
       "results": [
         {
@@ -39580,7 +39726,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251211",
       "results": [
         {
@@ -39726,7 +39872,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251210",
       "results": [
         {
@@ -39872,7 +40018,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251209",
       "results": [
         {
@@ -40018,7 +40164,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251208",
       "results": [
         {
@@ -40164,7 +40310,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251207",
       "results": [
         {
@@ -40310,7 +40456,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251206",
       "results": [
         {
@@ -40456,7 +40602,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251205",
       "results": [
         {
@@ -40602,7 +40748,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251204",
       "results": [
         {
@@ -40748,7 +40894,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251203",
       "results": [
         {
@@ -40894,7 +41040,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251202",
       "results": [
         {
@@ -41040,7 +41186,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251201",
       "results": [
         {
@@ -41186,7 +41332,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251130",
       "results": [
         {
@@ -41332,7 +41478,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251129",
       "results": [
         {
@@ -41478,7 +41624,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251128",
       "results": [
         {
@@ -41624,7 +41770,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251127",
       "results": [
         {
@@ -41770,7 +41916,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251126",
       "results": [
         {
@@ -41916,7 +42062,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251125",
       "results": [
         {
@@ -42062,7 +42208,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251124",
       "results": [
         {
@@ -42208,7 +42354,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251123",
       "results": [
         {
@@ -42354,7 +42500,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251122",
       "results": [
         {
@@ -42500,7 +42646,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251121",
       "results": [
         {
@@ -42646,7 +42792,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251120",
       "results": [
         {
@@ -42792,7 +42938,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251119",
       "results": [
         {
@@ -42938,7 +43084,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251118",
       "results": [
         {
@@ -43084,7 +43230,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251117",
       "results": [
         {
@@ -43230,7 +43376,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251116",
       "results": [
         {
@@ -43376,7 +43522,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251115",
       "results": [
         {
@@ -43522,7 +43668,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251114",
       "results": [
         {
@@ -43668,7 +43814,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251113",
       "results": [
         {
@@ -43814,7 +43960,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251112",
       "results": [
         {
@@ -43960,7 +44106,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251111",
       "results": [
         {
@@ -44106,7 +44252,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251110",
       "results": [
         {
@@ -44252,7 +44398,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251109",
       "results": [
         {
@@ -44398,7 +44544,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251108",
       "results": [
         {
@@ -44544,7 +44690,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251107",
       "results": [
         {
@@ -44690,7 +44836,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251106",
       "results": [
         {
@@ -44836,7 +44982,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251105",
       "results": [
         {
@@ -44982,7 +45128,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251104",
       "results": [
         {
@@ -45128,7 +45274,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251103",
       "results": [
         {
@@ -45274,7 +45420,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251102",
       "results": [
         {
@@ -45420,7 +45566,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251101",
       "results": [
         {
@@ -45566,7 +45712,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251031",
       "results": [
         {
@@ -45712,7 +45858,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251030",
       "results": [
         {
@@ -45858,7 +46004,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251029",
       "results": [
         {
@@ -46004,7 +46150,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251028",
       "results": [
         {
@@ -46150,7 +46296,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251027",
       "results": [
         {
@@ -46296,7 +46442,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251026",
       "results": [
         {
@@ -46442,7 +46588,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251025",
       "results": [
         {
@@ -46588,7 +46734,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251024",
       "results": [
         {
@@ -46734,7 +46880,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251023",
       "results": [
         {
@@ -46880,7 +47026,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251022",
       "results": [
         {
@@ -47026,7 +47172,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251021",
       "results": [
         {
@@ -47172,7 +47318,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251020",
       "results": [
         {
@@ -47318,7 +47464,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251019",
       "results": [
         {
@@ -47464,7 +47610,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251018",
       "results": [
         {
@@ -47610,7 +47756,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251017",
       "results": [
         {
@@ -47756,7 +47902,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251016",
       "results": [
         {
@@ -47902,7 +48048,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251015",
       "results": [
         {
@@ -48048,7 +48194,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251014",
       "results": [
         {
@@ -48194,7 +48340,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251013",
       "results": [
         {
@@ -48340,7 +48486,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251012",
       "results": [
         {
@@ -48486,7 +48632,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251011",
       "results": [
         {
@@ -48632,7 +48778,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251010",
       "results": [
         {
@@ -48778,7 +48924,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251009",
       "results": [
         {
@@ -48924,7 +49070,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251008",
       "results": [
         {
@@ -49070,7 +49216,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251007",
       "results": [
         {
@@ -49216,7 +49362,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251006",
       "results": [
         {
@@ -49362,7 +49508,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251005",
       "results": [
         {
@@ -49508,7 +49654,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251004",
       "results": [
         {
@@ -49654,7 +49800,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251003",
       "results": [
         {
@@ -49800,7 +49946,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251002",
       "results": [
         {
@@ -49946,7 +50092,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20251001",
       "results": [
         {
@@ -50092,7 +50238,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250930",
       "results": [
         {
@@ -50238,7 +50384,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250929",
       "results": [
         {
@@ -50384,7 +50530,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250928",
       "results": [
         {
@@ -50530,7 +50676,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250927",
       "results": [
         {
@@ -50676,7 +50822,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250926",
       "results": [
         {
@@ -50822,7 +50968,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250925",
       "results": [
         {
@@ -50968,7 +51114,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250924",
       "results": [
         {
@@ -51114,7 +51260,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250923",
       "results": [
         {
@@ -51260,7 +51406,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250922",
       "results": [
         {
@@ -51406,7 +51552,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250921",
       "results": [
         {
@@ -51552,7 +51698,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250920",
       "results": [
         {
@@ -51698,7 +51844,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250919",
       "results": [
         {
@@ -51844,7 +51990,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250918",
       "results": [
         {
@@ -51990,7 +52136,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250917",
       "results": [
         {
@@ -52136,7 +52282,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250916",
       "results": [
         {
@@ -52282,7 +52428,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250915",
       "results": [
         {
@@ -52428,7 +52574,7 @@
       "station": "Hội đồng XSKT miền Bắc",
       "source": "vvn-database",
       "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
+      "collected_at": "2026-09-14T04:15:50.634459+00:00",
       "draw_code": "MB-20250914",
       "results": [
         {
@@ -52565,152 +52711,6 @@
           "prize": "Đặc biệt",
           "position": 1,
           "value": "91807"
-        }
-      ]
-    },
-    {
-      "region": "mb",
-      "date": "2025-09-13",
-      "station": "Hội đồng XSKT miền Bắc",
-      "source": "vvn-database",
-      "verification": "VERIFIED",
-      "collected_at": "2026-09-13T04:30:19.184383+00:00",
-      "draw_code": "MB-20250913",
-      "results": [
-        {
-          "prize": "Giải ba",
-          "position": 1,
-          "value": "95992"
-        },
-        {
-          "prize": "Giải ba",
-          "position": 2,
-          "value": "70874"
-        },
-        {
-          "prize": "Giải ba",
-          "position": 3,
-          "value": "29597"
-        },
-        {
-          "prize": "Giải ba",
-          "position": 4,
-          "value": "93375"
-        },
-        {
-          "prize": "Giải ba",
-          "position": 5,
-          "value": "91851"
-        },
-        {
-          "prize": "Giải ba",
-          "position": 6,
-          "value": "18765"
-        },
-        {
-          "prize": "Giải bảy",
-          "position": 1,
-          "value": "28"
-        },
-        {
-          "prize": "Giải bảy",
-          "position": 2,
-          "value": "93"
-        },
-        {
-          "prize": "Giải bảy",
-          "position": 3,
-          "value": "80"
-        },
-        {
-          "prize": "Giải bảy",
-          "position": 4,
-          "value": "24"
-        },
-        {
-          "prize": "Giải nhì",
-          "position": 1,
-          "value": "35765"
-        },
-        {
-          "prize": "Giải nhì",
-          "position": 2,
-          "value": "93276"
-        },
-        {
-          "prize": "Giải nhất",
-          "position": 1,
-          "value": "87189"
-        },
-        {
-          "prize": "Giải năm",
-          "position": 1,
-          "value": "8982"
-        },
-        {
-          "prize": "Giải năm",
-          "position": 2,
-          "value": "6450"
-        },
-        {
-          "prize": "Giải năm",
-          "position": 3,
-          "value": "2538"
-        },
-        {
-          "prize": "Giải năm",
-          "position": 4,
-          "value": "8604"
-        },
-        {
-          "prize": "Giải năm",
-          "position": 5,
-          "value": "9611"
-        },
-        {
-          "prize": "Giải năm",
-          "position": 6,
-          "value": "4829"
-        },
-        {
-          "prize": "Giải sáu",
-          "position": 1,
-          "value": "257"
-        },
-        {
-          "prize": "Giải sáu",
-          "position": 2,
-          "value": "334"
-        },
-        {
-          "prize": "Giải sáu",
-          "position": 3,
-          "value": "253"
-        },
-        {
-          "prize": "Giải tư",
-          "position": 1,
-          "value": "8314"
-        },
-        {
-          "prize": "Giải tư",
-          "position": 2,
-          "value": "8485"
-        },
-        {
-          "prize": "Giải tư",
-          "position": 3,
-          "value": "5070"
-        },
-        {
-          "prize": "Giải tư",
-          "position": 4,
-          "value": "8002"
-        },
-        {
-          "prize": "Đặc biệt",
-          "position": 1,
-          "value": "02401"
         }
       ]
     }

@@ -1,44 +1,44 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-13T04:30:19.184383+00:00",
-  "xsmbLatestDate": "2026-09-12",
-  "xsmnLatestDate": "2026-09-12",
+  "generatedAt": "2026-09-14T04:15:50.634459+00:00",
+  "xsmbLatestDate": "2026-09-13",
+  "xsmnLatestDate": "2026-09-13",
   "historyDays": 365,
   "history": {
     "xsmb": {
       "days": 365,
-      "firstDate": "2025-09-13",
-      "latestDate": "2026-09-12",
+      "firstDate": "2025-09-14",
+      "latestDate": "2026-09-13",
       "draws": 361
     },
     "xsmn": {
       "days": 365,
-      "firstDate": "2025-09-13",
-      "latestDate": "2026-09-12",
-      "draws": 1148
+      "firstDate": "2025-09-14",
+      "latestDate": "2026-09-13",
+      "draws": 1147
     }
   },
-  "datasetVersion": "0f4ed8c9cec5bc8b",
+  "datasetVersion": "1c88f61aba6c40a9",
   "files": {
     "config.json": {
       "sha256": "5b9bf7fec7740c25798b4c2138184c3795d34e23b7531cf86852237df6ad838d",
       "bytes": 264
     },
     "xsmb/latest.json": {
-      "sha256": "b6485014ed6cba6eb5e7f1ab5c17d15a4431c3fb29cfe12b8bc6b275f629115b",
+      "sha256": "824d9713cb296771c45e3e51885693b55a645cf5cd1f290f1a5f1be49898987d",
       "bytes": 3333
     },
     "xsmn/latest.json": {
-      "sha256": "958d7da9a7a5dcb1ac4cb3c0267fe23f806d1e710d48c5b2b9dec20b0246c4c9",
-      "bytes": 8979
+      "sha256": "ad94e4b1256cbd92261c134d30ea552c7a7afb57ebe4af3f96e6f7feb6fbeca3",
+      "bytes": 6790
     },
     "xsmb/history.json": {
-      "sha256": "32c1744fda35921cf167f931e9d52158d8de4321ec5a436204c98ce51f21f002",
+      "sha256": "7b01542b7f66af0168deb3aa9c3d95b26a6a63b54c057d9508813442e06e552d",
       "bytes": 1138099
     },
     "xsmn/history.json": {
-      "sha256": "00667caf28d223e3b7225dfe1cd3aca6f43c739f9fc52264a0e14329c624b4cb",
-      "bytes": 2526866
+      "sha256": "8b1468c2abf448b27613d52a99ea78406c582372f5b28738d1802a0a4ef43e2f",
+      "bytes": 2524677
     }
   }
 }
