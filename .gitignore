@@ -10,6 +10,7 @@ backend/api-smoke.db
 .env
 .env.local
 .env.*.local
+infinityfree/config/config.php
 *.jks
 *.keystore
 *.pem
@@ -63,3 +64,8 @@ worker/.wrangler/
 Thumbs.db
 
 .vercel
+
+# --- Large files (exceeds GitHub 100MB limit) ---
+*.wpress
+web/drive-download-20230516T174429Z-001/
+web/drive-download-20230516T174429Z-001.zip

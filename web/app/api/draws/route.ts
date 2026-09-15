@@ -4,6 +4,7 @@ import type { LotteryDraw, Region } from "@/lib/lottery-domain";
 import { listStoredDraws } from "@/lib/server/draw-repository";
 import { fetchWorkerHistory } from "@/lib/worker-api-client";
 import { stationMatches } from "@/lib/stations";
+import { fetchBackupDraws } from "@/lib/server/backup-api";
 
 const VALID_REGIONS: Region[] = ["Miền Bắc", "Miền Trung", "Miền Nam"];
 const VALID_TYPES: LotteryDraw["lotteryType"][] = ["TRADITIONAL", "COMBINATION"];
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
   const limit = Math.min(Math.max(Number(params.limit) || 50, 1), 5000);
   const offset = Math.max(Number(params.offset) || 0, 0);
 
-  let storage: "postgres" | "worker" | "sample" = "sample";
+  let storage: "postgres" | "worker" | "backup" | "sample" = "sample";
   let total = 0;
   let draws: LotteryDraw[] = [];
 
@@ -54,7 +55,23 @@ export async function GET(request: Request) {
     }
   }
 
-  // Priority 3: Sample data fallback
+  // Priority 3: InfinityFree read-only backup. Client secrets are never involved.
+  if (storage === "sample" && process.env.BACKUP_API_URL) {
+    try {
+      const backupDraws = await fetchBackupDraws({ region, from, to, limit: limit + offset });
+      if (backupDraws.length > 0) {
+        storage = "backup";
+        let filtered = station ? backupDraws.filter((draw) => stationMatches(draw.station, station)) : backupDraws;
+        if (lotteryType) filtered = filtered.filter((draw) => draw.lotteryType === lotteryType);
+        total = filtered.length;
+        draws = filtered.slice(offset, offset + limit);
+      }
+    } catch (error) {
+      console.error("Backup API is unavailable.", error);
+    }
+  }
+
+  // Priority 4: bundled stale cache/sample data
   if (storage === "sample") {
     let sample = [...SAMPLE_DRAWS];
     if (region) sample = sample.filter((draw) => draw.region === region);
@@ -85,6 +102,7 @@ export async function GET(request: Request) {
       total,
       hasMore: offset + limit < total,
       storage,
+      stale: storage === "sample",
       updatedAt: draws[0]?.collectedAt ?? null,
     },
     { headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=900" } },

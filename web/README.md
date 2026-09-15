@@ -137,6 +137,7 @@ prisma/schema.prisma     mô hình PostgreSQL
 - [Triển khai Vercel + SQL](../docs/VERCEL_SQL_DEPLOY.md)
 - [Prompt bàn giao Cline/Codex](../docs/PROMPT_VERCEL_SQL_VI.md)
 - [PRODUCT_MVP.md](../docs/PRODUCT_MVP.md)
+- [Triển khai backup InfinityFree và đồng bộ](../docs/BACKUP_SYNC.md)
 
 ## Giấy phép
 

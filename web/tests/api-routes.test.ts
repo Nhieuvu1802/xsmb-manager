@@ -29,7 +29,7 @@ describe("GET /api/health", () => {
     const response = await healthGET();
     const body = await response.json();
     expect(response.status).toBe(200);
-    expect(body.status).toBe("healthy");
+    expect(body.status).toBe("online");
     expect(body.version).toBeTruthy();
     expect(["postgres", "worker", "sample"]).toContain(body.storage);
   }, 15_000);

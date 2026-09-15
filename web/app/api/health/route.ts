@@ -3,6 +3,7 @@ import { SAMPLE_DRAWS } from "@/lib/sample-data";
 import { databaseStatus } from "@/lib/server/draw-repository";
 import { checkWorkerHealth } from "@/lib/worker-api-client";
 import { getPrisma } from "@/lib/server/prisma";
+import { checkBackupHealth } from "@/lib/server/backup-api";
 
 export async function GET() {
   let database = null;
@@ -24,6 +25,8 @@ export async function GET() {
   }
 
   const worker = await checkWorkerHealth();
+  let backup: Record<string, unknown> | null = null;
+  try { backup = await checkBackupHealth(); } catch { /* optional backup */ }
   const latestSample = SAMPLE_DRAWS[0];
 
   const storage: "postgres" | "worker" | "sample" = database?.drawCount
@@ -33,7 +36,10 @@ export async function GET() {
       : "sample";
 
   return NextResponse.json({
-    status: "healthy",
+    status: "online",
+    database: database ? "online" : "offline",
+    last_sync: database?.newest?.collectedAt.toISOString() ?? null,
+    last_data: database?.newest?.drawnAt.toISOString() ?? null,
     version: "3.3.0",
     storage,
     drawCount: database?.drawCount || (worker.reachable ? (worker.xsmbDraws ?? 0) + (worker.xsmnDraws ?? 0) : SAMPLE_DRAWS.length),
@@ -44,6 +50,7 @@ export async function GET() {
       xsmbDraws: worker.xsmbDraws ?? null,
       xsmnDraws: worker.xsmnDraws ?? null,
     },
+    backup: { reachable: backup?.status === "online", ...backup },
     trend: {
       numberTrendRows: numberTrendCount,
       ready: numberTrendCount > 0,
