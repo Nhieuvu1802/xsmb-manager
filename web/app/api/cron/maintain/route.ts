@@ -11,6 +11,7 @@ import {
 import { refreshNumberTrends } from "@/lib/server/trend-repository";
 import { fetchLegalProvider, providerRecordsToDraws } from "@/lib/server/provider";
 import { fetchWorkerHistory } from "@/lib/worker-api-client";
+import { scrapeRecent } from "@/lib/server/xoso-scraper";
 import type { Region } from "@/lib/lottery-domain";
 import { cacheInvalidate } from "@/lib/server/cache";
 import { getClientIp } from "@/lib/server/request-context";
@@ -44,15 +45,22 @@ export async function GET(request: Request) {
       imported = await upsertDraws(providerRecordsToDraws(payload.records));
       source = "legal-provider";
     } else {
-      const regions: Region[] = ["Miền Bắc", "Miền Trung", "Miền Nam"];
-      const workerDraws = (await Promise.all(
-        regions.map((region) => fetchWorkerHistory(region, dateOnly(from), dateOnly(today))),
-      )).flat();
-      if (workerDraws.length) {
-        imported = before?.drawCount ? await upsertDraws(workerDraws) : await insertMissingDraws(workerDraws);
-        source = "cloudflare-worker-api";
+      // Try web scraper (xoso.com.vn / xosodaiphat.com) — no env vars needed
+      const scrapedDraws = await scrapeRecent(fullSync ? 7 : 3);
+      if (scrapedDraws.length) {
+        imported = before?.drawCount ? await upsertDraws(scrapedDraws) : await insertMissingDraws(scrapedDraws);
+        source = "xoso-scraper";
       } else {
-        imported = await insertMissingDraws(createSampleDraws(before?.drawCount ? 3 : 365));
+        const regions: Region[] = ["Miền Bắc", "Miền Trung", "Miền Nam"];
+        const workerDraws = (await Promise.all(
+          regions.map((region) => fetchWorkerHistory(region, dateOnly(from), dateOnly(today))),
+        )).flat();
+        if (workerDraws.length) {
+          imported = before?.drawCount ? await upsertDraws(workerDraws) : await insertMissingDraws(workerDraws);
+          source = "cloudflare-worker-api";
+        } else {
+          imported = await insertMissingDraws(createSampleDraws(before?.drawCount ? 3 : 365));
+        }
       }
     }
 
