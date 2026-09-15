@@ -1,0 +1,18 @@
+Changelog
+1.0.7 [2019 11 30]
+
+1.0.6 [2018 11 30]
+* added events order lines in widget-archive-list.php
+
+1.0.5 [2018 03 21]
+* kentha-widgets.php fixed early closing for missing post type
+
+1.0.3 
+* post thumbnail url 'post-thumbnail' in cards
+
+1.0.2
+* glass card class span replaced with h6
+
+1.0.1 
+* languages pot update
+* Version 1.0.0 [Started 2017 October 24]

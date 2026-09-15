@@ -21,11 +21,16 @@ vvn.freedev.app.txt
 *password*.txt
 *account*.txt
 
+# --- 9Router / Proxy Pool ---
+# .env.proxy-pool được commit mẫu (template), secret thực tế ở .env.proxy-pool.local
+.env.proxy-pool.local
+
 # --- Dữ liệu runtime: database người dùng, backup, bản phát hành ---
 data/**
 !data/README.md
 
 # --- Web (Next.js PWA) ---
+/node_modules/
 web/node_modules/
 web/.next/
 web/out/
@@ -58,4 +63,3 @@ worker/.wrangler/
 Thumbs.db
 
 .vercel
-.env*

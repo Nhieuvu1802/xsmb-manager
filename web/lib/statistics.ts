@@ -9,14 +9,19 @@ export function lastTwoDigits(value: string) {
 }
 
 export function calculateNumberStats(draws: LotteryDraw[]): NumberStat[] {
-  const drawCount = draws.length;
-  const totalSlots = draws.reduce((sum, draw) => sum + draw.results.length, 0);
+  // All recency metrics use index 0 as the newest draw. Normalizing here keeps
+  // imported data and API data correct even if a caller supplies ascending rows.
+  const orderedDraws = [...draws].sort(
+    (left, right) => right.date.localeCompare(left.date) || left.station.localeCompare(right.station),
+  );
+  const drawCount = orderedDraws.length;
+  const totalSlots = orderedDraws.reduce((sum, draw) => sum + draw.results.length, 0);
 
   return ALL_NUMBERS.map((number) => {
     const hitIndexes: number[] = [];
     let count = 0;
 
-    draws.forEach((draw, drawIndex) => {
+    orderedDraws.forEach((draw, drawIndex) => {
       let hitInDraw = false;
       draw.results.forEach((result) => {
         if (lastTwoDigits(result.value) === number) {
@@ -31,22 +36,12 @@ export function calculateNumberStats(draws: LotteryDraw[]): NumberStat[] {
     const deviation = Math.sqrt(totalSlots * 0.01 * 0.99);
     const gaps = hitIndexes.slice(1).map((value, index) => value - hitIndexes[index]);
 
-    // Streak calculation: currentStreak = consecutive from latest, longestStreak = all-time
+    // currentStreak starts at the newest draw (index 0).
     let currentStreak = 0;
     let longestStreak = 0;
     let tempStreak = 0;
-    for (let i = drawCount - 1; i >= 0; i -= 1) {
-      if (hitIndexes.includes(i)) {
-        if (i === drawCount - 1 || hitIndexes.includes(i + 1)) {
-          currentStreak += 1;
-        } else {
-          break;
-        }
-      } else if (i === drawCount - 1) {
-        break;
-      } else {
-        break;
-      }
+    for (let i = 0; i < drawCount && hitIndexes.includes(i); i += 1) {
+      currentStreak += 1;
     }
     // Compute longest streak from hitIndexes
     for (let i = 0; i < hitIndexes.length; i += 1) {
@@ -78,8 +73,9 @@ export function calculateNumberStats(draws: LotteryDraw[]): NumberStat[] {
 
 export function buildTrend(draws: LotteryDraw[], trackedNumbers: string[]) {
   return [...draws]
+    .sort((left, right) => right.date.localeCompare(left.date) || left.station.localeCompare(right.station))
+    .slice(0, 30)
     .reverse()
-    .slice(-30)
     .map((draw) => {
       const values = draw.results.map((result) => lastTwoDigits(result.value));
       return {
@@ -235,8 +231,11 @@ export type WindowComparison = {
 };
 
 export function compareWindows(draws: LotteryDraw[], periods: number[] = [7, 30, 90, 180, 365]): WindowComparison[] {
+  const orderedDraws = [...draws].sort(
+    (left, right) => right.date.localeCompare(left.date) || left.station.localeCompare(right.station),
+  );
   return periods.map((period) => {
-    const window = draws.slice(-period);
+    const window = orderedDraws.slice(0, period);
     const stats = calculateNumberStats(window);
     const totalSlots = window.reduce((sum, draw) => sum + draw.results.length, 0);
     const sorted = [...stats].sort((a, b) => b.count - a.count);
@@ -257,7 +256,10 @@ export function compareWindows(draws: LotteryDraw[], periods: number[] = [7, 30,
 
 export function lookupNumber(draws: LotteryDraw[], target: string, period?: number) {
   const padded = target.padStart(2, "0");
-  const window = period ? draws.slice(-period) : draws;
+  const orderedDraws = [...draws].sort(
+    (left, right) => right.date.localeCompare(left.date) || left.station.localeCompare(right.station),
+  );
+  const window = period ? orderedDraws.slice(0, period) : orderedDraws;
   const stats = calculateNumberStats(window);
   const stat = stats.find((s) => s.number === padded);
   if (!stat) return null;

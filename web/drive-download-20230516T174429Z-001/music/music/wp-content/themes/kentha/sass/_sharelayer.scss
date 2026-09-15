@@ -1,0 +1,65 @@
+.qt-sharelayer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.85);
+	z-index: 9999;
+	display: table;
+	top: 100%;
+	transition: opacity 0.25s;
+	opacity: 0;
+	vertical-align: middle;
+	.qt-sharecont {
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		a {
+			display: inline-block;
+			width: 120px;
+			height: 120px;
+			padding: 0.5rem 1rem;
+			text-align: center;
+			margin:  4px 2px;
+			color: #fff;
+			font-size: 12px;
+			text-transform: uppercase;
+			padding: 30px;
+			span {
+				font-size: 32px;
+				margin-bottom: 10px;
+				display: block;
+				float: none;
+			}
+			&:hover {
+				filter: brightness(130%);
+			}
+		}
+	}
+	.qt-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		font-size: 32px;
+		cursor: pointer;
+	}
+	&.active {
+		opacity: 1;
+		top: 0%;
+	}
+	
+	.qt-facebook {
+		background: #0084ff;
+	}
+	.qt-twitter {
+		background: #4da7de;
+	}
+	.qt-gplus {
+		background: #dd4b39;
+	}
+
+	.qt-pinterest {
+		background: #c92619;
+	}
+}

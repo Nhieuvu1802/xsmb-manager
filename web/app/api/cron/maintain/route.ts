@@ -3,6 +3,7 @@ import { createSampleDraws } from "@/lib/sample-data";
 import {
   databaseStatus,
   insertMissingDraws,
+  logAudit,
   logDataImport,
   pruneOldDraws,
   upsertDraws,
@@ -11,6 +12,8 @@ import { refreshNumberTrends } from "@/lib/server/trend-repository";
 import { fetchLegalProvider, providerRecordsToDraws } from "@/lib/server/provider";
 import { fetchWorkerHistory } from "@/lib/worker-api-client";
 import type { Region } from "@/lib/lottery-domain";
+import { cacheInvalidate } from "@/lib/server/cache";
+import { getClientIp } from "@/lib/server/request-context";
 
 export const maxDuration = 300;
 
@@ -70,6 +73,13 @@ export async function GET(request: Request) {
       duplicateRows: 0,
       rejectedRows: 0,
       report: { from: dateOnly(from), to: dateOnly(today), fullSync, removed: removed.count, retentionDays, trendRows },
+    });
+    await cacheInvalidate("stats:");
+    await logAudit({
+      action: "MAINTAIN_DATASET",
+      entity: "LotteryDraw",
+      details: { source, fullSync, imported, removed: removed.count, retentionDays, trendRows },
+      ipAddress: getClientIp(request),
     });
 
     return NextResponse.json({ status: "MAINTAINED", source, fullSync, imported, removed: removed.count, trendRows, database: after });

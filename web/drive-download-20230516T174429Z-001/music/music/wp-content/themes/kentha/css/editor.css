@@ -1,0 +1,129 @@
+body, html {
+  font-size: 16px;
+  line-height: 1.9em;
+  font-family: 'Open Sans', sans-serif; }
+
+strong {
+  font-weight: 700; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-rendering: geometricPrecision;
+  letter-spacing: -0.02em;
+  line-height: 1.25em;
+  margin-top: 1.15em;
+  margin-bottomo: 0.5em; }
+
+p + h1, ol + h1, ul + h1, blockquote + h1, table + h1, dl + h1, h1 + h1, h2 + h1, h3 + h1, h4 + h1, h5 + h1, h6 + h1 {
+  margin-top: 1em; }
+p + h2, ol + h2, ul + h2, blockquote + h2, table + h2, dl + h2, h1 + h2, h2 + h2, h3 + h2, h4 + h2, h5 + h2, h6 + h2 {
+  margin-top: 1em; }
+p + h3, ol + h3, ul + h3, blockquote + h3, table + h3, dl + h3, h1 + h3, h2 + h3, h3 + h3, h4 + h3, h5 + h3, h6 + h3 {
+  margin-top: 1em; }
+p + h4, ol + h4, ul + h4, blockquote + h4, table + h4, dl + h4, h1 + h4, h2 + h4, h3 + h4, h4 + h4, h5 + h4, h6 + h4 {
+  margin-top: 1em; }
+p + h5, ol + h5, ul + h5, blockquote + h5, table + h5, dl + h5, h1 + h5, h2 + h5, h3 + h5, h4 + h5, h5 + h5, h6 + h5 {
+  margin-top: 1em; }
+p + h6, ol + h6, ul + h6, blockquote + h6, table + h6, dl + h6, h1 + h6, h2 + h6, h3 + h6, h4 + h6, h5 + h6, h6 + h6 {
+  margin-top: 1em; }
+p + p, p + ul, p + ol, p + img, p + iframe, ol + p, ol + ul, ol + ol, ol + img, ol + iframe, ul + p, ul + ul, ul + ol, ul + img, ul + iframe, blockquote + p, blockquote + ul, blockquote + ol, blockquote + img, blockquote + iframe, table + p, table + ul, table + ol, table + img, table + iframe, dl + p, dl + ul, dl + ol, dl + img, dl + iframe, h1 + p, h1 + ul, h1 + ol, h1 + img, h1 + iframe, h2 + p, h2 + ul, h2 + ol, h2 + img, h2 + iframe, h3 + p, h3 + ul, h3 + ol, h3 + img, h3 + iframe, h4 + p, h4 + ul, h4 + ol, h4 + img, h4 + iframe, h5 + p, h5 + ul, h5 + ol, h5 + img, h5 + iframe, h6 + p, h6 + ul, h6 + ol, h6 + img, h6 + iframe {
+  margin-top: 1.4em; }
+
+hr {
+  clear: both; }
+
+p i {
+  position: initial; }
+
+iframe {
+  max-width: 100%; }
+
+address {
+  margin: 2rem 0.5rem; }
+
+dl:not(.gallery-item) dt {
+  font-weight: bold; }
+dl:not(.gallery-item) dt, dl:not(.gallery-item) dd {
+  margin-top: 1rem; }
+dl:not(.gallery-item) dt + dd {
+  margin: 0; }
+dl:not(.gallery-item) dd, dl:not(.gallery-item) dt {
+  padding-left: 1rem;
+  border-left: 6px solid;
+  line-height: 1.1em;
+  padding: 0 0 0 1rem; }
+dl:not(.gallery-item) dd {
+  padding-top: 0.5em; }
+
+ul, ol {
+  margin-left: 26px; }
+  ul li, ol li {
+    padding: 8px 16px; }
+
+ul li {
+  list-style-type: square; }
+
+table {
+  border-collapse: initial;
+  font-size: 15px;
+  line-height: 1.3em; }
+  table td, table th {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-collapse: initial;
+    border-radius: 0;
+    border-color: inherit; }
+  table th {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+    border-color: inherit; }
+  table tr:first-child {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-color: inherit; }
+
+blockquote {
+  font-size: 1rem;
+  position: relative;
+  border: none;
+  margin: 36px 0 90px 0;
+  min-height: 3rem;
+  padding: 0 1.5rem 0 0;
+  text-rendering: geometricPrecision;
+  letter-spacing: 0.02em;
+  text-align: center;
+  font-style: italic;
+  border-top: 2px solid rgba(100, 100, 100, 0.33);
+  border-bottom: 2px solid rgba(100, 100, 100, 0.33);
+  position: relative;
+  }
+  blockquote p {
+    font-weight: light;
+    font-size: 1.2rem;
+    line-height: 1.5em;
+    padding: 30px 0;
+    margin: 0 5px;
+    position: relative; }
+  blockquote cite {
+    text-align: center;
+    font-size: 13px;
+    font-style: initial;
+    font-weight: bold;
+    opacity: 0.6;
+    clear: both;
+    margin: 1.4rem 0;
+    width: 100%;
+    display: block;
+    position: absolute;
+    bottom: -80px; }
+  blockquote acronym {
+    font-style: italic; }
+  blockquote q {
+    font-size: 1.72em;
+    line-height: 1.4em;
+    font-style: italic; }
+  blockquote kbd, blockquote code, blockquote pre, blockquote var {
+    font-size: 14px;
+    padding: 4px 14px 6px 14px;
+    background: rgba(100, 100, 100, 0.2);
+    border-radius: 3px;
+    margin: 14px 0 30px; }

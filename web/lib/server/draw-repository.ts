@@ -188,3 +188,22 @@ export async function logDataImport(input: {
   if (!prisma) return null;
   return prisma.dataImport.create({ data: input });
 }
+
+export async function logAudit(input: {
+  action: string;
+  entity: string;
+  entityId?: string;
+  details?: Prisma.InputJsonValue;
+  ipAddress?: string;
+}) {
+  const prisma = getPrisma();
+  if (!prisma) return null;
+  try {
+    return await prisma.auditLog.create({ data: input });
+  } catch (error) {
+    // Auditing must never turn an already successful import/maintenance action
+    // into a failed HTTP response. Sentry/server logs still retain the failure.
+    console.error("Không thể ghi audit log.", error);
+    return null;
+  }
+}

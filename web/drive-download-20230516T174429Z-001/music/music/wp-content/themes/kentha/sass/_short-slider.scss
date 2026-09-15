@@ -1,0 +1,134 @@
+.qt-material-slider {
+	opacity: 1;
+	transition: opacity 0.3s;
+	position: relative;
+	&.active {
+		opacity: 1;
+	}
+	.qt-control-arrows {
+		position: absolute;
+		top: 1rem;
+		left: 1rem;
+		z-index: 500;
+		padding-left: 0;
+		a {
+			color:  #fff;
+		}
+	}
+	.indicators {
+		z-index: 100;
+		width: 100%;
+	    margin: 0;
+	    padding: 0;
+	    border-radius: 0;
+	    height: 12px;
+	    line-height: 12px;
+	    bottom: 8px;
+	   	padding-right: 4px;
+	    text-align: right;
+	    max-width: 200px;
+	    right: 4px;
+    	left: auto;
+	    li.indicator-item {
+	    	border-radius: 0;
+	    	height: 12px;
+	    	margin: 0 0 0 4px;
+	    	line-height: 12px;
+	    	width: 12px;
+	    	border-radius: $qt-border-radius;
+	    }
+	}
+	.indicator-item {
+		background-color: #fff;
+	}
+	.slides {
+		li {
+			background: #101010;
+			.qt-slidecaption {
+				display: table;
+				height: 100%;
+				width: 100%;
+				left: 0;
+				top: 100%;
+				transition: top 0.3s ease;
+				.qt-txt {
+					display: table-cell;
+					vertical-align: top;
+					padding: 80px 1.4rem 0 1.4rem;
+					
+					h3, h4, p {
+						margin:0;
+						opacity: 0;
+						transform: translateY(100px) translateZ(0);
+						transition: transform 0.7s ease, opacity 0.6s;
+						line-height: 1.05em;
+						will-change: transform;
+					}
+					
+					h4 {
+						transition-delay: 0.7s;
+						margin-top: 0.5em;
+						padding-left: 0px;
+					}
+					h3 {
+						transition-delay: 0.9s;
+					}
+					p {
+						transition-delay: 1.2s;
+						margin-top: 1rem;
+					}
+					.qt-link  {
+						border-bottom: 2px solid;
+						padding-bottom: 3px;
+						i {
+							top: 0em;
+							margin-left: 4px;
+						}
+						&:hover {
+							filter: brightness(130%);
+						}
+					}
+				}
+			}
+			img {
+				opacity: .6;
+				transform: scale(1.3);
+				transition: transform 0.5s;
+			}
+			&.active {
+				img {
+					transform: scale(1);
+				}
+				.qt-slidecaption {
+					top: 0%;
+					h1, h2, h3, h4, h5 {
+						color: #fff;
+					}
+					.qt-txt {
+						h3, h4, p {
+							transform: translateY(0px) translateZ(0);
+							opacity: 1;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}
+
+.qt-template-page-visualcomposer .qt-vc-row-container > .vc_row > .wpb_column > .vc_column-inner > .wpb_wrapper > .qt-material-slider {
+	.slides {
+		li {
+			.qt-slidecaption {
+				.qt-txt {
+					padding-top: 120px;
+				}
+			}
+		}
+	}
+	.qt-control-arrows {
+		top: 90px;
+		left: 20px;
+	}
+}

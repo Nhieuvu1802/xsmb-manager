@@ -1,0 +1,323 @@
+
+---Downloaded files---
+The import files for: Demo 0 Music multipurpose were successfully downloaded!
+Initial max execution time = 30000
+Files info:
+Site URL = http://localhost:8081/music
+Data file = D:\xampp\htdocs\music/wp-content/uploads/2020/09/demo-content-import-file_2020-09-30__09-09-47.xml
+Widget file = D:\xampp\htdocs\music/wp-content/uploads/2020/09/demo-widgets-import-file_2020-09-30__09-09-47.json
+Customizer file = D:\xampp\htdocs\music/wp-content/uploads/2020/09/demo-customizer-import-file_2020-09-30__09-09-47.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "Podcast 2" (Đa phương tiện)
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "podcast 3" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "podcast 3" (Đa phương tiện)
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "podcast 3" (Đa phương tiện)
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+Right Sidebar : 
+
+Tìm kiếm - No Title - Widget already exists
+QT Archives List Widget - LATEST NEWS - Imported
+QT Archives List Widget - New Albums - Imported
+Chuyên mục - No Title - Imported
+Gallery ảnh - Gallery - Imported
+
+Release Sidebar : 
+
+QT Archives List Widget - Latest album - Imported
+
+Podcast Sidebar : 
+
+Tìm kiếm - Search - Imported
+QT Archives List Widget - Latest podcast - Imported
+
+Event Sidebar : 
+
+QT Archives List Widget - New events - Imported
+
+Footer Sidebar : 
+
+QT Archives List Widget - Latest album - Imported
+QT Archives List Widget - Top artists - Imported
+QT Archives List Widget - New podcast - Imported
+QT Archives List Widget - Upcoming gigs - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---pt-ocdi/after_import---
+<h1>primary_menu</h1>WP_Term Object
+(
+    [term_id] => 36
+    [name] => Main
+    [slug] => main
+    [term_group] => 0
+    [term_taxonomy_id] => 36
+    [taxonomy] => nav_menu
+    [description] => 
+    [parent] => 0
+    [count] => 33
+    [filter] => raw
+)
+<h1>footer_menu</h1>WP_Term Object
+(
+    [term_id] => 35
+    [name] => Footer
+    [slug] => footer
+    [term_group] => 0
+    [term_taxonomy_id] => 35
+    [taxonomy] => nav_menu
+    [description] => 
+    [parent] => 0
+    [count] => 4
+    [filter] => raw
+)
+

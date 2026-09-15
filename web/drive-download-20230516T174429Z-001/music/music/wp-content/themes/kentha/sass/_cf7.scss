@@ -1,0 +1,25 @@
+#qtBody {
+	.wpcf7 {
+		select {
+			display: initial;
+			background: #fff;
+			color: #222;
+			height: auto;
+		}
+		textarea {
+			padding: 1.4rem;
+			min-height: 5rem;
+		}
+
+		[type="checkbox"]:not(:checked), [type="checkbox"]:checked,
+		label input[type=checkbox]:not(:checked), label input[type=checkbox]:checked, label input[type=radio],
+		[type="radio"]:not(:checked), [type="radio"]:checked {
+			position: initial;
+		    left: 0;
+		    opacity: 1;
+		}
+		span.wpcf7-list-item {
+			margin: 0 1rem 0 0;
+		}
+	}
+}

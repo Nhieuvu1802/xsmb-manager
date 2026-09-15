@@ -1,0 +1,72 @@
+1.3.2 [2020 01 22]
+* added condition to line 141 bodyClassesNew
+
+
+1.3.1 [2019 11 28]
+* added precise shop endpoints URL (no longer required to use shop or native URLs, they are dynamically retriven)
+* added support for ajaxing the shop
+
+
+1.3.0 [2019 06 28]
+* added checkbox to disable ajax loading on a specific page
+* added checkbox to execute internal links after ajax loading
+
+1.2.7 [2019 05 30]
+* qt-ajax-pageload.js fixed var name line 171
+
+1.2.6 [2019 05 27]
+* qt-ajax-pageload.js updated Page Builder css identified
+
+1.2.5 [20190123]
+* skipping any link with noajax in the URL
+
+1.2.4 [20180728]
+* Added exclusion by parent class adding noajax class (for menu and other items)
+
+1.2.3 [20180704]
+* regex improvement
+
+1.2.2 [20180702]
+* regex fix
+
+1.2.1 [20180627]
+* Exclusion regex fix for WooCommerce download
+
+1.2.0 [20180522]
+* Exclusion regex fix
+
+1.1.3 [20180301]
+* changed dependencies on script to match theme update: kentha-qt-main-script
+
+1.1.2 [20180129]
+* classes change
+
+1.1.1 [20180126]
+* added support for custom text fx styles
+
+1.1.0 [20171207]
+* updated js error
+
+1.0.9 [20171207]
+* changed loader function qt_ajax_pageload_enqueue_scripts
+
+1.0.8 [20171129]
+* added breadcrumb control
+
+1.0.7 [20171120]
+* custom ajax preloader
+
+1.0.6 [20171103]
+* fixes mediaelement script
+
+1.0.5 [20171010]
+* minor js version fixes
+
+1.0.4 [20170806]
+* better body class recognition
+
+1.0.2 [20170623]
+* css is now in external file qt-apl-style.css
+
+1.0.1 [20170504]
+* added exception for link with anchor #noajax

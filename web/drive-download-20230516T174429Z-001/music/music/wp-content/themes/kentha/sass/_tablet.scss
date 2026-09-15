@@ -1,0 +1,78 @@
+@media #{$tablets-only} {
+	/**
+	 * Part archive item
+	 */
+
+	.qt-part-archive-item {
+		.qt-header {
+			.qt-headings {
+				padding: 0.5rem 1.5rem;
+			}
+		}
+	}
+	.qt-footer-bottom {
+		.qt-menu-social {
+			padding-top: 20px;
+			// padding-left: 70px;
+		}
+	}
+	.qt-mplayer__btnspacer {
+		display: none;
+	}
+
+	.qt-perspectivecard-wrapper {
+		height: calc(100vh - 60px);
+	}
+	.qt-main-contents .qt-pageheader {
+	    height: calc(100% - 140px);
+	    height: calc(100vh - 140px);
+	    min-height: auto;
+	    text-align: center;
+	    display: table;
+	    width: 100%;
+	    vertical-align: middle;
+	    padding-top: 6%;
+	    .qt-item-metas {
+	    	text-align: center;
+	    }
+	    &__in {
+
+		    display: table-cell;
+		    vertical-align: middle;
+		    will-change: padding;
+		 	img {
+		 		max-width: 80%;
+		 		margin: 0 auto;
+		 	}
+		}
+	}	
+	
+
+	#qtBody.qt-user-logged {
+		.qt-menubar {
+			top: 32px;
+		}
+		.qt-mobilemenu {
+			top: 32px;
+			&.qt-down {
+				top: -70px;
+			}
+			&.qt-up {
+				top: 32px;
+			}
+		}
+	}
+	/** iPad
+	======================================================================================== */
+	.is_ipad {
+		.qt-parentcontainer {
+			.qt-menubar {
+
+			}
+		}
+		.qt-layer-bottom {
+			top: 160px;
+			height: calc(100% - 60px);
+		}
+	}
+}

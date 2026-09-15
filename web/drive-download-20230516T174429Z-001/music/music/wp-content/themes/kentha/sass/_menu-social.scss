@@ -1,0 +1,80 @@
+
+.qt-menu-social {
+	font-size: 18px;
+	margin-left: 0;
+	line-height: 36px;
+	
+	&.qt-artsocial {
+		a:not(:hover) {
+			color: inherit;
+		}
+	}
+}
+li.qt-social-linkicon {
+	margin: 0 2px;
+	padding: 0;
+	list-style: none;
+	display: inline-block;
+	a {
+		display: inline-block;
+		border-radius: 50%;
+		border: 2px solid;
+		$size: 29px;
+		width: $size;
+		height: $size;
+		line-height: $size;
+		vertical-align: middle;
+		text-align: center;
+		box-sizing: content-box;
+		i {
+			color: #fff;
+			display: block;
+			position: relative;
+			top: 2px;
+			font-size: 16px;
+			width: $size;
+			text-align: center;
+			height: $size;
+			line-height: $size;
+		}
+	}
+}
+.qt-scounter {
+	font-size: 13px;
+	margin: 0 0 0 10px;
+	span {
+		top: 0.1em;
+		position: relative;
+	}
+}
+li.qt-soc-count {
+		display: inline-block;
+		padding: 0;
+		list-style-type: none;
+		float: none;
+	    box-sizing: content-box;
+	    margin: 0 0 0 5px;
+		a {
+			padding: 0;
+			line-height: 30px;
+			text-align: center;
+			span {
+				line-height: 23px;
+				display: inline-block;
+				float: left;
+				font-size: 11px;
+				padding-left: 14px;
+				margin-top: -28px;
+				transform: rotate(-45deg) translateY(-25px) translateX(10px);
+   				position: absolute;
+   				border-bottom: 1px solid #fff;
+   				transition: opacity 0.2s;
+   				color: inherit;
+			}
+			&:hover {
+				span {
+					opacity: 1;
+				}
+			}
+		}
+	}

@@ -1,0 +1,10 @@
+FROM python:3.12-alpine
+
+WORKDIR /app
+
+# Install only stdlib deps — no requirements.txt needed
+RUN apk add --no-cache curl docker-cli
+
+COPY scripts/proxy-rotate.py /app/proxy-rotate.py
+
+CMD ["python", "-u", "/app/proxy-rotate.py"]

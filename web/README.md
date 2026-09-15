@@ -42,9 +42,8 @@ npm run test:e2e
 | Lịch sử | Danh sách kỳ, bộ lọc ngày/đài/miền/loại, modal chi tiết |
 | Thống kê | Tần suất 0–9, đầu–đuôi, chẵn/lẻ, khoảng, streak, cặp, ngày tuần |
 | So sánh | Bảng side-by-side 7/30/90/180/365 kỳ |
-| Xác suất | 2–6 chữ số, EV, Monte Carlo, Wilson, χ² |
+| Xác suất | 2–6 chữ số, EV, Monte Carlo, Wilson, χ², công thức và cảnh báo phương pháp |
 | Kho dữ liệu | Nhập CSV/JSON, validation, nguồn & cập nhật |
-| Phương pháp | Công thức, giả định, cảnh báo an toàn |
 
 Danh mục hiện có 14 đài miền Trung và 21 đài miền Nam theo lịch quay trong tuần. Dữ liệu mẫu cuộn theo 365 ngày gần nhất; cấu trúc giải miền Bắc là 27 kết quả, miền Trung/miền Nam là 18 kết quả cho mỗi đài.
 
@@ -59,6 +58,13 @@ CRON_SECRET=thay-bang-chuoi-ngau-nhien-khac
 DATA_RETENTION_DAYS=370
 LOTTERY_PROVIDER_URL=
 LOTTERY_PROVIDER_TOKEN=
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+SENTRY_DSN=
+NEXT_PUBLIC_SENTRY_DSN=
+SENTRY_AUTH_TOKEN=
+SENTRY_ORG=
+SENTRY_PROJECT=
 NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 ```
 
@@ -66,6 +72,8 @@ NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
 - `ADMIN_API_KEY` bảo vệ endpoint POST `/api/admin/import` và `/api/admin/seed`.
 - `CRON_SECRET` bảo vệ tác vụ cập nhật hằng ngày của Vercel.
 - `LOTTERY_PROVIDER_*` chỉ cần khi có API dữ liệu hợp pháp.
+- `UPSTASH_REDIS_REST_*` bật cache thống kê dùng chung; khi thiếu, app dùng cache bộ nhớ có TTL.
+- Nhóm `SENTRY_*` bật theo dõi lỗi và source map; khi thiếu, SDK được tắt an toàn.
 - `GET /api/probability` và `/api/draws` là API công khai.
 - `GET /api/health` kiểm tra trạng thái.
 - `GET /api/stats/compare` so sánh 5 cửa sổ.
@@ -102,7 +110,7 @@ app/
   api/cron/maintain/     đồng bộ hằng ngày + retention
   page.tsx               điểm vào App Router
 components/
-  lottery-app.tsx        shell + Tổng quan + Phân tích + Phương pháp
+  lottery-app.tsx        shell + Tổng quan + Phân tích + Xác suất
   southern-dual-view.tsx bảng giải 2 đài miền Nam song song
   simulator-view.tsx     quay thử minh bạch + điểm nổi bật lịch sử
   history-view.tsx       lịch sử kỳ quay + filter + modal

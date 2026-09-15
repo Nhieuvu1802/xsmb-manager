@@ -1,0 +1,54 @@
+.qt-chartvote {
+	display: table-cell;
+	width: 50px;
+	margin: 0;
+    padding: 0;
+	text-align: center;
+	line-height: 20px;
+	height: 100%;
+	background: white;
+	vertical-align: bottom;
+	i {
+		font-size: 25px;
+		display: inline;
+		position: normal;
+		float: none;
+		margin: 0;
+		line-height: 25px;
+		top: 0;
+		padding: 0;
+		    font-size: 45px;
+		&:before {
+			line-height: 0;
+		}
+	}
+	&-link, &-number {
+		display: block;
+		width: 100%;
+		clear: both;
+		text-align: center;
+		padding: 4px 0;
+		height: 33%;
+		vertical-align: middle;
+	}
+	&-number {
+		line-height: 1.5em;
+		background: #fff;
+		color: #222;
+		font-size: 12px;
+	}
+	&-link {
+		background: #fff;
+		color: #7bc71e;
+		&:hover {
+			background: #fff;
+			color: #8cff00;
+		}
+	}
+	.qt-down {
+		color: red;
+		&:hover {
+			color: #ce0000;
+		}
+	}
+}

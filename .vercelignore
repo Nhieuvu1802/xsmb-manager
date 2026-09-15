@@ -1,0 +1,16 @@
+# Only deploy the web/ directory
+backend/
+worker/
+mobile/
+data/
+.venv/
+node_modules/
+.github/
+.vscode/
+.idea/
+*.md
+!web/README.md
+Dockerfile*
+docker-compose*
+*.apk
+*.aab

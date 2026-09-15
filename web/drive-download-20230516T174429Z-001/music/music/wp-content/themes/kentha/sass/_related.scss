@@ -1,0 +1,61 @@
+.qt-related {
+	padding: 1rem;
+	border: none;
+	clear: both;
+	.qt-related-item {
+		margin-bottom: 1rem;
+		> a {
+			border-radius: $qt-border-radius;
+			overflow: hidden;
+			display: block;
+			cursor: pointer;
+			padding: 3rem 1rem;
+			height: 190px;
+			position: relative;
+			&::after {
+				content: " ";
+				display: block;
+				background: #000;
+				opacity: 0.4;
+				z-index: 1;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				transition: opacity 0.2s;
+			}
+			&:hover {
+				&::after {
+					opacity: 0;
+				}
+			}
+			
+			
+			h5 {
+				position: relative;
+				z-index: 2;
+				margin: 2rem 0 0 0;
+				padding: 0;
+			}
+			.qt-item-metas {
+				text-align: center;
+				margin: 0;
+				padding: 0;
+				color: #fff;
+				position: relative;
+				z-index: 2;
+			}
+			.qt-content-secondary.qt-item-metas {
+				position: absolute;
+				top: 0;
+				left: 0;
+				display: inline-block;
+				width: auto;
+				padding: 0 8px;
+				z-index: 3;
+				opacity: 1;
+			}
+		}
+	}
+}

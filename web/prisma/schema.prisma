@@ -94,3 +94,42 @@ model DataImport {
 
   @@map("data_imports")
 }
+
+/**
+ * Analytics cache — avoids recalculating statistics on every request.
+ * TTL-based: expiresAt controls when the entry is stale.
+ * Scoped by region and period for targeted invalidation.
+ */
+model AnalyticsCache {
+  id        String   @id @default(uuid()) @db.Uuid
+  cacheKey  String   @unique @map("cache_key") @db.VarChar(255)
+  data      Json
+  region    String   @db.VarChar(20)
+  period    Int
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  expiresAt DateTime @map("expires_at") @db.Timestamptz(3)
+
+  @@index([cacheKey])
+  @@index([region, period])
+  @@index([expiresAt])
+  @@map("analytics_cache")
+}
+
+/**
+ * Audit log — tracks admin actions for compliance and debugging.
+ * Immutable append-only table.
+ */
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  action    String   @db.VarChar(100)
+  entity    String   @db.VarChar(100)
+  entityId  String?  @map("entity_id") @db.Uuid
+  details   Json?
+  ipAddress String?  @map("ip_address") @db.VarChar(45)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  @@index([action])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

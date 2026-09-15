@@ -90,7 +90,7 @@ const NAV_ITEMS: Array<{ id: View; label: string; description: string; icon: typ
   { id: "stats", label: "Thống kê", description: "Phân tích chi tiết", icon: BarChart3 },
   { id: "compare", label: "So sánh", description: "7–365 kỳ", icon: Activity },
   { id: "data", label: "Kho dữ liệu", description: "Nguồn & nhập liệu", icon: Database },
-  { id: "method", label: "Phương pháp", description: "Công thức rõ ràng", icon: BookOpen },
+  { id: "method", label: "Xác suất", description: "Công thức & mô phỏng", icon: BookOpen },
 ];
 
 const PERIOD_OPTIONS: Period[] = [7, 30, 90, 180, 365];

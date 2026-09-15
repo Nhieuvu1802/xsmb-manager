@@ -1,0 +1,47 @@
+
+.qt-lineup {
+	margin: 0;
+	li {
+		list-style: none;
+	}
+
+}
+
+.qt-lineup-full {
+	a.qt-lineup-item {
+		width: 100%;
+		display: table;
+		margin-bottom: 2px;
+		height: 250px;
+		vertical-align: middle;
+		text-align: center;
+		&::after {
+			display: block;
+			clear: both;
+			width: 100%;
+			content: " ";
+		}
+		&::last-child {
+			margin-bottom: 0;
+		}
+		div {
+			display: table-cell;
+			vertical-align: middle;
+			background: rgba(0,0,0,0.3);
+			transition: background 0.2s;
+		}
+		h4 {
+			
+			vertical-align: middle;
+
+		}
+		.qt-item-metas {
+			text-align: center;
+		}
+		&:hover {
+			div {
+				background: rgba(0,0,0,0.1);
+			}
+		}
+	}
+}

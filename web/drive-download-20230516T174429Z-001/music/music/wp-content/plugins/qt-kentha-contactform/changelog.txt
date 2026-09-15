@@ -1,0 +1,11 @@
+1.0.3 [2019 06 04]
+* added control on custom_add_meta_box
+
+1.0.2 [2017 11 07]
+* send request compatibility update
+
+1.0.1 [2017 11 07]
+* .pot update
+
+1.0.0 [2017 10 22]
+First version. The email and privacy fields are for separate

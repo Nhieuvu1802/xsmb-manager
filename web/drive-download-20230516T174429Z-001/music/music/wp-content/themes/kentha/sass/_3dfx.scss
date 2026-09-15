@@ -1,0 +1,32 @@
+.qt-3dfx {
+	transform: translateX(0%);
+	transition: transform 0.3s ease; 
+}
+.qt-3dfx-on {
+	transform: translateX(-90%);
+	z-index: 300;
+	.qt-3dfx-Close {
+		display: block;
+		opacity: 0.5;
+	}
+}
+.qt-desktopmenu li, .qt-menu-secondary {
+	transition: opacity 0.3s;
+}
+.qt-3dfx-enabled {
+	.qt-menu-secondary, .qt-menubar-center .qt-menu-secondary li {
+		opacity: 0;
+
+	}
+	.qt-desktopmenu li {
+		opacity: 0;
+		
+	}
+	.qt-desktopmenu li.qt-3dswitch, .qt-menubar-center .qt-menu-secondary, .qt-menubar-center .qt-menu-secondary li.qt-3dswitch {
+		opacity: 1;
+	}
+	ul.qt-breadcrumb {
+		opacity: 0;
+	}
+
+}

@@ -1,0 +1,22 @@
+ul.qt-collapsible {
+	margin: 0 0 1rem 0;
+	padding: 0;
+	li {
+		list-style: none;
+		.qt-collapsible-header  {
+			position: relative;
+			margin: 0;
+			padding: 30px;
+			display: block;
+			i {
+				position: absolute;
+				right: 5px;
+				top: 30px;
+				font-size: 23px;
+			}
+		}
+		.qt-collapsible-body {
+			
+		}
+	}
+}

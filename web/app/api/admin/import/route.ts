@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { logDataImport, upsertDraws } from "@/lib/server/draw-repository";
+import { logAudit, logDataImport, upsertDraws } from "@/lib/server/draw-repository";
+import { cacheInvalidate } from "@/lib/server/cache";
+import { getClientIp } from "@/lib/server/request-context";
 import { providerPayloadSchema, providerRecordsToDraws } from "@/lib/server/provider";
 
 export async function POST(request: Request) {
@@ -35,6 +37,13 @@ export async function POST(request: Request) {
       duplicateRows: duplicates.length,
       rejectedRows: 0,
       report: { duplicates },
+    });
+    await cacheInvalidate("stats:");
+    await logAudit({
+      action: "IMPORT_DRAWS",
+      entity: "LotteryDraw",
+      details: { accepted, duplicateRows: duplicates.length, source: "admin-api" },
+      ipAddress: getClientIp(request),
     });
     return NextResponse.json({ accepted, duplicates, status: "IMPORTED" });
   } catch (error) {

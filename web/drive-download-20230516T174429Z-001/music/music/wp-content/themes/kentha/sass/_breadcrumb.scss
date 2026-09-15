@@ -1,0 +1,32 @@
+ul.qt-breadcrumb {
+	margin: 5px 0 0 0;
+	padding: 0;
+	position: relative;
+	line-height: 11px;
+	display: block;
+	clear: both;
+	text-align: right;
+	overflow:hidden;
+	opacity: 1;
+	transition: opacity 0.3s;
+	li {
+		line-height: 11px;
+		display: inline-block;
+		font-size: 11px;
+		padding: 0;
+		font-size: 11px;
+		opacity: 0.6;
+		float: none;
+		a, span {
+			color: inherit;
+			padding: 0;
+			font-size: 11px;
+			padding: 0 4px;
+		}
+		&:first-child {
+			a, span {
+				padding-left: 0;
+			}
+		}
+	}
+}

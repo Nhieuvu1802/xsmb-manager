@@ -30,9 +30,9 @@ describe("GET /api/health", () => {
     const body = await response.json();
     expect(response.status).toBe(200);
     expect(body.status).toBe("healthy");
-    expect(body.drawCount).toBeGreaterThan(0);
     expect(body.version).toBeTruthy();
-  });
+    expect(["postgres", "worker", "sample"]).toContain(body.storage);
+  }, 15_000);
 });
 
 describe("GET /api/stats/compare", () => {

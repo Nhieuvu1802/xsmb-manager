@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { CalendarDays, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { CalendarDays, X } from "lucide-react";
 import type { LotteryDraw } from "@/lib/lottery-domain";
 import { lastTwoDigits } from "@/lib/statistics";
 
@@ -53,12 +53,13 @@ function PageHeading({ eyebrow, title, description }: { eyebrow: string; title: 
 }
 
 export function HistoryView({ draws }: { draws: LotteryDraw[] }) {
-  const [page, setPage] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(20);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [stationFilter, setStationFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState<"" | LotteryDraw["lotteryType"]>("");
   const [selectedDraw, setSelectedDraw] = useState<LotteryDraw | null>(null);
-  const perPage = 20;
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   const stations = useMemo(() => [...new Set(draws.map((d) => d.station))].sort(), [draws]);
 
@@ -67,11 +68,23 @@ export function HistoryView({ draws }: { draws: LotteryDraw[] }) {
     if (fromDate) result = result.filter((d) => d.date >= fromDate);
     if (toDate) result = result.filter((d) => d.date <= toDate);
     if (stationFilter) result = result.filter((d) => d.station === stationFilter);
+    if (typeFilter) result = result.filter((d) => d.lotteryType === typeFilter);
     return result;
-  }, [draws, fromDate, toDate, stationFilter]);
+  }, [draws, fromDate, toDate, stationFilter, typeFilter]);
 
-  const totalPages = Math.ceil(filtered.length / perPage);
-  const paged = filtered.slice(page * perPage, (page + 1) * perPage);
+  const visible = filtered.slice(0, visibleCount);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || visibleCount >= filtered.length) return;
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0]?.isIntersecting) {
+        setVisibleCount((count) => Math.min(count + 20, filtered.length));
+      }
+    }, { rootMargin: "240px" });
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [filtered.length, visibleCount]);
 
   return (
     <>
@@ -79,16 +92,17 @@ export function HistoryView({ draws }: { draws: LotteryDraw[] }) {
       <section className="panel history-filters">
         <PanelHeader icon={<CalendarDays />} eyebrow="BỘ LỌC" title="Lọc kỳ quay" />
         <div className="filter-row">
-          <label><span>Từ ngày</span><input type="date" value={fromDate} onChange={(e) => { setFromDate(e.target.value); setPage(0); }} /></label>
-          <label><span>Đến ngày</span><input type="date" value={toDate} onChange={(e) => { setToDate(e.target.value); setPage(0); }} /></label>
-          <label><span>Đài</span><select value={stationFilter} onChange={(e) => { setStationFilter(e.target.value); setPage(0); }}><option value="">Tất cả</option>{stations.map((s) => <option key={s} value={s}>{s}</option>)}</select></label>
+          <label><span>Từ ngày</span><input type="date" value={fromDate} onChange={(event) => { setFromDate(event.target.value); setVisibleCount(20); }} /></label>
+          <label><span>Đến ngày</span><input type="date" value={toDate} onChange={(event) => { setToDate(event.target.value); setVisibleCount(20); }} /></label>
+          <label><span>Đài</span><select value={stationFilter} onChange={(event) => { setStationFilter(event.target.value); setVisibleCount(20); }}><option value="">Tất cả</option>{stations.map((station) => <option key={station} value={station}>{station}</option>)}</select></label>
+          <label><span>Loại</span><select value={typeFilter} onChange={(event) => { setTypeFilter(event.target.value as "" | LotteryDraw["lotteryType"]); setVisibleCount(20); }}><option value="">Tất cả</option><option value="TRADITIONAL">Truyền thống</option><option value="COMBINATION">Tổ hợp</option></select></label>
         </div>
       </section>
       <section className="panel draw-table-panel">
         <table className="draw-table">
           <thead><tr><th>Ngày</th><th>Đài</th><th>Miền</th><th>Mã kỳ</th><th>Kết quả</th></tr></thead>
           <tbody>
-            {paged.map((draw) => (
+            {visible.map((draw) => (
               <tr key={draw.id} className="clickable" onClick={() => setSelectedDraw(draw)}>
                 <td>{formatDate(draw.date)}</td>
                 <td>{draw.station}</td>
@@ -99,13 +113,7 @@ export function HistoryView({ draws }: { draws: LotteryDraw[] }) {
             ))}
           </tbody>
         </table>
-        {totalPages > 1 && (
-          <div className="pagination">
-            <button disabled={page === 0} onClick={() => setPage((p) => p - 1)}><ChevronLeft /></button>
-            <span>{page + 1} / {totalPages}</span>
-            <button disabled={page >= totalPages - 1} onClick={() => setPage((p) => p + 1)}><ChevronRight /></button>
-          </div>
-        )}
+        {visibleCount < filtered.length && <div ref={sentinelRef} className="history-sentinel">Đang tải thêm kỳ quay…</div>}
       </section>
       {selectedDraw && (
         <div className="modal-overlay" onClick={() => setSelectedDraw(null)} role="dialog" aria-label="Chi tiết kỳ quay">

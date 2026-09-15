@@ -1,10 +1,19 @@
 import { defineConfig } from "vitest/config";
+import { resolve } from "path";
 
 export default defineConfig({
   test: {
+    globals: true,
+    environment: "node",
     include: ["tests/**/*.test.ts"],
-    coverage: { reporter: ["text", "html"] },
+    exclude: ["node_modules", ".next", "tests/e2e"],
+    coverage: {
+      provider: "v8",
+      include: ["lib/**/*.ts"],
+      exclude: ["lib/server/**"],
+      reporter: ["text", "html"],
+    },
   },
-  resolve: { alias: { "@": new URL("./", import.meta.url).pathname } },
+  resolve: { alias: { "@": resolve(import.meta.dirname, ".") } },
 });
 

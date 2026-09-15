@@ -1,0 +1,45 @@
+.qt-morphbtn { 
+	display: block;
+	position: relative;
+	height: 56px;
+	width: 40px;
+	line-height: 56px;
+	text-align: center;
+	padding-top: 4px;
+	i {
+		z-index:121; 
+		cursor: pointer;  
+		margin: 0 auto;  
+		width: 22px;  
+		height: 22px;
+		display: inline-block;
+		transform: none;
+		.qt-top, .qt-middle, .qt-bottom  {
+			backface-visibility: hidden;  
+			position: absolute;  
+			left: 0;  
+			border-top: 2px solid white;  
+			width: 22px;  
+			transition: 0.3s;
+		}
+		.qt-top {  top: 0;}
+		.qt-middle {  top: 6px;}
+		.qt-bottom {  top: 12px;}
+
+		
+	}
+	&.active i {
+		.qt-top {  
+			backface-visibility: hidden;  
+			top: 6px;  
+			transform: rotate(45deg);  
+		}
+		.qt-middle {  opacity: 0; }
+		.qt-bottom {  
+			backface-visibility: hidden;  
+			top: 6px;  
+			transform: rotate(-45deg);  
+		}
+	}
+}
+

@@ -1,0 +1,32 @@
+
+$qt-primary-color: #222;
+$qt-primary-color-light: #343434;
+$qt-primary-color-dark: #010101;
+
+$qt-color-accent: #00ced0;
+$qt-color-accent-hover: #00fcff;
+$qt-color-secondary: #ff0d51;
+$qt-color-secondary-hover: #c60038;
+
+$qt-color-background: #444;
+$qt-color-paper: #131617;
+
+
+
+$qt-text-color: rgba(255,255,255,0.80);
+$qt-text-color-secondary: rgba(255,255,255,0.65);
+$qt-titles-color: rgba(255,255,255,0.93);
+$qt-text-color-aside:rgba(255,255,255,0.65);
+$qt-text-color-divider-and-hints: rgba(100,100,100,0.5);
+$qt-text-color-negative: #000;
+$qt-text-color-negative-light: rgba(0,0,0,0.65);
+
+$primary-color: $qt-color-accent;
+$primary-color-light: $qt-color-accent-hover;
+$primary-color-dark: darken($primary-color, 15%) !default;
+
+$secondary-color: $qt-color-secondary;
+$success-color: color("green", "base") !default;
+$error-color: color("red", "base") !default;
+$link-color: $qt-color-accent;
+$link-color-hover: $qt-color-accent-hover;

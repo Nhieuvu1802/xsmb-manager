@@ -570,6 +570,7 @@ td strong { color: #d8dce4; }
 .pagination button { background: var(--panel-soft); border: 1px solid var(--line); color: var(--text); border-radius: 8px; padding: 6px 10px; }
 .pagination button:disabled { opacity: .35; }
 .pagination span { font-size: 10px; color: var(--muted); }
+.history-sentinel { padding: 14px; border-top: 1px solid var(--line-soft); color: var(--muted); font-size: 10px; text-align: center; }
 
 .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.6); display: grid; place-content: center; padding: 20px; backdrop-filter: blur(4px); }
 .modal-panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); max-width: 580px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow); }
@@ -598,6 +599,8 @@ td strong { color: #d8dce4; }
 .compare-table th { text-align: center; padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--muted); font-weight: 500; font-size: 10px; }
 .compare-table td { padding: 9px 12px; border-bottom: 1px solid var(--line-soft); text-align: center; color: var(--text); }
 .compare-table td:first-child { text-align: left; color: var(--muted); font-size: 10px; }
+.compare-overlay-panel h2 { margin: 0 0 4px; font-size: 16px; }
+.compare-overlay-panel > p { margin: 0 0 14px; color: var(--muted); font-size: 11px; }
 
 .parity-summary { display: flex; gap: 24px; padding: 13px 21px; }
 .parity-summary div { display: flex; flex-direction: column; gap: 2px; }

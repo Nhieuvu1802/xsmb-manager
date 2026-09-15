@@ -1,0 +1,42 @@
+[data-slug*=slider-revolution] + .plugin-update-tr {
+  display: none;
+}
+
+#vc_license-activation-notice {
+  display: none;
+}
+
+.menu-top.toplevel_page_t2gconnectorclient-dashboard {
+  background: black;
+  color: #fff;
+}
+
+.menu-icon-chart .dashicons-before::before,
+.menu-icon-members .dashicons-before::before,
+.menu-icon-radiochannel .dashicons-before::before,
+.menu-icon-shows .dashicons-before::before,
+.menu-icon-schedule .dashicons-before::before {
+  color: #ff1744 !important;
+}
+
+a.menu-icon-chart:hover .dashicons-before,
+a.menu-icon-members:hover .dashicons-before,
+a.menu-icon-radiochannel:hover .dashicons-before,
+a.menu-icon-shows:hover .dashicons-before,
+a.menu-icon-schedule:hover .dashicons-before {
+  color: #c62828 !important;
+}
+a.menu-icon-chart:hover .dashicons-before::before,
+a.menu-icon-members:hover .dashicons-before::before,
+a.menu-icon-radiochannel:hover .dashicons-before::before,
+a.menu-icon-shows:hover .dashicons-before::before,
+a.menu-icon-schedule:hover .dashicons-before::before {
+  color: #c62828 !important;
+}
+
+/**
+ * Widget admin
+ */
+.qt-widgetadmin input[type=text] {
+  width: 100%;
+}

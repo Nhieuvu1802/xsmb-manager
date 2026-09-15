@@ -62,4 +62,32 @@ describe("calculateNumberStats streaks", () => {
       expect(s.longestStreak).toBeGreaterThanOrEqual(s.currentStreak);
     }
   });
+
+  it("tÃ­nh gap vÃ  currentStreak tá»« ká»³ má»›i nháº¥t dá»¥ báº£n ghi Ä‘áº§u vÃ o bá»‹ Ä‘áº£o chiá»u", () => {
+    const referenceRegion = SAMPLE_DRAWS[0].region;
+    const base = SAMPLE_DRAWS.filter((draw) => draw.region === referenceRegion).slice(0, 4);
+    const newestFirst = base.map((draw, index) => ({
+      ...draw,
+      results: [{ prize: "Test", position: 1, value: index < 2 ? "07" : "08" }],
+    }));
+
+    const fromNewest = calculateNumberStats(newestFirst).find((item) => item.number === "07")!;
+    const fromOldest = calculateNumberStats([...newestFirst].reverse()).find((item) => item.number === "07")!;
+
+    expect(fromNewest.gap).toBe(0);
+    expect(fromNewest.currentStreak).toBe(2);
+    expect(fromOldest).toEqual(fromNewest);
+  });
+
+  it("cá»­a sá»• so sÃ¡nh láº¥y ká»³ má»›i nháº¥t, khÃ´ng pháº£i ká»³ cÅ© nháº¥t", () => {
+    const referenceRegion = SAMPLE_DRAWS[0].region;
+    const draws = SAMPLE_DRAWS.filter((draw) => draw.region === referenceRegion).slice(0, 10)
+      .map((draw, index) => ({
+        ...draw,
+        results: [{ prize: "Test", position: 1, value: index < 7 ? "07" : "99" }],
+      }));
+
+    const window = compareWindows([...draws].reverse(), [7])[0];
+    expect(window.top[0]).toEqual({ number: "07", count: 7 });
+  });
 });

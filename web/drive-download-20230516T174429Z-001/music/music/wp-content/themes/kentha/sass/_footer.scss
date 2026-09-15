@@ -1,0 +1,121 @@
+/* 06. Footer
+   ========================================================================== */
+.qt-footercontainer {
+	position: relative;
+	z-index: 100;
+}
+
+.qt-footer-bottom {
+	padding: 2.5rem 0 6rem 0;
+	.qt-menu-social {
+		padding: 1rem 0 0.4rem 0;
+	}
+	.qt-menu-footer {
+		margin: 0.5rem 0 0 0;
+		padding: 0;
+		line-height: 1em;
+		li {
+			display: inline;
+			line-height: 1em;
+			height: 2 * $qt-font-scale;
+			padding: 0;
+			&::after {
+				display: inline;
+				content: " / ";
+				opacity: 0.3;
+			}
+			&:last-child::after {
+				display: none;
+			}
+			a {
+				line-height: $qt-font-scale;
+				i {
+					font-size: $qt-font-scale;
+					opacity: 1;
+				}
+			}
+		}
+	}
+}
+
+.qt-list-chevron li::before {
+	display: inline;
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: 'liga';
+	content: "keyboard_arrow_right";
+	position: relative;
+	top: 0.11em;
+	margin-right: 0.2em;
+}
+
+
+.qt-footer-widgets-container {
+	position: relative;
+	z-index: 2;
+	margin-top: 0;
+	.qt-container-l {
+		position: relative;
+		z-index: 2;
+	}
+	.qt-footer-widgets {
+		padding: 5rem 0;
+		width: 100%;
+		top: 50%;
+		&::after {
+			display: block;
+			content: " ";
+			top: 0;
+			left: 0;
+			background: #000;
+			opacity: 0.5;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			position: absolute;
+		}
+	}
+	.qt-container {
+		position: relative;
+		z-index: 2;
+	}
+	.qt-footer-twitter {
+		text-align: center;
+		.qt-tweet-featured {
+			.qt-title {
+
+			}
+			.qt-tweet-content {
+				font-size: 32px;
+				line-height: 1.2em;
+				padding: 1rem 0;
+				font-style: italic;
+				opacity: 0.6;
+			}
+			.qt-tweet-author {
+				
+			}
+		}
+	}
+}
+
+.qt-btn.qt-scrollupbtn {
+	float: left;
+	margin: 10px 10px 0 0;
+}
+
+.qt-related-section  {
+	position: relative;
+	z-index: 2;
+}

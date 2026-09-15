@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { SAMPLE_DRAWS } from "@/lib/sample-data";
-import { databaseStatus, insertMissingDraws, logDataImport } from "@/lib/server/draw-repository";
+import { databaseStatus, insertMissingDraws, logAudit, logDataImport } from "@/lib/server/draw-repository";
+import { cacheInvalidate } from "@/lib/server/cache";
+import { getClientIp } from "@/lib/server/request-context";
 
 export const maxDuration = 300;
 
@@ -20,6 +22,13 @@ export async function POST(request: Request) {
       duplicateRows: SAMPLE_DRAWS.length - inserted,
       rejectedRows: 0,
       report: { requested: SAMPLE_DRAWS.length, retainedDays: 370 },
+    });
+    await cacheInvalidate("stats:");
+    await logAudit({
+      action: "SEED_SAMPLE_DRAWS",
+      entity: "LotteryDraw",
+      details: { inserted, requested: SAMPLE_DRAWS.length },
+      ipAddress: getClientIp(request),
     });
     return NextResponse.json({ status: "SEEDED", inserted, database: status });
   } catch (error) {
