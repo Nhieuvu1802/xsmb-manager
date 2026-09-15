@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { SAMPLE_DRAWS } from "@/lib/sample-data";
 import type { LotteryDraw, Region } from "@/lib/lottery-domain";
 import { listStoredDraws } from "@/lib/server/draw-repository";
-import { fetchWorkerHistory } from "@/lib/worker-api-client";
+import { fetchWorkerHistory, fetchWorkerLatest } from "@/lib/worker-api-client";
 import { stationMatches } from "@/lib/stations";
 import { fetchBackupDraws } from "@/lib/server/backup-api";
 
@@ -22,7 +22,7 @@ export async function GET(request: Request) {
   const limit = Math.min(Math.max(Number(params.limit) || 50, 1), 5000);
   const offset = Math.max(Number(params.offset) || 0, 0);
 
-  let storage: "postgres" | "worker" | "backup" | "sample" = "sample";
+  let storage: "postgres" | "worker" | "hybrid" | "backup" | "sample" = "sample";
   let total = 0;
   let draws: LotteryDraw[] = [];
 
@@ -36,6 +36,28 @@ export async function GET(request: Request) {
     }
   } catch (error) {
     console.error("Không đọc được PostgreSQL.", error);
+  }
+
+  // Merge the uncached live feed with stored history. The daily maintenance
+  // job persists it later, but users see a newly published draw immediately.
+  if (region && !from && !to && offset === 0) {
+    try {
+      const liveDraws = await fetchWorkerLatest(region);
+      if (liveDraws.length) {
+        const merged = new Map<string, LotteryDraw>();
+        for (const draw of [...liveDraws, ...draws]) {
+          const key = `${draw.region}|${draw.station}|${draw.date}`;
+          if (!merged.has(key)) merged.set(key, draw);
+        }
+        draws = [...merged.values()]
+          .sort((left, right) => right.date.localeCompare(left.date) || left.station.localeCompare(right.station))
+          .slice(0, limit);
+        total = Math.max(total, draws.length);
+        storage = storage === "postgres" ? "hybrid" : "worker";
+      }
+    } catch (error) {
+      console.error("Live Worker API is unavailable.", error);
+    }
   }
 
   // Priority 2: Cloudflare Worker API (always available, real data)

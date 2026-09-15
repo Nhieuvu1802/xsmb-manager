@@ -4,6 +4,7 @@ import { databaseStatus } from "@/lib/server/draw-repository";
 import { checkWorkerHealth } from "@/lib/worker-api-client";
 import { getPrisma } from "@/lib/server/prisma";
 import { checkBackupHealth } from "@/lib/server/backup-api";
+import { buildProviderChain } from "@/lib/server/providers";
 
 export async function GET() {
   let database = null;
@@ -34,6 +35,8 @@ export async function GET() {
     : worker.reachable
       ? "worker"
       : "sample";
+  const providerHealth = buildProviderChain().getHealthScores();
+
 
   return NextResponse.json({
     status: "online",
@@ -51,6 +54,15 @@ export async function GET() {
       xsmnDraws: worker.xsmnDraws ?? null,
     },
     backup: { reachable: backup?.status === "online", ...backup },
+    providers: providerHealth.map((h) => ({
+      code: h.code,
+      name: h.name,
+      score: h.score,
+      healthy: h.healthy,
+      successCount: h.successCount,
+      failureCount: h.failureCount,
+      averageResponseTime: Math.round(h.averageResponseTimeMs),
+    })),
     trend: {
       numberTrendRows: numberTrendCount,
       ready: numberTrendCount > 0,

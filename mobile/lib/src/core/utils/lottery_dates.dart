@@ -30,6 +30,17 @@ DateTime todayInVietnam({DateTime? now}) {
   return DateTime.utc(vn.year, vn.month, vn.day);
 }
 
+/// Poll nhanh trong giờ quay, giảm tải mạnh ngoài giờ quay.
+Duration liveRefreshInterval({DateTime? now}) {
+  final vietnam = (now ?? DateTime.now()).toUtc().add(
+    const Duration(hours: 7),
+  );
+  final minutes = vietnam.hour * 60 + vietnam.minute;
+  return minutes >= 16 * 60 && minutes <= 19 * 60 + 15
+      ? const Duration(seconds: 45)
+      : const Duration(minutes: 30);
+}
+
 /// `dd/MM/yyyy` để hiển thị.
 String displayDate(String isoValue) {
   final parts = isoValue.split('-');

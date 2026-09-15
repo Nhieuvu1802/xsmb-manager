@@ -58,6 +58,21 @@ export async function GET(request: Request) {
 
     const removed = await pruneOldDraws(retentionDays);
 
+    // Sync newly imported data to InfinityFree backup (best-effort, non-blocking)
+    let syncResult: { inserted?: number; updated?: number; unchanged?: number } | null = null;
+    if (imported > 0 && process.env.BACKUP_SYNC_URL) {
+      try {
+        const { listStoredDraws: listDraws } = await import("@/lib/server/draw-repository");
+        const { syncDrawsToBackup } = await import("@/lib/server/backup-api");
+        const recentDraws = await listDraws({ from: dateOnly(from), to: dateOnly(today), limit: 100 });
+        if (recentDraws?.draws.length) {
+          syncResult = await syncDrawsToBackup(recentDraws.draws);
+        }
+      } catch (syncError) {
+        console.error("Đồng bộ backup thất bại (non-blocking).", syncError);
+      }
+    }
+
     // Refresh NumberTrend pre-aggregated table for fast trend queries
     let trendRows = 0;
     try {
@@ -82,7 +97,7 @@ export async function GET(request: Request) {
       ipAddress: getClientIp(request),
     });
 
-    return NextResponse.json({ status: "MAINTAINED", source, fullSync, imported, removed: removed.count, trendRows, database: after });
+    return NextResponse.json({ status: "MAINTAINED", source, fullSync, imported, removed: removed.count, trendRows, backupSync: syncResult, database: after });
   } catch (error) {
     console.error("Cron duy trì dữ liệu thất bại.", error);
     return NextResponse.json(

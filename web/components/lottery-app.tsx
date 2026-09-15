@@ -57,6 +57,7 @@ import { StatsView } from "@/components/stats-view";
 import { CompareView } from "@/components/compare-view";
 import { SimulatorView } from "@/components/simulator-view";
 import { SouthernDualView } from "@/components/southern-dual-view";
+import { liveRefreshInterval } from "@/lib/live-refresh";
 import {
   buildTrend,
   calculateStructure,
@@ -113,6 +114,14 @@ function percentage(value: number, digits = 1) {
   }).format(value);
 }
 
+function dataSourceLabel(source: "worker" | "postgres" | "hybrid" | "backup" | "sample") {
+  if (source === "hybrid") return "PostgreSQL + dữ liệu live";
+  if (source === "postgres") return "PostgreSQL";
+  if (source === "worker") return "Cloudflare Worker API";
+  if (source === "backup") return "InfinityFree backup";
+  return "Dữ liệu lưu gần nhất";
+}
+
 function NumberPill({ number, tone = "neutral" }: { number: string; tone?: "hot" | "cold" | "gold" | "neutral" }) {
   return <span className={`number-pill ${tone}`}>{number}</span>;
 }
@@ -144,7 +153,7 @@ export function LotteryApp() {
   const [station, setStation] = useState("");
   const [lotteryType, setLotteryType] = useState("Lô tô 2 số");
   const [draws, setDraws] = useState<LotteryDraw[]>(CLIENT_SAMPLE_DRAWS);
-  const [dataSource, setDataSource] = useState<"worker" | "postgres" | "sample">("sample");
+  const [dataSource, setDataSource] = useState<"worker" | "postgres" | "hybrid" | "backup" | "sample">("sample");
   const [toast, setToast] = useState("");
   const [theme, setTheme] = useState<"dark" | "light">(() =>
     typeof window !== "undefined" && localStorage.getItem("tk24:theme") === "light" ? "light" : "dark",
@@ -169,9 +178,13 @@ export function LotteryApp() {
   useEffect(() => {
     const controller = new AbortController();
     const params = new URLSearchParams({ region, limit: "5000", includeResults: "true" });
-    fetch(`/api/draws?${params}`, { signal: controller.signal })
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const load = () => fetch(`/api/draws?${params}&live=${Date.now()}`, {
+      signal: controller.signal,
+      cache: "no-store",
+    })
       .then((response) => response.ok ? response.json() : Promise.reject(new Error("Không tải được dữ liệu.")))
-      .then((payload: { draws?: LotteryDraw[]; storage?: "worker" | "postgres" | "sample" }) => {
+      .then((payload: { draws?: LotteryDraw[]; storage?: "worker" | "postgres" | "hybrid" | "backup" | "sample" }) => {
         if (!payload.draws?.length) return;
         setDraws((current) => [
           ...payload.draws!,
@@ -181,8 +194,23 @@ export function LotteryApp() {
       })
       .catch((error: unknown) => {
         if (!(error instanceof DOMException && error.name === "AbortError")) console.error(error);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) timer = setTimeout(load, liveRefreshInterval());
       });
-    return () => controller.abort();
+    void load();
+    const onVisible = () => {
+      if (document.visibilityState === "visible") {
+        if (timer) clearTimeout(timer);
+        void load();
+      }
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      controller.abort();
+      if (timer) clearTimeout(timer);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, [region]);
 
   function changeRegion(nextRegion: Region) {
@@ -236,7 +264,7 @@ export function LotteryApp() {
           <ShieldCheck size={21} />
           <div><strong>18+ · Có trách nhiệm</strong><p>Thống kê để tham khảo, không phải cam kết trúng thưởng.</p></div>
         </div>
-        <div className="sidebar-meta"><span><span className="status-dot" />{dataSource === "postgres" ? "PostgreSQL trực tuyến" : dataSource === "worker" ? "Cloudflare Worker API" : "Dữ liệu mẫu"}</span><small>v3.3.0</small></div>
+        <div className="sidebar-meta"><span><span className="status-dot" />{dataSourceLabel(dataSource)}</span><small>v3.3.0</small></div>
       </aside>
 
       {mobileMenu && <button className="sidebar-scrim" onClick={() => setMobileMenu(false)} aria-label="Đóng menu" />}
@@ -653,7 +681,7 @@ function Analyzer({ draws, stats }: { draws: LotteryDraw[]; stats: NumberStat[] 
   );
 }
 
-function DataCenter({ draws, dataSource, onImport }: { draws: LotteryDraw[]; dataSource: "worker" | "postgres" | "sample"; onImport: (draws: LotteryDraw[]) => void }) {
+function DataCenter({ draws, dataSource, onImport }: { draws: LotteryDraw[]; dataSource: "worker" | "postgres" | "hybrid" | "backup" | "sample"; onImport: (draws: LotteryDraw[]) => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState("");
   const [csvText, setCsvText] = useState("");
@@ -688,7 +716,7 @@ function DataCenter({ draws, dataSource, onImport }: { draws: LotteryDraw[]; dat
       <PageHeading eyebrow="QUẢN TRỊ DỮ LIỆU" title="Kho dữ liệu" description="Biết dữ liệu đến từ đâu, được kiểm tra thế nào và cập nhật khi nào." action={<button className="primary-button" onClick={() => inputRef.current?.click()}><FileUp size={17} />Chọn CSV / JSON</button>} />
 
       <section className="source-grid">
-        <article className="panel source-card active-source"><div className="source-logo"><Database /></div><div><span>ĐANG SỬ DỤNG</span><h3>{dataSource === "postgres" ? "PostgreSQL trên Vercel" : dataSource === "worker" ? "Cloudflare Worker API (dữ liệu thật)" : "Dữ liệu mẫu cục bộ"}</h3><p>{draws.length} kỳ · {dataSource === "postgres" ? "đọc từ kho dữ liệu trực tuyến." : dataSource === "worker" ? "dữ liệu xổ số thật từ xsmb-api.nhieuvu1802.workers.dev." : "sinh bằng seed theo ngày và đài để chạy thử an toàn."}</p></div><span className="verified"><Check />Sẵn sàng</span></article>
+        <article className="panel source-card active-source"><div className="source-logo"><Database /></div><div><span>ĐANG SỬ DỤNG</span><h3>{dataSourceLabel(dataSource)}</h3><p>{draws.length} kỳ · {dataSource === "sample" ? "dữ liệu lưu gần nhất; có thể đã cũ." : "tự động lấy dữ liệu mới nhất từ hệ thống trực tuyến."}</p></div><span className="verified"><Check />Sẵn sàng</span></article>
         <article className="panel source-card"><div className="source-logo api"><Cloud /></div><div><span>TÙY CHỌN</span><h3>API dữ liệu hợp pháp</h3><p>Khai báo URL và token riêng trên Vercel; khóa truy cập không gửi xuống trình duyệt.</p></div><span className="verified"><ShieldCheck />Phía máy chủ</span></article>
       </section>
 
@@ -717,7 +745,7 @@ function DataCenter({ draws, dataSource, onImport }: { draws: LotteryDraw[]; dat
 
       <section className="panel provenance-panel">
         <PanelHeader icon={<History />} eyebrow="DẤU VẾT DỮ LIỆU" title="Nguồn và lần cập nhật" />
-        <div className="provenance-table"><div className="provenance-head"><span>Nguồn</span><span>Phạm vi</span><span>Cập nhật gần nhất</span><span>Trạng thái</span></div><div><span><Database />{dataSource === "postgres" ? "PostgreSQL" : dataSource === "worker" ? "Cloudflare Worker API" : "Mẫu cục bộ"}</span><span>3 miền · {draws.length} kỳ · khoảng 1 năm</span><span>{latestDate ? `20:10 · ${formatDate(latestDate)}` : "—"}</span><span className="good-status"><Check />Đã kiểm tra</span></div></div>
+        <div className="provenance-table"><div className="provenance-head"><span>Nguồn</span><span>Phạm vi</span><span>Cập nhật gần nhất</span><span>Trạng thái</span></div><div><span><Database />{dataSourceLabel(dataSource)}</span><span>3 miền · {draws.length} kỳ · khoảng 1 năm</span><span>{latestDate ? `20:10 · ${formatDate(latestDate)}` : "—"}</span><span className="good-status"><Check />Đã kiểm tra</span></div></div>
       </section>
     </>
   );

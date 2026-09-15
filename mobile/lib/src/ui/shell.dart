@@ -85,7 +85,7 @@ class LotteryApp extends StatefulWidget {
   State<LotteryApp> createState() => _LotteryAppState();
 }
 
-class _LotteryAppState extends State<LotteryApp> {
+class _LotteryAppState extends State<LotteryApp> with WidgetsBindingObserver {
   final ScrollController _scrollController = ScrollController();
 
   /// Dùng `GlobalKey` để mở ngăn kéo từ `_TopBar`: `Scaffold.of(context)` không
@@ -100,6 +100,7 @@ class _LotteryAppState extends State<LotteryApp> {
   List<LotteryDraw> _draws = const <LotteryDraw>[];
   String? _toast;
   Timer? _toastTimer;
+  Timer? _autoRefreshTimer;
 
   bool _busy = false;
   bool _runningBacktest = false;
@@ -121,12 +122,15 @@ class _LotteryAppState extends State<LotteryApp> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     unawaited(_bootstrap());
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _toastTimer?.cancel();
+    _autoRefreshTimer?.cancel();
     _scrollController.dispose();
     super.dispose();
   }
@@ -139,6 +143,28 @@ class _LotteryAppState extends State<LotteryApp> {
     if (!mounted) return;
     setState(() => _lastSyncAt = preferences.getString(AppConfig.lastSyncKey));
     await _sync(silent: true);
+    _scheduleAutoRefresh();
+  }
+
+  void _scheduleAutoRefresh() {
+    _autoRefreshTimer?.cancel();
+    _autoRefreshTimer = Timer(liveRefreshInterval(), () async {
+      if (!mounted) return;
+      await _sync(force: true, silent: true);
+      if (mounted) _scheduleAutoRefresh();
+    });
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_sync(force: true, silent: true));
+      _scheduleAutoRefresh();
+    } else if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.detached) {
+      _autoRefreshTimer?.cancel();
+    }
   }
 
   Future<void> _reloadFromStore() async {

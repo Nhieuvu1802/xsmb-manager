@@ -81,7 +81,7 @@ function mapDraw(raw: WorkerDraw): LotteryDraw | null {
   };
 }
 
-async function fetchWithTimeout(url: string, signal?: AbortSignal): Promise<Response> {
+async function fetchWithTimeout(url: string, signal?: AbortSignal, live = false): Promise<Response> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
@@ -91,7 +91,9 @@ async function fetchWithTimeout(url: string, signal?: AbortSignal): Promise<Resp
   }
 
   try {
-    return await fetch(url, { signal: controller.signal, next: { revalidate: 300 } });
+    return await fetch(url, live
+      ? { signal: controller.signal, cache: "no-store" }
+      : { signal: controller.signal, next: { revalidate: 300 } });
   } finally {
     clearTimeout(timeout);
   }
@@ -138,7 +140,7 @@ export async function fetchWorkerLatest(region: Region): Promise<LotteryDraw[]> 
   const url = `${WORKER_BASE}/v1/${key === "mb" ? "xsmb" : key === "mn" ? "xsmn" : "xsmt"}/latest`;
 
   try {
-    const response = await fetchWithTimeout(url);
+    const response = await fetchWithTimeout(url, undefined, true);
     if (!response.ok) return [];
     const body: WorkerLatestResponse = await response.json();
     if (!body.draws?.length) return [];
